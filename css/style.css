@@ -1,0 +1,117 @@
+@charset "UTF-8";
+/* solarized colors */
+:root {
+  --solarized-base03: #002b36;
+  --solarized-base02: #073642;
+  --solarized-base01: #586e75;
+  --solarized-base00: #657b83;
+  --solarized-base0: #839496;
+  --solarized-base1: #93a1a1;
+  --solarized-base2: #eee8d5;
+  --solarized-base3: #fdf6e3;
+  --solarized-yellow: #b58900;
+  --solarized-orange: #cb4b16;
+  --solarized-red: #dc322f;
+  --solarized-magenta: #d33682;
+  --solarized-violet: #6c71c4;
+  --solarized-blue: #268bd2;
+  --solarized-cyan: #2aa198;
+  --solarized-green: #859900;
+  --main-bg-color: var(--solarized-base03);
+}
+
+a:hover {
+    color: var(--solarized-blue);
+}
+
+a {
+    color: var(--solarized-cyan);
+    text-decoration: none;
+}
+
+body {
+    font-family: Helvetica, sans-serif;
+    color: var(--solarized-base1);
+    background-color: var(--main-bg-color);
+}
+
+table {
+    background-color: var(--solarized-base02);
+    border: 1px solid var(--solarized-base01);
+    width: 62%;
+    border-collapse: collapse;
+}
+
+td {
+    border: 1px solid var(--solarized-base01);
+}
+
+.home-menu-box {
+  border: 5px solid var(--solarized-blue);
+  background-color: var(--solarized-base02);
+  padding-top: 10px;
+  box-sizing: content-box;
+  padding-bottom: 10px;
+  margin: 20px;
+  border-radius: 20px;
+}
+
+.home-menu {
+    font-size: 28px;
+    font-weight: bold;
+    font-family: Helvetica, sans-serif;
+    text-decoration: none;
+    color: var(--solarized-base1);
+}
+
+.home-menu a:hover {
+    color: var(--solarized-blue);
+
+}
+
+.home-title {
+    font-weight: bold;
+    font-size: 48px;
+    font-family: Helvetica, sans-serif;
+    color: var(--solarized-base1);
+    margin: 0;
+}
+
+.home-subtitle{
+    font-weight: normal;
+    font-size: 20px;
+    font-family: Helvetica, sans-serif;
+    font-style: italic;
+    color: var(--solarized-base1);
+    margin: 0;
+
+}
+
+h2 {
+    font-family: Helvetica, sans-serif;
+    color: var(--solarized-base1);
+}
+
+h3 {
+    font-family: Helvetica, sans-serif;
+    color: var(--solarized-base1);
+}
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    -ms-stransform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.footer {
+    color: var(--solarized-base01);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
