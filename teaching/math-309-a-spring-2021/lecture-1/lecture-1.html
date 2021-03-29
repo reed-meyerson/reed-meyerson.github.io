@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Math 309: Lecture 1</title>
+<meta name="author" content="Reed Meyerson"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/sky.css" id="theme"/>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1 class="title">Math 309: Lecture 1</h1><h2 class="author">Reed Meyerson</h2><h2 class="date">March 29, 2021</h2>
+</section>
+
+<section>
+<section id="slide-orgf8d1d61">
+<h2 id="orgf8d1d61">Who am I?</h2>
+<ul>
+<li>Reed Meyerson</li>
+<li>5th (and final) year math PhD student
+<ul>
+<li>Study &ldquo;Geometric Inverse Problems&rdquo;</li>
+
+</ul></li>
+<li>Undergrad in math at New College of Florida</li>
+<li>Taught Math 309 a bunch</li>
+<li>Just &ldquo;Reed&rdquo;</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org258aee4">
+<h2 id="org258aee4">Who are you?</h2>
+<p>
+<b>Majors</b>
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">30%</td>
+<td class="org-left">math</td>
+</tr>
+
+<tr>
+<td class="org-right">10%</td>
+<td class="org-left">pre science</td>
+</tr>
+
+<tr>
+<td class="org-right">8%</td>
+<td class="org-left">mechechanical engineering</td>
+</tr>
+
+<tr>
+<td class="org-right">5%</td>
+<td class="org-left">computer science</td>
+</tr>
+
+<tr>
+<td class="org-right">5%</td>
+<td class="org-left">applied math</td>
+</tr>
+
+<tr>
+<td class="org-right">5%</td>
+<td class="org-left">economics</td>
+</tr>
+</tbody>
+</table>
+<p>
+etc&#x2026;
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org183fabf">
+<h2 id="org183fabf">Administrative Stuff</h2>
+<ul>
+<li>Course Website: <a href="https://reedmeyerson.com/teaching">reedmeyerson.com/teaching</a></li>
+<li>All assignments through Gradescope</li>
+<li>Live lectures will be recorded
+<ul>
+<li><b>UNLESS</b> attendance &lt; 60%</li>
+<li>Attendance is mandatory (sort of)</li>
+
+</ul></li>
+<li>I check email twice a day</li>
+<li>Office Hours: Mon/Wed after class (9:30-10:30)</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org56f2864">
+<h2 id="org56f2864">Course Structure</h2>
+<ul>
+<li>Weekly homework</li>
+<li>Quiz every other Wednesday
+<ul>
+<li>Very basic</li>
+
+</ul></li>
+<li>Midterm: April 26 during class</li>
+<li>Final: June 8, 8:30-10:30 AM</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-orgf181276">
+<h2 id="orgf181276">Course Structure</h2>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Homework</td>
+<td class="org-right">5%</td>
+</tr>
+
+<tr>
+<td class="org-left">Quizes</td>
+<td class="org-right">10%</td>
+</tr>
+
+<tr>
+<td class="org-left">Midterm</td>
+<td class="org-right">40%</td>
+</tr>
+
+<tr>
+<td class="org-left">Final</td>
+<td class="org-right">45%</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Final is cumulative but weighted towards new stuff</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org9088838">
+<h2 id="org9088838">Course OvervieW</h2>
+<ul>
+<li>Two parts
+<ul>
+<li>Systems of Ordinary Differential Equations (ODEs)</li>
+<li>Partial Differential Equations (PDEs)</li>
+
+</ul></li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-orga72076e">
+<h2 id="orga72076e">Ordinary Differential Equations (ODEs)</h2>
+<ul>
+<li>System evolving in time</li>
+<li>State of system can be described by a finite number of values</li>
+
+</ul>
+</section>
+<section id="slide-orgbc224a6">
+<h3 id="orgbc224a6">Example: orbits of planets</h3>
+<video controls>
+<source src="orbit.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<ul>
+<li>state = xyz coordinates of planets</li>
+
+</ul>
+</section>
+<section id="slide-org2ee4300">
+<h3 id="org2ee4300">History</h3>
+<ul>
+<li>Newton and Liebniz (1670s)</li>
+<li>\(\vec{F}=m\vec{a}\implies \vec{F}(t)=m\vec{x}''(t)\)</li>
+<li>Lots more people</li>
+
+</ul>
+</section>
+<section id="slide-orgce1fa52">
+<h3 id="orgce1fa52">ODE Example</h3>
+<div>
+\begin{equation*}
+    \begin{cases}
+        x_1'(t)&=x_1(t)+2x_2(t)\\
+        x_2'(t)&=3x_1(t)+4x_2(t)\\
+        (x_1(0),x_2(0))&=(5,6)
+    \end{cases}
+\end{equation*}
+
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org34c88be">
+<h2 id="org34c88be">Partial Differential Equations (PDEs)</h2>
+<ul>
+<li>System evolving in time</li>
+<li>State of system can be described by function</li>
+
+</ul>
+</section>
+<section id="slide-orgf40aea7">
+<h3 id="orgf40aea7">Example: temperature of wire changing in time</h3>
+<video controls>
+<source src="heat_equation_demo.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<ul>
+<li>State = temperature of wire</li>
+
+</ul>
+</section>
+<section id="slide-org81b086f">
+<h3 id="org81b086f">Example: vibrating string</h3>
+<video controls>
+<source src="wave_equation_demo.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<ul>
+<li>State = position &amp; velocity of string</li>
+
+</ul>
+</section>
+<section id="slide-orgb11e5d5">
+<h3 id="orgb11e5d5">History</h3>
+<ul>
+<li>Wave Equation (d&rsquo;Alembert, Euler, Bernouli 1750s/1760s)
+<ul>
+<li>Vibrating string/vibrating membrane/acoustic vibration</li>
+
+</ul></li>
+<li>Laplace&rsquo;s Equation (Laplace 1780s)
+<ul>
+<li>Gravitational potential field</li>
+
+</ul></li>
+<li>Heat Equation (Fourier 1810s/1820s)
+<ul>
+<li>Heat flow in wire/solid/atmosphere</li>
+
+</ul></li>
+
+</ul>
+</section>
+<section id="slide-org2e73672">
+<h3 id="org2e73672">PDE Example</h3>
+<div>
+\begin{equation*}
+    \begin{cases}
+        \partial_tu(x,t)-\partial_x^2u(x,t)&=0 &\text{ }x\in[0,1],t>0\\
+        u(x,0)&=x^2 &\text{ }x\in[0,1]\\
+        u(0,t)=u(1,t)&=0 &\text{ }t>0
+    \end{cases}
+\end{equation*}
+
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org5205730">
+<h2 id="org5205730"><code>[LINEAR]</code> Analysis</h2>
+<ul>
+<li>Ties both halves together</li>
+<li>\(T(\alpha x+y)=\alpha T(x)+T(y)\)</li>
+
+</ul>
+</section>
+<section id="slide-org55de877" data-transition="none">
+<h3 id="org55de877">We Can Add&#x2026;</h3>
+<ul>
+<li><p>
+numbers
+</p>
+<div>
+\begin{equation*}
+  3+4=7
+\end{equation*}
+
+</div></li>
+
+</ul>
+</section>
+<section id="slide-org5ae6d8f" data-transition="none">
+<h3 id="org5ae6d8f">We Can Add&#x2026;</h3>
+<ul>
+<li><p>
+vectors
+</p>
+<div>
+\begin{equation*}
+  (x_1,y_1)+(x_2,y_2)=(x_1+y_1,x_2+y_2)
+\end{equation*}
+
+</div></li>
+
+</ul>
+</section>
+<section id="slide-org0145df2" data-transition="none">
+<h3 id="org0145df2">We Can Add&#x2026;</h3>
+<ul>
+<li><p>
+functions
+</p>
+<div>
+\begin{equation*}
+  (f+g)(x)=f(x)+g(x)
+\end{equation*}
+
+</div></li>
+
+</ul>
+
+</section>
+<section id="slide-orgc94a5d4" data-transition="none">
+<h3 id="orgc94a5d4">We Can Add&#x2026;</h3>
+<ul>
+<li><p>
+vector valued functions
+</p>
+
+<p>
+If
+</p>
+<div>
+\begin{align*}x(t)&=(x_1(t),y_2(t))\\y(t)&=(y_1(t),y_2(t))\end{align*}
+
+</div>
+<p>
+then
+</p>
+<div>
+\begin{equation*}
+  (x+y)(t)=(x_1(t)+y_1(t),x_2(t)+y_2(t))
+\end{equation*}
+
+</div></li>
+
+</ul>
+</section>
+<section id="slide-orgbd38baf" data-transition="none">
+<h3 id="orgbd38baf">We Can Add&#x2026;</h3>
+<ul>
+<li><p>
+matrices
+</p>
+<div>
+\begin{equation*}
+  \begin{pmatrix} a & b\\ c & d\end{pmatrix}+\begin{pmatrix} e & f\\ g & h\end{pmatrix}
+  = \begin{pmatrix} a+e & b+f\\ c+g & d+h\end{pmatrix}
+\end{equation*}
+
+</div></li>
+
+</ul>
+</section>
+<section id="slide-org1245847" data-transition="none">
+<h3 id="org1245847">We Can Scale&#x2026;</h3>
+<ul>
+<li><p>
+numbers
+</p>
+<div>
+\begin{equation*}
+  3\cdot 7=21
+\end{equation*}
+
+</div></li>
+
+</ul>
+
+</section>
+<section id="slide-org15fa085" data-transition="none">
+<h3 id="org15fa085">We Can Scale&#x2026;</h3>
+<ul>
+<li><p>
+vectors
+</p>
+<div>
+\begin{equation*}
+  \alpha\cdot (x,y)=(\alpha\cdot x,\alpha\cdot y)
+\end{equation*}
+
+</div></li>
+
+</ul>
+
+</section>
+<section id="slide-org4ae7545" data-transition="none">
+<h3 id="org4ae7545">We Can Scale&#x2026;</h3>
+<ul>
+<li><p>
+functions
+</p>
+<div>
+\begin{equation*}
+  (\alpha \cdot f)(x)=\alpha\cdot(f(x))
+\end{equation*}
+
+</div></li>
+
+</ul>
+
+</section>
+<section id="slide-orge5f7cda" data-transition="none">
+<h3 id="orge5f7cda">We Can Scale&#x2026;</h3>
+<ul>
+<li><p>
+vector valued functions
+</p>
+
+<p>
+If \(x(t)=(x_1(t),x_2(t))\) then
+</p>
+
+<div>
+\begin{equation*}
+  (\alpha \cdot x)(t)=((\alpha\cdot x_1)(t),(\alpha\cdot x_2)(t))
+\end{equation*}
+
+</div></li>
+
+</ul>
+
+</section>
+<section id="slide-org595a160" data-transition="none">
+<h3 id="org595a160">We Can Scale&#x2026;</h3>
+<ul>
+<li><p>
+matrices
+</p>
+<div>
+\begin{equation*}
+  \alpha\cdot \begin{pmatrix} a & b \\ c & d\end{pmatrix} = \begin{pmatrix} \alpha\cdot a & \alpha\cdot b\\ \alpha\cdot c & \alpha\cdot d\end{pmatrix}
+\end{equation*}
+
+</div></li>
+
+</ul>
+
+</section>
+<section id="slide-org9b1bc15" data-transition="none">
+<h3 id="org9b1bc15">We Can Scale&#x2026;</h3>
+<ul>
+<li><p>
+matrices
+</p>
+<div>
+\begin{equation*}
+  \alpha\cdot \begin{pmatrix} a & b \\ c & d\end{pmatrix} = \begin{pmatrix} \alpha\cdot a & \alpha\cdot b\\ \alpha\cdot c & \alpha\cdot d\end{pmatrix}
+\end{equation*}
+
+</div></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org3a64ecd">
+<h2 id="org3a64ecd">Solving an actual ODE</h2>
+<p>
+Consider the following &ldquo;system&rdquo; of ODEs
+</p>
+<div>
+\begin{equation*}
+    \begin{cases}
+        x_1'&=&1x_1&+&0x_2\\
+        x_2'&=&0x_1&+&2x_2\\
+        x_1(0)&=&3\\
+        x_2(0)&=&4
+    \end{cases}
+\end{equation*}
+
+</div>
+</section>
+<section id="slide-org68c0e1c">
+<h3 id="org68c0e1c">Solving an actual ODE</h3>
+<div>
+\begin{equation*}
+    \begin{cases}
+        x_1'&=&1x_1&&\\
+        x_2'&=&&&2x_2\\
+        x_1(0)&=&3\\
+        x_2(0)&=&4
+    \end{cases}
+\end{equation*}
+
+</div>
+</section>
+<section id="slide-org2b25d97">
+<h3 id="org2b25d97">Solving an actual ODE</h3>
+<p>
+Splits into two regular ODEs (307)
+</p>
+<div>
+\begin{equation*}
+    \begin{cases}
+        x_1'&=1x_1\\
+        x_1(0)&=3\\
+    \end{cases}
+\end{equation*}
+
+</div>
+<div>
+\begin{equation*}
+    \begin{cases}
+        x_2'&=2x_2\\
+        x_2(0)&=4
+    \end{cases}
+\end{equation*}
+
+</div>
+</section>
+<section id="slide-org2304f1e">
+<h3 id="org2304f1e">Solving an actual ODE</h3>
+<p>
+From 307
+</p>
+<div>
+\begin{equation*}
+    \begin{cases}
+        x_1'&=1x_1\\
+        x_1(0)&=3\\
+    \end{cases}
+\end{equation*}
+
+</div>
+<p>
+\(x_1(t)=3e^{t}\)
+</p>
+</section>
+<section id="slide-orgc19a08c">
+<h3 id="orgc19a08c">Solving an actual ODE</h3>
+<div>
+\begin{equation*}
+    \begin{cases}
+        x_2'&=2x_2\\
+        x_2(0)&=4
+    \end{cases}
+\end{equation*}
+
+</div>
+<p>
+\(x_2(t)=4e^{2t}\)
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org474971d">
+<h2 id="org474971d">Solving a harder ODE</h2>
+<div>
+\begin{equation*}
+    \begin{cases}
+        x_1'&=&3x_1+&2x_2\\
+        x_2'&=& &1x_2\\
+        x_1(0)&=&4\\
+        x_2(0)&=&5
+    \end{cases}
+\end{equation*}
+
+</div>
+</section>
+<section id="slide-org3a16cb2">
+<h3 id="org3a16cb2">Solving a harder ODE</h3>
+<div>
+\begin{equation*}
+    \begin{cases}
+        x_1'&=&3x_1+&2x_2\\
+        x_2'&=& &1x_2\\
+        x_1(0)&=&4\\
+        x_2(0)&=&5
+    \end{cases}
+\end{equation*}
+
+</div>
+<div>
+\begin{equation*}
+\implies
+    \begin{cases}
+        x_2'&=1x_2\\
+        x_2(0)&=5
+    \end{cases}
+\end{equation*}
+
+</div>
+<p>
+So, by 307 we have \(x_2(t)=5e^t\)
+</p>
+</section>
+<section id="slide-org546212e">
+<h3 id="org546212e">Solving a harder ODE</h3>
+<div>
+\begin{equation*}
+x_2(t)=5e^t\text{ and }
+    \begin{cases}
+        x_1'&=&3x_1+&2x_2\\
+        x_2'&=& &1x_2\\
+        x_1(0)&=&4\\
+        x_2(0)&=&5
+    \end{cases}
+\end{equation*}
+
+</div>
+<div>
+\begin{equation*}
+\implies
+    \begin{cases}
+        x_1'&=&3x_1+&10e^t\\
+        x_1(0)&=&4\\
+    \end{cases}
+\end{equation*}
+
+</div>
+<p>
+By 307 we get \(x_1(t)=9e^{3t}-5e^t\)
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgda2d6ff">
+<h2 id="orgda2d6ff">Substitution Method</h2>
+<p>
+Could solve any &ldquo;upper triangular&rdquo; system
+</p>
+<div>
+\begin{equation*}
+\begin{cases}
+    x_1'&=&a_{11}x_1+&a_{12}x_2+&a_{13}x_3...+&a_{1n}x_n\\
+    x_2'&=&&a_{22}x_2+&a_{23}x_3...+&a_{2n}x_n\\
+    x_3'&=&&&a_{33}x_3...+&a_{3n}x_n\\
+        &\vdots\\
+    x_n'&=&&&&a_{nn}x_{n}
+\end{cases}
+\end{equation*}
+
+</div>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/search/search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom/zoom.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+mouseWheel: false,
+fragmentInURL: false,
+hashOneBasedIndex: false,
+pdfSeparateFragments: true,
+
+overview: true,
+
+transition: 'slide',
+transitionSpeed: 'default',
+
+// Plugins with reveal.js 4.x
+plugins: [ RevealMarkdown, RevealNotes, RevealSearch, RevealZoom ],
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+]
+
+});
+</script>
+</body>
+</html>
