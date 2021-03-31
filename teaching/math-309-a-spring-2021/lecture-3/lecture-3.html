@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Math 309: Lecture 3</title>
+<meta name="author" content="Reed Meyerson"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/sky.css" id="theme"/>
+
+<link rel="stylesheet" href="local.css"/>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1 class="title">Math 309: Lecture 3</h1><h2 class="author">Reed Meyerson</h2><h2 class="date">March 31, 2021</h2>
+</section>
+
+<section>
+<section id="slide-org06d0f18">
+<h2 id="org06d0f18">Last Time</h2>
+<ul>
+<li>&ldquo;Vectors&rdquo;</li>
+<li>Matrices</li>
+<li><p>
+Diagonalization:
+If \(Av_1=\lambda_1v_1\), \(Av_2=\lambda_2v_2\) and \(\{v_1,v_2\}\) is a basis for \(\mathbb{R}^2\) then
+</p>
+<div>
+\begin{equation*}
+  A=(v_1|v_2)\begin{pmatrix} \lambda_1 & 0\\ 0 & \lambda_2\end{pmatrix}(v_1|v_2)^{-1}
+\end{equation*}
+
+</div></li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org653b4c8">
+<h2 id="org653b4c8">Goals for Today</h2>
+<ul>
+<li>Broaden notion of &ldquo;vector&rdquo;/&ldquo;vector space&rdquo;</li>
+<li>Understand what &ldquo;linear&rdquo; means in new context</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-orga5a25aa">
+<h2 id="orga5a25aa">Example 1</h2>
+<ul>
+<li>Let \(v,w\in\mathbb{R}^n\), \(\alpha\in\mathbb{R}\), and \(A\) be an \(m\times n\) matrix.</li>
+<li><p>
+Then \((\alpha v+w)\in\mathbb{R}^n\), and
+</p>
+<div>
+\begin{equation*}
+  A(\alpha v+w)=\alpha Av+Aw
+\end{equation*}
+
+</div></li>
+
+</ul>
+</section>
+<section id="slide-orgae02b92">
+<h3 id="orgae02b92">Example 2</h3>
+<ul>
+<li>Let \(f,g:\mathbb{R}\to\mathbb{R}\) be differentiable, and \(\alpha\in\mathbb{R}\).</li>
+<li>Then \((\alpha f+g):\mathbb{R}\to\mathbb{R}\) is differentiable, and</li>
+
+</ul>
+<div>
+\begin{equation*}
+    \frac{d}{dt}(\alpha f+g)=\alpha \frac{d}{dt}f+\frac{d}{dt}g
+\end{equation*}
+
+</div>
+</section>
+<section id="slide-org5cf1da0">
+<h3 id="org5cf1da0">Example 3</h3>
+<ul>
+<li>Let \(f,g:[0,1]\to\mathbb{R}\) be continuous, and \(\alpha\in\mathbb{R}\).</li>
+<li>Then \((\alpha f+g):[0,1]\to\mathbb{R}\) is continuous, and</li>
+
+</ul>
+<div>
+\begin{equation*}
+    \int_0^1(\alpha f+g)(t)dt=\alpha\int_0^1f(t)dt+\int_0^1g(t)dt
+\end{equation*}
+
+</div>
+</section>
+<section id="slide-org3ddf7e9">
+<h3 id="org3ddf7e9">Example 4</h3>
+<ul>
+<li>Let \(x:\mathbb{R}\to\mathbb{R}^2\) (i.e. \(x(t)=\begin{pmatrix}x_1(t)\\x_2(t)\end{pmatrix})\).</li>
+<li>Let \(A=\begin{pmatrix} a & b\\c & d\end{pmatrix}\) be a \(2\times 2\) matrix.</li>
+<li><p>
+Then \((Ax):\mathbb{R}\to\mathbb{R}^2\) is defined by
+</p>
+<div style="font-size: 62%;">
+<div>
+\begin{equation*}
+  (Ax)(t)=\begin{pmatrix} a & b\\c & d\end{pmatrix}\begin{pmatrix}x_1(t)\\x_2(t)\end{pmatrix}=\begin{pmatrix}ax_1(t)+bx_2(t)\\cx_1(t)+dx_2(t)\end{pmatrix}
+\end{equation*}
+
+</div>
+</div></li>
+
+</ul>
+</section>
+<section id="slide-org31ec33d">
+<h3 id="org31ec33d">Example 4</h3>
+<ul>
+<li>Let \(x,y:\mathbb{R}\to\mathbb{R}^2\), \(\alpha\in\mathbb{R}\), and \(A\) be a \(2\times 2\) matrix.</li>
+<li><p>
+Then \((\alpha x+y):\mathbb{R}\to\mathbb{R}^2\), and
+</p>
+<div>
+\begin{equation*}
+  A(\alpha x+y)=\alpha Ax+Ay
+\end{equation*}
+
+</div></li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-orga54f790">
+<h2 id="orga54f790">Pattern?</h2>
+<ul>
+<li>There are two patterns</li>
+
+</ul>
+</section>
+<section id="slide-org02b57bd">
+<h3 id="org02b57bd">Pattern 1: &ldquo;Scale and Add&rdquo;</h3>
+<div style="font-size: 62%;">
+<ul>
+<li><p>
+\(v,w\in\mathbb{R}^n,\alpha\in\mathbb{R}\)
+</p>
+<div>
+\begin{equation*}
+  \implies(\alpha v+w)\in\mathbb{R}^n
+\end{equation*}
+
+</div></li>
+<li><p>
+\(f,g:\mathbb{R}\to\mathbb{R}\text{ differentiable }, \alpha\in\mathbb{R}\)
+</p>
+<div>
+\begin{equation*}
+  \implies (\alpha f+g):\mathbb{R}\to\mathbb{R}\text{ differentiable}
+\end{equation*}
+
+</div></li>
+<li><p>
+\(f,g:[0,1]\to\mathbb{R}\text{ continuous },\alpha\in\mathbb{R}\)
+</p>
+<div>
+\begin{equation*}
+  \implies(\alpha f+g):[0,1]\to\mathbb{R}\text{ continuous}
+\end{equation*}
+
+</div></li>
+<li><p>
+\(x,y:\mathbb{R}\to\mathbb{R}^2,\alpha\in\mathbb{R}\)
+</p>
+<div>
+\begin{equation*}
+  \implies (\alpha x+y):\mathbb{R}\to\mathbb{R}^2
+\end{equation*}
+
+</div></li>
+
+</ul>
+</div>
+
+</section>
+<section id="slide-org847f702">
+<h3 id="org847f702">&rsquo;Scale and Add&rsquo; Counterexample</h3>
+<p>
+Let \(f,g:\mathbb{R}\to\mathbb{R}\) be <i>discontinuous</i> at \(0\), and \(\alpha\in\mathbb{R}\). Does this guarantee that \((\alpha f+g):\mathbb{R}\to\mathbb{R}\) is discontinuous at \(0\)?
+</p>
+</section>
+<section id="slide-org0f6b3a1">
+<h3 id="org0f6b3a1">&rsquo;Scale and Add&rsquo; Counterexample</h3>
+<ul>
+<li><b>NO</b></li>
+<li>Let \(f(x)=\begin{cases} 0 & x\le 0\\ 1 & x>0\end{cases}\), \(\alpha=1\) and \(g=-f\).</li>
+<li>Then both \(f\) and \(g\) are discontinuous at \(0\)</li>
+<li>But \((\alpha f+g)=(f-f)=0\) (the zero function) is continuous.</li>
+
+</ul>
+</section>
+<section id="slide-org9c8bdd1">
+<h3 id="org9c8bdd1">Pattern 2: &ldquo;Commutes with Scale and Add&rdquo;</h3>
+<ul>
+<li>\(A(\alpha v+w)=\alpha Av+Aw\)</li>
+<li>\(\frac{d}{dt}(\alpha f+g)=\alpha\frac{d}{dt}f+\frac{d}{dt}g\)</li>
+<li>\(\int_0^1(\alpha f+g)(t)dt=\alpha\int_0^1f(t)dt+\int_0^1g(t)dt\)</li>
+<li>\(A(\alpha x+y)=\alpha Ax+Ay\)</li>
+
+</ul>
+
+</section>
+<section id="slide-orgda7008d">
+<h3 id="orgda7008d">&rsquo;Commutes with&rsquo; Counterexample</h3>
+<ul>
+<li><p>
+If \(f,g:[0,1]\to\mathbb{R}\) are continuous and \(\alpha\in\mathbb{R}\), does that guarantee that
+</p>
+<div style="font-size: 62%;">
+<div>
+\begin{equation*}
+  \int_0^1(\alpha f(t)+g(t))^2dt=\alpha\int_0^1(f(t))^2dt+\int_0^1(g(t))^2dt
+\end{equation*}
+
+</div>
+</div></li>
+
+</ul>
+</section>
+<section id="slide-org52fa30e">
+<h3 id="org52fa30e">&rsquo;Commutes with&rsquo; Counterexample</h3>
+<ul>
+<li><b>NO</b></li>
+<li><p>
+Let \(f(t)=g(t)=2\) and \(\alpha=1\). Then
+</p>
+<div style="font-size: 62%;">
+<div>
+\begin{equation*}
+  \int_0^1(\alpha f(t)+g(t))^2dt=\int_0^14^2dt=16
+\end{equation*}
+
+</div>
+</div>
+<p>
+But
+</p>
+<div style="font-size: 62%;">
+<div>
+\begin{equation*}
+  \alpha\int_0^1(f(t))^2dt+\int_0^1(g(t))^2dt=\int_0^12^2dt+\int_0^12^2dt=8
+\end{equation*}
+
+</div>
+</div></li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-orgc524072">
+<h2 id="orgc524072">Vector Spaces</h2>
+<p>
+Intuitively a <b>vector space</b> is a set of objects, \(V\), called <b>vectors</b> such that
+</p>
+<ul>
+<li>If \(\alpha\in\mathbb{R}\) and \(v,w\in V\), then \((\alpha v+w)\in V\).
+<ul>
+<li>&rsquo;+&rsquo; and &rsquo;\(\alpha v\)&rsquo; will either be explicitly defined, or defined by context</li>
+
+</ul></li>
+
+</ul>
+</section>
+<section id="slide-org029c75a">
+<h3 id="org029c75a">Examples of Vector Spaces</h3>
+<ul>
+<li>\(\mathbb{R}^n\) is a vector space.</li>
+<li>\(\{f:\mathbb{R}\to\mathbb{R}|f\text{ is differentiable}\}\) is a vector space.</li>
+<li>\(\{f:[0,1]\to\mathbb{R}|f\text{ is continuous}\}\) is a vector space.</li>
+<li>\(\{x:\mathbb{R}\to\mathbb{R}^2\}\) is a vector space.</li>
+<li>\(\{f:\mathbb{R}\to\mathbb{R}|f\text{ is discontinuous at }0\}\) is <b>NOT</b> a vector space.</li>
+
+</ul>
+</section>
+<section id="slide-orgcb3f375">
+<h3 id="orgcb3f375">Important Vector Spaces</h3>
+<div class="outline-text-3" id="text-orgcb3f375">
+</div>
+</section>
+<section id="slide-org91b211f">
+<h4 id="org91b211f">Continuous Functions</h4>
+<ul>
+<li>Codomain is \(\mathbb{R}\)
+<ul>
+<li>\(C([a,b])=\{f:[a,b]\to\mathbb{R}|f\text{ is continuous }\}\)</li>
+<li>\(C(\mathbb{R})=\{f:\mathbb{R}\to\mathbb{R}|f\text{ is continuous }\}\)</li>
+<li>\(C(\mathbb{R}^n)=\{f:\mathbb{R}^n\to\mathbb{R}|f\text{ is continuous}\}\)</li>
+
+</ul></li>
+<li>Specified codomain
+<ul>
+<li>\(C([a,b];\mathbb{R}^n)=\{f:\mathbb{R}\to\mathbb{R}^n|f\text{ is continuous}\}\)</li>
+<li>\(C(\mathbb{R};\mathbb{R}^n)=\{f:\mathbb{R}\to\mathbb{R}^n|f\text{ is continuous }\}\)</li>
+<li>\(C(\mathbb{R}^n;\mathbb{R}^m)=\{f:\mathbb{R}\to\mathbb{R}^n|f\text{ is continuous }\}\)</li>
+
+</ul></li>
+
+</ul>
+</section>
+<section id="slide-orgab0383f">
+<h4 id="orgab0383f">Continuously Differentiable Functions</h4>
+<ul>
+<li><p>
+Codomain is \(\mathbb{R}\)
+</p>
+<div>
+\begin{align*}
+  C^1([a,b])&=\{f:[a,b]\to\mathbb{R}|\\
+                  &f' \text{ exists and is continuous}\}\\
+  C^1(\mathbb{R})&=\{f:\mathbb{R}\to\mathbb{R}|\\
+                             &f' \text{ exists and is continuous}\}\\
+  C^1(\mathbb{R}^n)&=\{f:\mathbb{R}^n\to\mathbb{R}|\\
+                                 &\text{all first-order partial derivatives}\\
+                                 &\text{exist and are continuous}\}\\
+\end{align*}
+
+</div></li>
+
+</ul>
+</section>
+<section id="slide-orga991f8c">
+<h4 id="orga991f8c">Continuously Differentiable Functions</h4>
+<ul>
+<li><p>
+Specified codomain
+</p>
+<div>
+ \begin{align*}
+  C^1([a,b];\mathbb{R}^n)&=\{f:[a,b]\to\mathbb{R}^n|\\
+                  &f' \text{ exists and is continuous}\}\\
+  C^1(\mathbb{R};\mathbb{R}^n)&=\{f:\mathbb{R}\to\mathbb{R}^n|\\
+                             &f' \text{ exists and is continuous}\}\\
+  C^1(\mathbb{R}^n;\mathbb{R}^m)&=\{f:\mathbb{R}^n\to\mathbb{R}^m|\\
+                                 &\text{all first-order partial derivatives}\\
+                                 &\text{exist and are continuous}\}\\
+\end{align*}
+
+</div></li>
+
+</ul>
+</section>
+<section id="slide-orga67bfda">
+<h4 id="orga67bfda">Continuously Differentiable Functions</h4>
+<p>
+In the last slide, we meant:
+</p>
+<div style="font-size: 62%">
+<ul>
+<li>For \(C^1(\mathbb{R};\mathbb{R}^n)\) \(\implies f(x)=(f_1(x),...,f_n(x))\) and \(f'(x)=(f_1'(x),...,f_n'(x))\).</li>
+<li>For \(C^1(\mathbb{R}^n;\mathbb{R}^m)\) \(\implies f(x_1,....,x_n)=(f_1(x_1,...,x_n),f_2(x_1,...,x_n),...,f_m(x_1,...,x_m))\), and we are interested in \(\frac{\partial f_i}{\partial x_j}\), for \(i=1\cdots m\) and \(j=1...n\).</li>
+
+</ul>
+</div>
+</section>
+<section id="slide-org586d09e">
+<h4 id="org586d09e">Spaces of Sequeneces</h4>
+<ul>
+<li>Sequence notation:
+<ul>
+<li>\(\{x_k\}_{k=1}^\infty=x_1,x_2,x_3,\cdots\)</li>
+<li>\(\{x_k\}_{k=0}^\infty=x_0,x_1,x_2,\cdots\)</li>
+<li>\(\{x_k\}_{k=-\infty}^\infty=\cdots ,x_{-2},x_{-1},x_0,x_1,x_2,\cdots\)</li>
+
+</ul></li>
+<li>For example
+<ul>
+<li>\(\{k^2\}_{k=1}^\infty=1,4,9,16,\cdots\)</li>
+
+</ul></li>
+
+</ul>
+</section>
+<section id="slide-orgce802e6">
+<h4 id="orgce802e6">Linear Combinations of Sequences</h4>
+<ul>
+<li><p>
+If \(x=\{x_k\}_{k=1}^\infty\), \(y=\{y_k\}_{k=1}^\infty\), and \(\alpha\in\mathbb{R}\), then
+</p>
+<div>
+\begin{equation*}
+  \alpha x+y=\{\alpha x_k+y_k\}_{k=1}^\infty
+\end{equation*}
+
+</div></li>
+<li><p>
+For example, if \(x=\{k^2\}_{k=1}^\infty\) and \(y=\{2k\}_{k=1}^\infty\), then
+</p>
+<div>
+\begin{equation*}
+  \alpha x+y=\{k^2+2k\}_{k=1}^\infty=3,8,15,24,\cdots
+\end{equation*}
+
+</div></li>
+
+</ul>
+</section>
+<section id="slide-org18b419d">
+<h4 id="org18b419d">Real Valued Sequences</h4>
+<ul>
+<li>Let
+<ul>
+<li>\(\mathbb{N}=\{1,2,3,\cdots\}\)</li>
+<li>\(\mathbb{N}_0=\{0,1,2,\cdots\}\)</li>
+<li>\(\mathbb{Z}=\{\cdots,-2,-1,0,1,2,\cdots\}\)</li>
+
+</ul></li>
+<li>Vector spaces of sequences:
+<ul>
+<li>\(C(\mathbb{N})=\big\{\{x_k\}_{k=1}^\infty|x_k\in\mathbb{R}\text{ for all }k\in\mathbb{N}\big\}\)</li>
+<li>\(C(\mathbb{N}_0)=\big\{\{x_k\}_{k=0}^\infty|x_k\in\mathbb{R}\text{ for all }k\in\mathbb{N}_0\big\}\)</li>
+<li>\(C(\mathbb{Z})=\big\{\{x_k\}_{k=-\infty}^\infty|x_k\in\mathbb{R}\text{ for all }k\in\mathbb{Z}\big\}\)</li>
+
+</ul></li>
+
+</ul>
+</section>
+<section id="slide-org8c71396">
+<h4 id="org8c71396">Square Summable Sequences</h4>
+<ul>
+<li>\(\ell^2(\mathbb{N})=\{\{x_k\}_{k=1}^\infty\in C(\mathbb{N})|\sum\limits_{k=1}^\infty|x_k|^2<\infty\}\)
+<ul>
+<li>Pronounced &ldquo;little ell two&rdquo;.</li>
+<li>Proof needed that this is a vector space.</li>
+
+</ul></li>
+<li>Define \(\ell^2(\mathbb{N}_0)\) and \(\ell^2(\mathbb{Z})\) similarly.</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org9152d9f">
+<h2 id="org9152d9f">Linear Transformations</h2>
+<p>
+Let \(V,W\) be vector spaces. A map \(T:V\to W\) is <b>linear</b> (or <i>a</i> <b>linear transformation</b>) if
+</p>
+<ul>
+<li>for all \(v_1,v_2\in V\), and all \(\alpha\in\mathbb{R}\), then \(T(\alpha v_1+v_2)=\alpha T(v_1)+T(v_2)\).</li>
+
+</ul>
+</section>
+<section id="slide-org61fd098">
+<h3 id="org61fd098">Examples of Linear Transformations</h3>
+<p>
+For an \(m\times n\) matrix \(A\), define \(T_1:\mathbb{R}^n\to\mathbb{R}^m\) by
+</p>
+<div>
+\begin{equation*}
+  T_1(v)=Av
+\end{equation*}
+
+</div>
+<p>
+Then \(T\) is linear.
+</p>
+</section>
+<section id="slide-orga24f951">
+<h3 id="orga24f951">Examples of Linear Transformations</h3>
+<p>
+Define \(T_2:C^1(\mathbb{R})\to C(\mathbb{R})\) by
+</p>
+<div>
+\begin{equation*}
+  T_2(f)=\frac{d}{dt}f
+\end{equation*}
+
+</div>
+<p>
+Then \(T_2\) is linear.
+</p>
+</section>
+<section id="slide-org13b49a8">
+<h3 id="org13b49a8">Examples of Linear Transformations</h3>
+<p>
+Define \(T_3:C([0,1])\to\mathbb{R}\) by
+</p>
+<div>
+\begin{equation*}
+  T_3(f)=\int_0^1f(t)dt
+\end{equation*}
+
+</div>
+<p>
+Then \(T_3\) is linear.
+</p>
+</section>
+<section id="slide-orgda69ae5">
+<h3 id="orgda69ae5">Examples of Linear Transformations</h3>
+<p>
+For a \(2\times 2\) matrix \(A\), define \(T_4:C(\mathbb{R};\mathbb{R}^2)\to C(\mathbb{R};\mathbb{R}^2)\) by
+</p>
+<div>
+\begin{equation*}
+  T_4(x)=Ax
+\end{equation*}
+
+</div>
+<p>
+Then \(T_4\) is linear.
+</p>
+</section>
+<section id="slide-orgc71177f">
+<h3 id="orgc71177f">Examples of Linear Transformations</h3>
+<p>
+Define \(T_5:C([0,1])\to \mathbb{R}\) by
+</p>
+<div>
+\begin{equation*}
+    T_5(f)=\int_0^1(f(t))^2dt
+\end{equation*}
+
+</div>
+<p>
+Then \(T_5\) is <b>not</b> linear.
+</p>
+</section>
+<section id="slide-orgf137f3b">
+<h3 id="orgf137f3b">Examples of Linear Transformations</h3>
+<p>
+Define \(T_6:C([0,1])\to C(\mathbb{N})\) by
+</p>
+<div>
+\begin{equation*}
+    (T_6(f))_k=\sqrt{2}\int_0^1f(s)\sin(k\pi s)ds
+\end{equation*}
+
+</div>
+<p>
+Then \(T_6\) is linear.
+</p>
+
+<p>
+<b>Theorem:</b> (We might prove this at some point) Let \(f\in C([0,1])\), then \(T_6(f)\in\ell^2(\mathbb{N})\).
+</p>
+</section>
+<section id="slide-orgd713a18">
+<h3 id="orgd713a18">Examples of Linear Transformations</h3>
+<p>
+Define the <b>right shift operator</b> \(S:C(\mathbb{N})\to C(\mathbb{N})\) by
+</p>
+<div>
+\begin{equation*}
+    S(x_1,x_2,x_3,\cdots)=0,x_1,x_2,x_3,\cdots
+\end{equation*}
+
+</div>
+<p>
+<code>WARNING</code>: \(S\) is one-to-one but <b>not</b> onto
+</p>
+</section>
+<section id="slide-org878e063">
+<h3 id="org878e063">Examples of Linear Transformations</h3>
+<p>
+Define the <b>left shift operator</b> \(S^*:C(\mathbb{N})\to C(\mathbb{N})\) by
+</p>
+<div>
+\begin{equation*}
+    S^*(x_1,x_2,x_3,\cdots)=x_2,x_3,x_4,\cdots
+\end{equation*}
+
+</div>
+<p>
+<code>WARNING</code>: \(S^*\) is onto but <b>not</b> one-to-one
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/search/search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom/zoom.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+mouseWheel: false,
+fragmentInURL: false,
+hashOneBasedIndex: false,
+pdfSeparateFragments: true,
+
+overview: true,
+
+transition: 'slide',
+transitionSpeed: 'default',
+
+// Plugins with reveal.js 4.x
+plugins: [ RevealMarkdown, RevealNotes, RevealSearch, RevealZoom ],
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+]
+
+});
+</script>
+</body>
+</html>
