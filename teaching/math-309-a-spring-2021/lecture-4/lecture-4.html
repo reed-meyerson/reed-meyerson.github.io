@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Math 309: Lecture 4</title>
+<meta name="author" content="Reed Meyerson"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/sky.css" id="theme"/>
+
+<link rel="stylesheet" href="local.css"/>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1 class="title">Math 309: Lecture 4</h1><h2 class="author">Reed Meyerson</h2><h2 class="date">April 5, 2021</h2>
+</section>
+
+<section>
+<section id="slide-org6794ce0">
+<h2 id="org6794ce0">Last Time</h2>
+<ul>
+<li>Vector spaces
+<ul>
+<li>\(v,w\in V\), \(\alpha\in\mathbb{R}\) \(\implies\) \((\alpha v+w)\in V\)</li>
+<li>e.g. \(C([0,1])\) or \(C^1(\mathbb{R};\mathbb{R}^2)\) or \(C(\mathbb{N})\).</li>
+
+</ul></li>
+<li>Understand definition of \(T_3\) (slide 30)</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-orgdcb4203">
+<h2 id="orgdcb4203">Goals for Today</h2>
+<ul>
+<li>Understand inner products</li>
+<li>Understand Orthogonality</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org4213d09">
+<h2 id="org4213d09">Dot Product Review</h2>
+<p>
+Let \(v,w\in\mathbb{R}^n\) such that
+</p>
+<div>
+\begin{align*}
+    v&=(v_1,...,v_n)\\
+    w&=(w_1,...,w_n)
+\end{align*}
+
+</div>
+<p>
+Then
+</p>
+<div>
+\begin{align*}
+    v\bullet w&=v_1w_1+v_2w_2+...+v_nw_n\\
+    &=\sum\limits_{k=1}^nv_iw_i
+\end{align*}
+
+</div>
+</section>
+<section id="slide-org051f8b9">
+<h3 id="org051f8b9">Algebraic Properties</h3>
+<p>
+Let \(v,w,z\in\mathbb{R}^n\) and \(\alpha\in\mathbb{R}\). Then
+</p>
+<ul>
+<li><p>
+<code>SYMMETRIC</code>
+</p>
+<div>
+\begin{equation*}
+  v\bullet w=w\bullet v
+\end{equation*}
+
+</div></li>
+<li><p>
+<code>LINEAR IN THE FIRST ARGUMENT</code>
+</p>
+<div>
+\begin{equation*}
+    (\alpha v+w)\bullet z=\alpha (v\bullet z)+(w\bullet z)
+\end{equation*}
+
+</div></li>
+
+</ul>
+</section>
+<section id="slide-orgfc9a93c">
+<h3 id="orgfc9a93c">Analytic Properties</h3>
+<p>
+Let \(v\in\mathbb{R}\). Then
+</p>
+<ul>
+<li><code>POSITIVE DEFINITE</code></li>
+
+</ul>
+<div>
+\begin{equation*}
+    \text{If }v\neq 0\text{ then }(v\bullet v)>0
+\end{equation*}
+
+</div>
+</section>
+<section id="slide-org1f1d3f3">
+<h3 id="org1f1d3f3">Geometric Properties</h3>
+<p>
+Define \(|v|=\sqrt{v\bullet v}\)
+</p>
+<ul>
+<li>Length \(\implies\) \(|v|\)</li>
+<li>Distance \(\implies\) \(|v-w|\)</li>
+<li>Angle \(\implies\) \(\theta=\cos^{-1}\frac{v\bullet w}{|v||w|}\)
+<ul>
+<li>Orthogonality \(v\bullet w=0\implies v\perp w\)</li>
+
+</ul></li>
+
+</ul>
+</section>
+<section id="slide-org502db42">
+<h3 id="org502db42">Derived Algebraic Properties</h3>
+<p>
+Let \(v,w,z\in\mathbb{R}^n\) and \(\alpha\in\mathbb{R}\). Then
+</p>
+<div>
+\begin{equation*}
+    v\bullet (\alpha w+z)=\alpha(v\bullet w)+(v\bullet z)
+\end{equation*}
+
+</div>
+<ul>
+<li><code>LINEAR IN THE SECOND ARGUMENT</code></li>
+
+</ul>
+</section>
+<section id="slide-org01c35fa">
+<h3 id="org01c35fa">Proof</h3>
+<div>
+\begin{align*}
+    v\bullet (\alpha w+z)&=(\alpha w+z)\bullet v&\text{symmetry}\\
+        &=\alpha (w\bullet v) + (z\bullet v)&\text{linear in first}\\
+        &=\alpha(v\bullet w)+(v\bullet z)&\text{symmetry}
+\end{align*}
+
+</div>
+
+</section>
+<section id="slide-orge482f56">
+<h3 id="orge482f56">More Derived Properties</h3>
+<p>
+Let \(v\in\mathbb{R}^n\). Then \(\vec{0}\bullet v=0\).
+</p>
+</section>
+<section id="slide-orgd53dacc">
+<h3 id="orgd53dacc">Proof</h3>
+<div>
+\begin{align*}
+    \vec{0}\bullet v &= (\vec{0}+\vec{0})\bullet v& \text{property of }\vec{0}\\
+        &= (\vec{0}\bullet v)+(\vec{0}\bullet v) &\text{linear in first}\\
+\end{align*}
+
+</div>
+<p>
+So
+</p>
+<div>
+\begin{align*}
+    0&=\vec{0}\bullet v& \text{subtraction}
+\end{align*}
+
+</div>
+
+</section>
+<section id="slide-org1fa6069">
+<h3 id="org1fa6069">Derived geometric properties</h3>
+<p>
+Let \(v,w,z\in\mathbb{R}^n\) and \(\alpha\in\mathbb{R}\). Then
+</p>
+<ul>
+<li>\(|\alpha v|=|\alpha| |v|\)</li>
+<li>\(|v+w|\le |v| + |w|\)</li>
+<li>\(|v-z|\le |v-w| + |w-z|\)</li>
+
+</ul>
+<p>
+The above properties can all be derived using only <code>SYMMETRY</code>, <code>LINEAR IN THE FIRST</code>, and <code>POSITIVE DEFINITE</code> (and linear algebra)
+</p>
+</section>
+<section id="slide-orga3c596e">
+<h3 id="orga3c596e">Proof \(|\alpha v|=|\alpha| |v|\)</h3>
+<div>
+\begin{align*}
+    |\alpha v|&=\sqrt{(\alpha v)\bullet (\alpha v)} & \text{definition of }|\cdot|\\
+        &=\sqrt{\alpha^2(v\bullet v)} & \text{linear in both}\\
+        &=\sqrt{\alpha^2}\sqrt{v\bullet v}& \text{property of $\sqrt{\cdot}$}\\
+        &=|\alpha|\sqrt{v\bullet v}& \sqrt{x^2}=|x|
+\end{align*}
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org7d3cc4a">
+<h2 id="org7d3cc4a">Inner Products</h2>
+<div style="font-size: 62%;">
+<p>
+Let \(V\) be a vector space. An <b>inner product on</b> \(V\) is a rule \(\langle,\rangle\) which assigns to each pair of vectors \(v,w\in V\) a real number \(\langle v,w\rangle\). We require \(\langle,\rangle\) to satisfy
+</p>
+<ul>
+<li><p>
+<code>SYMMETRIC</code>
+</p>
+
+<p>
+If \(v,w\in V\), then \(\langle v,w\rangle =\langle w,v\rangle\)
+</p></li>
+<li><p>
+<code>LINEAR IN THE FIRST ARGUMENT</code>
+</p>
+
+<p>
+If \(v,w\in V\) and \(\alpha\in\mathbb{R}\), then \(\langle \alpha v + w,z \rangle=\alpha\langle v,z\rangle + \langle w,z\rangle\)
+</p></li>
+<li><p>
+<code>POSITIVE DEFINITE</code>
+</p>
+
+<p>
+If \(v\in V\) and \(v\neq 0\), then \(\langle v,v\rangle >0\).
+</p></li>
+
+</ul>
+</div>
+</section>
+<section id="slide-org22ed812">
+<h3 id="org22ed812">Inner Products Examples</h3>
+<p>
+For vectors \(v,w\in\mathbb{R}^n\), define
+</p>
+<div>
+\begin{equation*}
+    \langle v,w\rangle_{\mathbb{R}^n}=v\bullet w
+\end{equation*}
+
+</div>
+<p>
+Then, \(\langle,\rangle_{\mathbb{R}^n}\) is an inner product on \(\mathbb{R}^n\).
+</p>
+</section>
+<section id="slide-org54a0c5f">
+<h3 id="org54a0c5f">Inner Products Examples</h3>
+<p>
+For vectors \(v=(v_1,v_2)\) and \(w=(w_1,w_2)\) in \(\mathbb{R}^2\) define
+</p>
+<div>
+\begin{equation*}
+    \langle v,w\rangle_2=v_1w_1+2v_2w_2
+\end{equation*}
+
+</div>
+<p>
+Then \(\langle,\rangle_2\) is an inner product.
+</p>
+</section>
+<section id="slide-org58f6241">
+<h4 id="org58f6241">Proof of Symmetry</h4>
+<div>
+\begin{align*}
+    \langle v,w\rangle_2&=v_1w_1+2v_2w_2\\
+    &=w_1v_1+2w_2v_2\\
+    &=\langle w,v\rangle_2
+\end{align*}
+
+</div>
+</section>
+<section id="slide-org93a6eb8">
+<h4 id="org93a6eb8">Proof of Linearity in First Argument</h4>
+<p>
+Let \(z=(z_1,z_2)\) and \(\alpha\in\mathbb{R}\).
+</p>
+<div>
+\begin{align*}
+    \langle \alpha v+w,z\rangle_2&=\langle(\alpha v_1+w_1,\alpha v_2+w_2),(z_1,z_2)\rangle_2\\
+        &=(\alpha v_1+w_1)z_1+2(\alpha v_2+w_2)z_2\\
+        &=\alpha(v_1z_1+2v_2z_2)+(w_1z_1+2w_2z_2)\\
+        &=\alpha\langle v,z\rangle_2+\langle w,z\rangle_2
+\end{align*}
+
+</div>
+</section>
+<section id="slide-orgaa87fc4">
+<h4 id="orgaa87fc4">Proof of Positive Definiteness</h4>
+<p>
+Let \(v=(v_1,v_2)\neq (0,0)\). Then
+</p>
+<div>
+\begin{align*}
+    \langle v,v\rangle_2&=v_1^2+2v_2^2\\
+        &> 0
+\end{align*}
+
+</div>
+
+</section>
+<section id="slide-orgea5d4ce">
+<h3 id="orgea5d4ce">The \(L^2\) Inner Product</h3>
+<p>
+For \(f,g\in C([a,b])\), define
+</p>
+<div>
+\begin{equation*}
+    \langle f,g\rangle_{L^2}=\int_a^bf(s)g(s)ds
+\end{equation*}
+
+</div>
+<p>
+Then \(\langle,\rangle_{L^2}\) defines and inner product on \(C([a,b])\).
+</p>
+<ul>
+<li>If we want to be specific about the interval, we write \(L^2([a,b])\).</li>
+
+</ul>
+</section>
+<section id="slide-org5d20754">
+<h4 id="org5d20754">Proof of Symmetry</h4>
+<div>
+\begin{align*}
+    \langle f,g\rangle_{L^2}&=\int_a^bf(s)g(s)ds\\
+        &=\int_a^bg(s)f(s)ds\\
+        &=\langle g,f\rangle_{L^2}
+\end{align*}
+
+</div>
+</section>
+<section id="slide-orga900558">
+<h4 id="orga900558">Proof of Linearity in First Argument</h4>
+<div>
+\begin{align*}
+    \langle \alpha f+g,h\rangle_{L^2}&=\int_a^b(\alpha f+g)(s)h(s)ds\\
+        &=\int_a^b[\alpha f(s)+g(s)]h(s)ds\\
+        &=\alpha\int_a^bf(s)h(s)ds+\int_a^bg(s)h(s)ds\\
+        &=\alpha\langle f,h\rangle_{L^2}+\langle g,h\rangle_{L^2}
+\end{align*}
+
+</div>
+</section>
+<section id="slide-org152314c">
+<h4 id="org152314c">Proof of Positive Definiteness</h4>
+<div style="font-size: 62%;">
+<p>
+Let be \(f\in C([a,b])\) be such that \(f\) is not identically zero (i.e. not the zero function).
+</p>
+<div>
+\begin{align*}
+    \langle f,f\rangle_{L^2}&=\int_a^bf(s)f(s)ds\\
+        &=\int_a^b[f(s)]^2ds\\
+        &\ge 0
+\end{align*}
+
+</div>
+<p>
+Since \(f\) is not the zero function, the area under the curve of \(f^2(s)\) is strictly positive. Thus
+</p>
+<div>
+\begin{equation*}
+    \int_a^b[f(s)]^2ds>0
+\end{equation*}
+
+</div>
+</div>
+
+</section>
+<section id="slide-org16474e3">
+<h3 id="org16474e3">Inner Product Space</h3>
+<p>
+An <b>inner product space</b> is a pair \((V,\langle,\rangle)\) where \(V\) is a vector space and \(\langle,\rangle\) is an inner product on \(V\).
+</p>
+
+<ul>
+<li>Practically, this just means there is a fixed inner product.</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org1e24887">
+<h2 id="org1e24887">Orthogonality</h2>
+<p>
+Let \((V,\langle,\rangle)\) be an inner product space. Let \(v,w\in V\). If \(\langle v,w\rangle=0\), we say that \(v\) is <b>orthogonal</b> to \(w\) and we write \(v\perp w\).
+</p>
+
+<p>
+If \(S\subset V\) is any subset such that, for any pair \(v,w\in S\) such that \(v\neq w\), we say that \(S\) is an <b>orthogonal subset</b>.
+</p>
+</section>
+<section id="slide-org58dd719">
+<h3 id="org58dd719">Orthogonality Example</h3>
+<ul>
+<li>Let \(\hat i=(1,0)\) and \(\hat j=(0,1)\). Then \(\hat i\) is orthogonal to \(\hat j\) with respect to \(\langle,\rangle_{\mathbb{R}^2}\).</li>
+<li>Let \(S=\{(1,0,0),(0,1,1),(0,1,-1)\}\). Then \(S\) is an orthogonal subset of \(\mathbb{R}^3\) with respect to \(\langle,\rangle_{\mathbb{R}^3}\).</li>
+
+</ul>
+</section>
+<section id="slide-org7121515">
+<h3 id="org7121515">Orthogonal Functions</h3>
+<p>
+Let \(\varphi_k(x)=\sin(k\pi x)\) on the interval \([0,1]\). Then \(\{\varphi_1,\varphi_2,...,\}\) is orthogonal with respect to the \(L^2([0,1])\) inner product.
+</p>
+</section>
+<section id="slide-orge956156">
+<h4 id="orge956156">Proof</h4>
+<div style="font-size: 62%;">
+<p>
+Let \(j\neq k\) be natural numbers. We must show that \(\langle \varphi_j,\varphi_k\rangle_{L^2([0,1])} =0\)
+</p>
+<div>
+\begin{align*}
+    \langle \varphi_j,\varphi_k\rangle_{L^2}&=\int_0^1\varphi_j(s)\varphi_k(s)ds\\
+    &=\int_0^1\sin(j\pi s)\sin(k\pi s)ds\\
+    &=\int_0^1\frac{1}{2}[\cos((j-k)\pi s)-\cos((j+k)\pi s)]ds\\
+    &=\frac{1}{2}[\frac{1}{(j-k)\pi}\sin((j-k)\pi s)-\frac{1}{(j+k)\pi}\sin((j+k)\pi s]\bigg|_0^1\\
+    &=0
+\end{align*}
+
+</div>
+<p>
+Where we have used \(\sin(a)\sin(b)=\frac{1}{2}[\cos(a-b)-\cos(a+b)]\)
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org115402f">
+<h2 id="org115402f">Orthonormal</h2>
+<p>
+Let \((V,\langle,\rangle)\) be an inner product space. Let \(S\subset V\) be an orthonogonal subset. We say \(S\) is <b>orthonormal</b> if, for all \(v\in S\), we have \(\langle v,v\rangle =1\).
+</p>
+</section>
+<section id="slide-orgf75c94f">
+<h3 id="orgf75c94f">Orthonormal Example</h3>
+<ul>
+<li>Let \(\hat i=(1,0)\) and \(\hat j=(0,1)\). Then \(\{\hat i,\hat j\}\) is orthonormal with respect to \(\langle,\rangle_{\mathbb{R}^2}\).</li>
+<li>Let \(S=\{(1,0,0),(0,\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}}),(0,\frac{1}{\sqrt{2}},-\frac{1}{\sqrt{2}})\}\). Then \(S\) is an orthogonal subset of \(\mathbb{R}^3\) with respect to \(\langle,\rangle_{\mathbb{R}^3}\).</li>
+
+</ul>
+</section>
+<section id="slide-org3541368">
+<h3 id="org3541368">Orthonormal Functions</h3>
+<p>
+Let \(\hat \varphi_k(x)=\sqrt{2}\sin(k\pi x)\) on the interval \([0,1]\). Then \(\{\hat \varphi_1,\hat \varphi_2,...,\}\) is orthonormal with respect to the \(L^2([0,1])\) inner product.
+</p>
+</section>
+<section id="slide-orgbc74995">
+<h4 id="orgbc74995">Proof</h4>
+<p>
+From previous computation, we know that if \(j\neq k\), then
+</p>
+<div>
+\begin{align*}
+    \langle \hat \varphi_j,\hat\varphi_k\rangle_{L^2} &=\langle \sqrt{2}\varphi_j,\sqrt{2}\varphi_k\rangle_{L^2}\\
+        &=2\langle\varphi_j,\varphi_k\rangle_{L^2}\\
+        &=0
+\end{align*}
+
+</div>
+<p>
+Thus, we just have to show that \(\langle \hat\varphi_k,\hat\varphi_k\rangle_{L^2}=1\).
+</p>
+</section>
+<section id="slide-orgea0ff97">
+<h4 id="orgea0ff97">Proof</h4>
+<div style="font-size: 62%;">
+<p>
+We compute
+</p>
+<div>
+\begin{align*}
+    \langle \hat\varphi_k,\hat\varphi_k\rangle_{L^2} &=2\int_0^1\sin^2(k\pi s)ds\\
+        &=2\int_0^1\frac{1}{2}[1-\cos(2k\pi s)]ds\\
+        &=[s-\frac{1}{2k\pi}\sin(2k\pi s)]\bigg|_0^1\\
+        &=1
+\end{align*}
+
+</div>
+<p>
+Where we have used \(\sin^2(a)=\frac{1}{2}[1-\cos(2a)]\).
+</p>
+</div>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/search/search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom/zoom.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+mouseWheel: false,
+fragmentInURL: false,
+hashOneBasedIndex: false,
+pdfSeparateFragments: true,
+
+overview: true,
+
+transition: 'slide',
+transitionSpeed: 'default',
+
+// Plugins with reveal.js 4.x
+plugins: [ RevealMarkdown, RevealNotes, RevealSearch, RevealZoom ],
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+]
+
+});
+</script>
+</body>
+</html>
