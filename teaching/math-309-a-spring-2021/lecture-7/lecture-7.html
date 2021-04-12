@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Math 309: Lecture 7</title>
+<meta name="author" content="Reed Meyerson"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/sky.css" id="theme"/>
+
+<link rel="stylesheet" href="local.css"/>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1 class="title">Math 309: Lecture 7</h1><h2 class="author">Reed Meyerson</h2><h2 class="date">April 12, 2021</h2>
+</section>
+
+<section>
+<section id="slide-org13f9cd9">
+<h2 id="org13f9cd9">Last Time</h2>
+<ul>
+<li>Direction Fields
+<ul>
+<li>Draw direction of \(Ax\) for all &ldquo;x&rdquo;</li>
+<li>Solutions &ldquo;follow the arrows&rdquo;</li>
+
+</ul></li>
+
+</ul>
+</section>
+<section id="slide-org153655b">
+<h3 id="org153655b">To draw a direction field</h3>
+<ol>
+<li>Diagonalize</li>
+<li>Draw line for each eigenvector</li>
+<li>Points in/out depending on sign of eigenvalues</li>
+<li>&ldquo;interpolate&rdquo;</li>
+
+</ol>
+</section>
+</section>
+<section>
+<section id="slide-org3d082dc">
+<h2 id="org3d082dc">Goals for Today</h2>
+<ul>
+<li>Complex numbers</li>
+<li>Complex eigenvalues</li>
+<li>Solving \(2\times 2\) IVP with complex eigenvalues</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-orgef2ef6c">
+<h2 id="orgef2ef6c">Motivating Example</h2>
+<div style="font-size: 62%;">
+<ul>
+<li>Let \(A=\begin{pmatrix} -2 & 1\\ -1 & -2\end{pmatrix}\)</li>
+<li><p>
+\(\text{det}(A-\lambda I)=\lambda^2+4\lambda +5\)
+</p>
+<div>
+\begin{align*}
+  \lambda&=\frac{-4\pm\sqrt{4^2-4(1)5}}{2}\\
+          &=\frac{-4\pm\sqrt{-4}}{2}\\
+          &=\frac{-4\pm 2\sqrt{-1}}{2}\\
+          &=-2\pm \sqrt{-1}
+\end{align*}
+
+</div>
+<p>
+uh oh
+</p></li>
+
+</ul>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org5496df6">
+<h2 id="org5496df6">Review of Complex Numbers</h2>
+<ul>
+<li>\(i=\sqrt{-1}\)
+<ul>
+<li>replace \(i^2\mapsto -1\)</li>
+
+</ul></li>
+<li>A <b>complex number</b> is an expression of the form
+<ul>
+<li>\(a+bi\) where \(a,b\in\mathbb{R}\)</li>
+
+</ul></li>
+
+</ul>
+<p>
+For example
+</p>
+<div>
+\begin{equation*}
+    3+4i
+\end{equation*}
+
+</div>
+</section>
+<section id="slide-org1ea1025">
+<h3 id="org1ea1025">Plotting Complex Numbers</h3>
+
+<div id="org243315f" class="figure">
+<p><img src="./complex_plot.JPG" alt="complex_plot.JPG" class="center-image" />
+</p>
+</div>
+</section>
+<section id="slide-org88e04b3">
+<h3 id="org88e04b3">Real and Imaginary Parts</h3>
+<ul>
+<li>Let \(z=a+bi\).</li>
+<li>Define \(\mathbb{R}\text{e}(z)=a\)</li>
+<li>Define \(\mathbb{I}\text{m}(z)=b\)</li>
+
+</ul>
+<p>
+For example
+</p>
+<div>
+\begin{align*}
+    \mathbb{R}\text{e}(3-4i)&=3\\
+    \mathbb{I}\text{m}(3-4i)&=-4\\
+\end{align*}
+
+</div>
+</section>
+<section id="slide-org402e15a">
+<h3 id="org402e15a">Addition</h3>
+<div>
+\begin{equation*}
+    (a+bi)+(c+di)=(a+c)+(b+d)i
+\end{equation*}
+
+</div>
+<p>
+For example
+</p>
+<div>
+\begin{equation*}
+    (3+4i)+(5+6i)=8+12i
+\end{equation*}
+
+</div>
+</section>
+<section id="slide-org9c67fda">
+<h3 id="org9c67fda">Multiplication</h3>
+<div>
+\begin{align*}
+    (a+bi)(c+di)&=ac+bci+adi+bdi^2\\
+        &=ac+bci+adi-bd\\
+        &=(ac-bd)+(bc+ad)i
+\end{align*}
+
+</div>
+<p>
+For example
+</p>
+<div>
+\begin{equation*}
+    (1+2i)(3+4i)=-5+10i
+\end{equation*}
+
+</div>
+</section>
+<section id="slide-org6d2d93d">
+<h3 id="org6d2d93d">Division</h3>
+<ul>
+<li>Later</li>
+
+</ul>
+</section>
+<section id="slide-orgf9bb903">
+<h3 id="orgf9bb903">Conjugation</h3>
+<ul>
+<li>\(i\mapsto -i\)</li>
+<li>If \(z=a+bi\), then its <b>complex conjugate</b> is \(\overline{z}=a-bi\).</li>
+
+</ul>
+<p>
+For example
+</p>
+<div>
+\begin{equation*}
+    \overline{3+4i}=3-4i
+\end{equation*}
+
+</div>
+<ul>
+<li>Reflect over \(\mathbb{R}\text{e}\) axis</li>
+
+</ul>
+</section>
+<section id="slide-org55dde9c">
+<h3 id="org55dde9c">Magnitude</h3>
+
+<div id="org7a59b8c" class="figure">
+<p><img src="./magnitude.JPG" alt="magnitude.JPG" class="center-image" />
+</p>
+</div>
+</section>
+<section id="slide-org84d03a1">
+<h3 id="org84d03a1">Compute Magnitude with Conjugation</h3>
+<div style="font-size: 62%;">
+<p>
+Let \(z=a+bi\)
+</p>
+<ul>
+<li>\(|z|=\sqrt{a^2+b^2}\)</li>
+
+</ul>
+<p>
+Compute
+</p>
+<div>
+\begin{align*}
+    (a+bi)(a-bi)&=a^2-abi+abi-b^2i^2\\
+        &=a^2+b^2
+        &=|z|^2
+\end{align*}
+
+</div>
+<p>
+So
+</p>
+<div>
+\begin{equation*}
+    |z|^2=z\overline{z}
+\end{equation*}
+
+</div>
+</div>
+</section>
+<section id="slide-org0a76250">
+<h3 id="org0a76250">Division</h3>
+<p>
+<b>Idea:</b> For a real number \(x\), then if \(y\) is a real number satisfying
+</p>
+<div>
+\begin{equation*}
+    xy=1
+\end{equation*}
+
+</div>
+<p>
+Then \(y=\frac{1}{x}\)
+</p>
+<ul>
+<li><i>Define</i> \(a \div b=a\cdot\frac{1}{b}\)</li>
+<li>i.e. define the reciprocal, then define division to be multiplication by the reciprocal.</li>
+
+</ul>
+</section>
+<section id="slide-orgb0a1af8">
+<h3 id="orgb0a1af8">Division</h3>
+<p>
+Let \(z=a+bi\). Want to find \((c+di)\) such that \((a+bi)(c+di)=1+0i\).
+</p>
+<ul>
+<li>Compute</li>
+
+</ul>
+<div>
+\begin{align*}
+    z\cdot \frac{\overline{z}}{|z|^2}&=\frac{z\overline{z}}{|z|^2}\\
+        &=\frac{|z|^2}{|z|^2}\\
+        &=1
+\end{align*}
+
+</div>
+<p>
+So \(\frac{1}{a+bi}=\frac{a-bi}{a^2+b^2}\)
+</p>
+</section>
+<section id="slide-org68e87a7">
+<h3 id="org68e87a7">Division Example</h3>
+<div>
+\begin{equation*}
+    \frac{1}{3+4i}=\frac{3}{25}-\frac{4}{25}i
+\end{equation*}
+
+</div>
+<div>
+\begin{align*}
+    \frac{2+3i}{3+4i}&=(2+3i)\frac{1}{3+4i}\\
+    &=(2+3i)\bigg[\frac{3}{25}-\frac{4}{25}i\bigg]\\
+    &=\frac{11}{25}+\frac{2}{25}i
+\end{align*}
+
+</div>
+</section>
+<section id="slide-orgeeb14f5">
+<h3 id="orgeeb14f5">Euler&rsquo;s Formula</h3>
+<div>
+\begin{equation*}
+    e^{i\theta}=\cos\theta+i\sin\theta
+\end{equation*}
+
+</div>
+</section>
+<section id="slide-org26b2d3e">
+<h3 id="org26b2d3e">Formulas for Real and Complex Part</h3>
+<p>
+<b>Exercise:</b> Let \(z=a+bi\). Then, show that
+</p>
+<div>
+\begin{align*}
+    \mathbb{R}\text{e}(z)&=\frac{1}{2}z+\frac{1}{2}\overline{z}\\
+    \mathbb{I}\text{m}(z)&=\frac{-i}{2}z+\frac{i}{2}\overline{z}
+\end{align*}
+
+</div>
+<p>
+Additionally, \(z+\overline{z}=2\mathbb{R}\text{e}(z)\).
+</p>
+</section>
+</section>
+<section>
+<section id="slide-orgc05ecb1">
+<h2 id="orgc05ecb1">Back to Complex Eigenvalues</h2>
+<div>
+\begin{align*}
+    A&=\begin{pmatrix} -2 & 1\\ -1 & -2\end{pmatrix}\\
+    \lambda &= -2\pm i
+\end{align*}
+
+</div>
+</section>
+<section id="slide-orgadb4b0c">
+<h3 id="orgadb4b0c">Complex Eigenvectors</h3>
+<div style="font-size: 62%;">
+<p>
+We want to solve
+</p>
+<div>
+\begin{equation*}
+    \begin{pmatrix} -2 & 1\\ -1 & -2\end{pmatrix}\begin{pmatrix} a \\ b\end{pmatrix}=(-2+i)\begin{pmatrix} a \\ b\end{pmatrix}
+\end{equation*}
+
+</div>
+<p>
+Expand
+</p>
+<div>
+\begin{align*}
+    -2a+b&=(-2+i)a\\
+    -a-2b&=(-2+i)b
+\end{align*}
+
+</div>
+<p>
+Simplify
+</p>
+<div>
+\begin{align*}
+    -ia+b&=0\\
+    -a-ib&=0
+\end{align*}
+
+</div>
+</div>
+</section>
+<section id="slide-org4e23ca8">
+<h3 id="org4e23ca8">Complex Eigenvectors</h3>
+<div style="font-size: 62%;">
+<p>
+Multiply bottom equation by \(i\)
+</p>
+<div>
+\begin{align*}
+    -ia+b&=0\\
+    i\cdot(-a-ib&=0)
+\end{align*}
+
+</div>
+<p>
+Yields
+</p>
+<div>
+\begin{align*}
+    -ia+b&=0\\
+    -ia+b&=0
+\end{align*}
+
+</div>
+<p>
+So the solution is anything satisfying \(b=ia\). Choose \(a=1\) then \(b=i\).
+</p>
+</div>
+</section>
+<section id="slide-orgfba990a">
+<h3 id="orgfba990a">First Eigenspace</h3>
+<ul>
+<li>\(-2+i\) is an eigenvalue</li>
+<li>\(E(-2+i)=\text{span}\{(1,i)\}\).</li>
+
+</ul>
+</section>
+<section id="slide-org7e715ca">
+<h3 id="org7e715ca">Repeat with \(\lambda=-2-i\)???</h3>
+<ul>
+<li>HECK NO!!!</li>
+
+</ul>
+</section>
+<section id="slide-org8a2b892">
+<h3 id="org8a2b892">Want to Solve</h3>
+<div style="font-size: 62%;">
+<div>
+\begin{equation*}
+    \begin{pmatrix} -2 & 1\\ -1 & -2\end{pmatrix}\begin{pmatrix} a \\ b\end{pmatrix}=(-2-i)\begin{pmatrix} a \\ b\end{pmatrix}
+\end{equation*}
+
+</div>
+<p>
+This is the <i>conjugate</i> of
+</p>
+<div>
+\begin{equation*}
+    \begin{pmatrix} -2 & 1\\ -1 & -2\end{pmatrix}\begin{pmatrix} a \\ b\end{pmatrix}=(-2+i)\begin{pmatrix} a \\ b\end{pmatrix}
+\end{equation*}
+
+</div>
+<p>
+To solve, just conjugate every step. The result will be the conjugate of the previous answer.
+</p>
+</div>
+</section>
+<section id="slide-org432c52a">
+<h3 id="org432c52a">Second Eigenspace</h3>
+<ul>
+<li>\(-2-i\) is an eigenvalue</li>
+<li>\(E(-2-i)=\text{span}\{(1,-i)\}\).</li>
+<li>This will always work, because complex solutions to real polynomial equations always come in conjugate pairs.</li>
+
+</ul>
+</section>
+<section id="slide-org5bb7953">
+<h3 id="org5bb7953">Complex Diagonalization</h3>
+<div>
+\begin{equation*}
+    A=\begin{pmatrix} 1 & 1\\ i & -i\end{pmatrix}\begin{pmatrix} -2+i & 0\\ 0 & -2-i\end{pmatrix}\begin{pmatrix} 1 & 1\\ i & -i\end{pmatrix}^{-1}
+\end{equation*}
+
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org1c73f14">
+<h2 id="org1c73f14">Initial Value Problem</h2>
+<p>
+Consider
+</p>
+<div>
+\begin{align*}
+    x'&=\begin{pmatrix} -2 & 1\\ -1 & -2\end{pmatrix}x\\
+    x(0)&=(6,8)
+\end{align*}
+
+</div>
+<p>
+General solution is
+</p>
+<div>
+\begin{equation*}
+    x(t)=c_1e^{(-2+i)t}\begin{pmatrix}1\\ i\end{pmatrix}+c_2e^{(-2-i)t}\begin{pmatrix} 1\\-i\end{pmatrix}
+\end{equation*}
+
+</div>
+</section>
+<section id="slide-org4fec0e3">
+<h3 id="org4fec0e3">Solve for Initial Condition</h3>
+<div>
+\begin{align*}
+    x(0)&=c_1\begin{pmatrix}1\\ i\end{pmatrix}+c_2\begin{pmatrix} 1\\-i\end{pmatrix}\\
+        &=\begin{pmatrix}6\\8\end{pmatrix}
+\end{align*}
+
+</div>
+<p>
+So
+</p>
+<div>
+\begin{align*}
+    c_1+c_2&=6\\
+    c_1i-c_2i&=8
+\end{align*}
+
+</div>
+</section>
+<section id="slide-org94b6645">
+<h3 id="org94b6645">Keep Solving</h3>
+<div style="font-size: 62%;">
+<p>
+Multiply bottom by \(i\)
+</p>
+<div>
+\begin{align*}
+    c_1+c_2&=6\\
+    i(c_1i-c_2i&=8)
+\end{align*}
+
+</div>
+<p>
+Yields
+</p>
+<div>
+\begin{align*}
+    c_1+c_2&=6\\
+    -c_1+c_2&=i8
+\end{align*}
+
+</div>
+<p>
+Add equations
+</p>
+<div>
+\begin{equation*}
+    2c_2=6+8i
+\end{equation*}
+
+</div>
+<p>
+So \(c_2=3+4i\)
+</p>
+</div>
+</section>
+<section id="slide-orgbbedb1a">
+<h3 id="orgbbedb1a">Keep Solving</h3>
+<p>
+Plug into top equation gives
+</p>
+<div>
+\begin{equation*}
+    c_1+(3+4i)=6
+\end{equation*}
+
+</div>
+<p>
+So \(c_1=3-4i\)
+</p>
+</section>
+<section id="slide-orgefbe0c8">
+<h3 id="orgefbe0c8">Write Down Final Solution</h3>
+<p>
+\(x(t)=(3-4i)e^{(-2+i)t}\begin{pmatrix} 1\\i\end{pmatrix}+(3+4i)e^{(-2-i)t}\begin{pmatrix} 1\\-i\end{pmatrix}\)
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf55e8b6">
+<h2 id="orgf55e8b6">Wait a Minute</h2>
+<div style="font-size: 62%;">
+<div>
+\begin{align*}
+    x'&=\begin{pmatrix} -2 & 1\\ -1 & -2\end{pmatrix}x\\
+    x(0)&=(6,8)
+\end{align*}
+
+</div>
+<p>
+Is a &ldquo;Real&rdquo; IVP. Just &ldquo;follow the arrows&rdquo;, so solution should be real. But
+</p>
+<div>
+\begin{equation*}
+    x(t)=(3-4i)e^{(-2+i)t}\begin{pmatrix}1\\ i\end{pmatrix}+(3+4i)e^{(-2-i)t}\begin{pmatrix} 1\\-i\end{pmatrix}
+\end{equation*}
+
+</div>
+<p>
+looks complex.
+</p>
+</div>
+</section>
+<section id="slide-orga3d3438">
+<h3 id="orga3d3438">Lets Investigate</h3>
+<div style="font-size: 62%;">
+<div>
+\begin{equation*}
+    x(t)=(3-4i)e^{(-2+i)t}\begin{pmatrix}1\\ i\end{pmatrix}+(3+4i)e^{(-2-i)t}\begin{pmatrix} 1\\-i\end{pmatrix}
+\end{equation*}
+
+</div>
+<p>
+Let
+</p>
+<div>
+\begin{align*}
+    f(t)&=(3-4i)e^{(-2+i)t}\begin{pmatrix}1\\ i\end{pmatrix}\\
+    g(t)&=(3+4i)e^{(-2-i)t}\begin{pmatrix} 1\\-i\end{pmatrix}
+\end{align*}
+
+</div>
+<p>
+Then \(f(t)=\overline{g(t)}\), so \(f(t)+\overline{f(t)}\) is <i>real</i>.
+</p>
+</div>
+</section>
+<section id="slide-orge12b01a">
+<h3 id="orge12b01a">Exercise</h3>
+<p>
+Expand \(x(t)\) and explicitly show that it is a real vector-valued function.
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/search/search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom/zoom.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+mouseWheel: false,
+fragmentInURL: false,
+hashOneBasedIndex: false,
+pdfSeparateFragments: true,
+
+overview: true,
+
+transition: 'slide',
+transitionSpeed: 'default',
+
+// Plugins with reveal.js 4.x
+plugins: [ RevealMarkdown, RevealNotes, RevealSearch, RevealZoom ],
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+]
+
+});
+</script>
+</body>
+</html>
