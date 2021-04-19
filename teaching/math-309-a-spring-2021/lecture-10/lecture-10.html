@@ -22,16 +22,16 @@
 </section>
 
 <section>
-<section id="slide-org8e81f68">
-<h2 id="org8e81f68">Last Time</h2>
+<section id="slide-org061d44f">
+<h2 id="org061d44f">Last Time</h2>
 <ul>
 <li>Direction Fields for Complex Eigenvectors</li>
 <li>Stability of steady state</li>
 
 </ul>
 </section>
-<section id="slide-org2efd9c8">
-<h3 id="org2efd9c8">Real Eigenvalues</h3>
+<section id="slide-org5ef9e26">
+<h3 id="org5ef9e26">Real Eigenvalues</h3>
 <p>
 Eigenvalues \(\lambda_1,\lambda_2\)
 </p>
@@ -43,7 +43,7 @@ Eigenvalues \(\lambda_1,\lambda_2\)
 </ul></li>
 <li>\(\lambda_1<0,\lambda_2<0\)
 <ul>
-<li>asymptotically stable node (everything poitns in)</li>
+<li>asymptotically stable node (everything points in)</li>
 
 </ul></li>
 <li>\(\lambda_1>0,\lambda_2<0\)
@@ -54,8 +54,8 @@ Eigenvalues \(\lambda_1,\lambda_2\)
 
 </ul>
 </section>
-<section id="slide-org0b16f3a">
-<h3 id="org0b16f3a">Complex Eigenvalues</h3>
+<section id="slide-orgd0a072f">
+<h3 id="orgd0a072f">Complex Eigenvalues</h3>
 <p>
 If \(\lambda_1=a+bi\) and \(\lambda_2=a-bi\) with \(b\neq 0\)
 </p>
@@ -78,8 +78,8 @@ If \(\lambda_1=a+bi\) and \(\lambda_2=a-bi\) with \(b\neq 0\)
 
 </ul>
 </section>
-<section id="slide-org7f6f0e7">
-<h3 id="org7f6f0e7">Direction of Spiral/Orbits</h3>
+<section id="slide-org9a901c0">
+<h3 id="org9a901c0">Direction of Spiral/Orbits</h3>
 <p>
 If \(A=\begin{pmatrix} A_{11} & A_{12}\\ A_{21} & A_{22}\end{pmatrix}\)
 </p>
@@ -91,19 +91,19 @@ If \(A=\begin{pmatrix} A_{11} & A_{12}\\ A_{21} & A_{22}\end{pmatrix}\)
 </section>
 </section>
 <section>
-<section id="slide-orgd975cd5">
-<h2 id="orgd975cd5">Goals for Today</h2>
+<section id="slide-orga8ffd31">
+<h2 id="orga8ffd31">Goals for Today</h2>
 <ul>
 <li>Understand the idea of <i>solution operators</i></li>
-<li>polynomials of matrices</li>
+<li>Polynomials of matrices</li>
 <li>Matrix exponential</li>
 
 </ul>
 </section>
 </section>
 <section>
-<section id="slide-org14c28d8">
-<h2 id="org14c28d8">Solution Operators</h2>
+<section id="slide-org4d60ec4">
+<h2 id="org4d60ec4">Solution Operators</h2>
 <div style="font-size: 62%;">
 <p>
 <b>Observation:</b> Let \(x_0,y_0\in\mathbb{R}^n\) be initial conditions, and \(c\in\mathbb{R}\). Let \(A\) be an \(n\times n\) matrix. Let
@@ -140,8 +140,8 @@ If \(z(t)=cx(t)+y(t)\) then \(z\) is the solution to
 </div>
 </div>
 </section>
-<section id="slide-org9dd262e">
-<h3 id="org9dd262e">Input \(\to\) Solution is Linear</h3>
+<section id="slide-org09217cc">
+<h3 id="org09217cc">Input \(\to\) Solution is Linear</h3>
 <ul>
 <li>\([\text{initial condition}]\to[\text{solve ODE}]\to [\text{solution}]\)</li>
 
@@ -161,8 +161,8 @@ defines a linear transformation from \(\mathbb{R}^n\) to \(C^1(\mathbb{R};\mathb
 </section>
 </section>
 <section>
-<section id="slide-org5028822">
-<h2 id="org5028822">Motivation for Matrix Exponential</h2>
+<section id="slide-org27c6e37">
+<h2 id="org27c6e37">Motivation for Matrix Exponential</h2>
 <p>
 If \(A\in\mathbb{R}\) (just a number) and \(x_0\in\mathbb{R}\) (just a number) then the solution to
 </p>
@@ -179,8 +179,8 @@ If \(A\in\mathbb{R}\) (just a number) and \(x_0\in\mathbb{R}\) (just a number) t
 Is \(x(t)=e^{At}x_0\), so \(x_0\mapsto e^{At}x_0\) describes &ldquo;solution operator&rdquo;.
 </p>
 </section>
-<section id="slide-orga340ca1">
-<h3 id="orga340ca1">Exponential Power Series</h3>
+<section id="slide-org82fa792">
+<h3 id="org82fa792">Exponential Power Series</h3>
 <p>
 Recall, if \(A\) is a number, then
 </p>
@@ -192,8 +192,8 @@ Recall, if \(A\) is a number, then
 
 </div>
 </section>
-<section id="slide-orgc5102a7">
-<h3 id="orgc5102a7">Powers of Matrices</h3>
+<section id="slide-orgb283e70">
+<h3 id="orgb283e70">Powers of Matrices</h3>
 <p>
 If \(A\) is an \(n\times n\) matrix
 </p>
@@ -211,8 +211,8 @@ If \(A\) is an \(n\times n\) matrix
 What happens if we plug a matrix into a power series?
 </p>
 </section>
-<section id="slide-org3681e5f">
-<h3 id="org3681e5f">Matrix Exponential Definition</h3>
+<section id="slide-org7e9d7f0">
+<h3 id="org7e9d7f0">Matrix Exponential Definition</h3>
 <div style="font-size: 62%;">
 <p>
 Let \(A\) be an \(n\times n\) matrix. <i>Define</i>
@@ -232,8 +232,8 @@ How do we compute this?
 </section>
 </section>
 <section>
-<section id="slide-org7c3a578">
-<h2 id="org7c3a578">Polynomials of Matrices</h2>
+<section id="slide-orgbca682a">
+<h2 id="orgbca682a">Polynomials of Matrices</h2>
 <p>
 Let \(p(x)=a_0x^0+a_1x^1+...+a_mx^m\). Define
 </p>
@@ -244,11 +244,11 @@ Let \(p(x)=a_0x^0+a_1x^1+...+a_mx^m\). Define
 
 </div>
 </section>
-<section id="slide-orgce3d2d0">
-<h3 id="orgce3d2d0">Example</h3>
+<section id="slide-org7232e47">
+<h3 id="org7232e47">Example</h3>
 <div style="font-size: 62%;">
 <p>
-Let \(p(x)=3+2x^2\) and \(A=\begin{pmatrix} 1 & 2\\ 3 & 4\end{pmatrix}\).
+Let \(p(x)=3+x^2\) and \(A=\begin{pmatrix} 1 & 2\\ 3 & 4\end{pmatrix}\).
 </p>
 <div>
 \begin{align*}
@@ -264,8 +264,8 @@ Let \(p(x)=3+2x^2\) and \(A=\begin{pmatrix} 1 & 2\\ 3 & 4\end{pmatrix}\).
 </section>
 </section>
 <section>
-<section id="slide-org66ccd96">
-<h2 id="org66ccd96">Powers of Diagonal Matrix</h2>
+<section id="slide-org4596bc2">
+<h2 id="org4596bc2">Powers of Diagonal Matrix</h2>
 <p>
 Let \(D=\begin{pmatrix} \lambda_1 & 0\\ 0 & \lambda_2\end{pmatrix}\). Then
 </p>
@@ -277,8 +277,8 @@ Let \(D=\begin{pmatrix} \lambda_1 & 0\\ 0 & \lambda_2\end{pmatrix}\). Then
 
 </div>
 </section>
-<section id="slide-org5372966">
-<h3 id="org5372966">Polynomials of Diagonal Matrices</h3>
+<section id="slide-org82398ed">
+<h3 id="org82398ed">Polynomials of Diagonal Matrices</h3>
 <div style="font-size: 62%;">
 <p>
 Let \(D=\begin{pmatrix} \lambda_1 & 0\\ 0 & \lambda_2\end{pmatrix}\), and \(p(x)=a_0+a_1x+...+a_mx^m\).
@@ -293,8 +293,8 @@ Let \(D=\begin{pmatrix} \lambda_1 & 0\\ 0 & \lambda_2\end{pmatrix}\), and \(p(x)
 </div>
 </div>
 </section>
-<section id="slide-orgb873818">
-<h3 id="orgb873818">Exponential of Diagonal Matrices</h3>
+<section id="slide-org4207d57">
+<h3 id="org4207d57">Exponential of Diagonal Matrices</h3>
 <div style="font-size: 62%;">
 <p>
 Let \(D=\begin{pmatrix} \lambda_1 & 0\\ 0 & \lambda_2\end{pmatrix}\), and \(p_N(x)=\sum\limits_{k=0}^N\frac{x^k}{k!}\). Then
@@ -309,8 +309,8 @@ Let \(D=\begin{pmatrix} \lambda_1 & 0\\ 0 & \lambda_2\end{pmatrix}\), and \(p_N(
 </div>
 </div>
 </section>
-<section id="slide-orge2de4d7">
-<h3 id="orge2de4d7">With &ldquo;Time&rdquo;</h3>
+<section id="slide-orgc1b996e">
+<h3 id="orgc1b996e">With &ldquo;Time&rdquo;</h3>
 <p>
 <b>Exercise:</b> Let \(t\in\mathbb{R}\) and \(D=\begin{pmatrix} \lambda_1 & 0\\ 0 & \lambda_2\end{pmatrix}\). Then
 </p>
@@ -323,8 +323,8 @@ Let \(D=\begin{pmatrix} \lambda_1 & 0\\ 0 & \lambda_2\end{pmatrix}\), and \(p_N(
 </section>
 </section>
 <section>
-<section id="slide-org304e429">
-<h2 id="org304e429">Powers of Diagonalizable Matrices</h2>
+<section id="slide-orgfe300a2">
+<h2 id="orgfe300a2">Powers of Diagonalizable Matrices</h2>
 <div style="font-size: 62%;">
 <p>
 Let \(D\) be an \(n\times n\) matrix, \(P\) be an invertible \(n\times n\) matrix, then
@@ -344,8 +344,8 @@ Similarly \((P^{-1}DP)^k=P^{-1}D^kP\).
 </p>
 </div>
 </section>
-<section id="slide-org6e3da67">
-<h3 id="org6e3da67">Polynomials of Diagonalizable Matrices</h3>
+<section id="slide-orgcb16a6f">
+<h3 id="orgcb16a6f">Polynomials of Diagonalizable Matrices</h3>
 <div style="font-size: 62%;">
 <p>
 Let \(D\) be an \(n\times n\) matrix, \(P\) be an invertible \(n\times n\) matrix, and \(p(x)=a_0+a_1x+...+a_mx^m\). Then
@@ -366,8 +366,8 @@ Similarly \(p(P^{-1}DP)=P^{-1}p(D)P\).
 </p>
 </div>
 </section>
-<section id="slide-org675b119">
-<h3 id="org675b119">Polynomials of Diagonalizable Matrices</h3>
+<section id="slide-orge045159">
+<h3 id="orge045159">Polynomials of Diagonalizable Matrices</h3>
 <div style="font-size: 62%;">
 <p>
 As an example, let \(A=\begin{pmatrix} 1 & 2 \\ 3 & 4\end{pmatrix}\begin{pmatrix} 5 & 0\\ 0 & 6\end{pmatrix}\begin{pmatrix} 1 & 2 \\ 3 & 4\end{pmatrix}^{-1}\), and \(p(x)=2+x^2\). Then
@@ -381,8 +381,8 @@ As an example, let \(A=\begin{pmatrix} 1 & 2 \\ 3 & 4\end{pmatrix}\begin{pmatrix
 </div>
 </div>
 </section>
-<section id="slide-org7aac0b2">
-<h3 id="org7aac0b2">Exponential of a Diagonalizable Matrix</h3>
+<section id="slide-orgd4d317a">
+<h3 id="orgd4d317a">Exponential of a Diagonalizable Matrix</h3>
 <div style="font-size: 62%;">
 <p>
 Let \(A=PDP^{-1}\). Let \(p_N(x)=\sum\limits_{k=0}^N\frac{x^k}{k!}\). Then
@@ -400,8 +400,8 @@ Similarly \(e^{P^{-1}DP}=P^{-1}e^DP\)
 </p>
 </div>
 </section>
-<section id="slide-org196c019">
-<h3 id="org196c019">With &ldquo;Time&rdquo;</h3>
+<section id="slide-orgd8fe42d">
+<h3 id="orgd8fe42d">With &ldquo;Time&rdquo;</h3>
 <p>
 <b>Exercise:</b> Let \(A=PDP^{-1}\). Then
 </p>
@@ -414,14 +414,14 @@ Similarly \(e^{P^{-1}DP}=P^{-1}e^DP\)
 </section>
 </section>
 <section>
-<section id="slide-org87a50c2">
-<h2 id="org87a50c2">Example</h2>
+<section id="slide-orgc472c34">
+<h2 id="orgc472c34">Example</h2>
 <p>
 Let \(A=\begin{pmatrix} 7 & -6\\8 & -7\end{pmatrix}\). Compute \(e^{At}\).
 </p>
 </section>
-<section id="slide-org864ef0e">
-<h3 id="org864ef0e">Diagonalize</h3>
+<section id="slide-org5bc7f2c">
+<h3 id="org5bc7f2c">Diagonalize</h3>
 <p>
 \(A=\begin{pmatrix} 1 & 3\\ 1 & 4\end{pmatrix}\begin{pmatrix} 1 & 0\\ 0 & -1\end{pmatrix}\begin{pmatrix} 1 & 3\\ 1 & 4\end{pmatrix}^{-1}\), so
 </p>
