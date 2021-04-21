@@ -22,16 +22,16 @@
 </section>
 
 <section>
-<section id="slide-orgbd4a3ae">
-<h2 id="orgbd4a3ae">Last Time</h2>
+<section id="slide-orgea410ff">
+<h2 id="orgea410ff">Last Time</h2>
 <ul>
 <li>Solution operators</li>
 <li>Matrix exponential</li>
 
 </ul>
 </section>
-<section id="slide-org4ca916f">
-<h3 id="org4ca916f">Matrix Exponential</h3>
+<section id="slide-org928cc9e">
+<h3 id="org928cc9e">Matrix Exponential</h3>
 <p>
 If \(A=P\begin{pmatrix} \lambda_1 & 0\\ 0 & \lambda_2\end{pmatrix}P^{-1}\) then
 </p>
@@ -48,17 +48,18 @@ If \(A=P\begin{pmatrix} \lambda_1 & 0\\ 0 & \lambda_2\end{pmatrix}P^{-1}\) then
 </section>
 </section>
 <section>
-<section id="slide-org5d176b5">
-<h2 id="org5d176b5">Goals for Today</h2>
+<section id="slide-org9c71947">
+<h2 id="org9c71947">Goals for Today</h2>
 <ul>
 <li>Understand how to solve ODEs with the matrix exponential</li>
+<li>Understand properties of matrix exponential</li>
 
 </ul>
 </section>
 </section>
 <section>
-<section id="slide-orgf882e20">
-<h2 id="orgf882e20">Matrix Exponential Solution</h2>
+<section id="slide-orgc102813">
+<h2 id="orgc102813">Matrix Exponential Solution</h2>
 <p>
 <b>Claim:</b> Let \(A\) be an \(n\times n\) matrix and \(x_0\in\mathbb{R}^n\). Then the solution to
 </p>
@@ -75,16 +76,16 @@ If \(A=P\begin{pmatrix} \lambda_1 & 0\\ 0 & \lambda_2\end{pmatrix}P^{-1}\) then
 is \(x(t)=e^{At}x_0\).
 </p>
 </section>
-<section id="slide-org52af460">
-<h3 id="org52af460">Exercise</h3>
+<section id="slide-org9340be1">
+<h3 id="org9340be1">Exercise</h3>
 <p>
 Convince yourself that
 \(x(t)=e^{At}x_0\)
 is a vector-valued function
 </p>
 </section>
-<section id="slide-org9ba7e09">
-<h3 id="org9ba7e09">Initial Condition</h3>
+<section id="slide-org283251a">
+<h3 id="org283251a">Initial Condition</h3>
 <div style="font-size: 62%;">
 <div>
 \begin{align*}
@@ -107,8 +108,8 @@ So
 </div>
 </div>
 </section>
-<section id="slide-org82d02f2">
-<h3 id="org82d02f2">Derivative</h3>
+<section id="slide-orgb783dd0">
+<h3 id="orgb783dd0">Derivative</h3>
 <div style="font-size: 62%;">
 <div>
 \begin{align*}
@@ -122,8 +123,8 @@ So
 </div>
 </div>
 </section>
-<section id="slide-org3129abe">
-<h3 id="org3129abe">Derivative Continued</h3>
+<section id="slide-org7c41b2d">
+<h3 id="org7c41b2d">Derivative Continued</h3>
 <div style="font-size: 62%;">
 <div>
 \begin{align*}
@@ -144,8 +145,8 @@ So \(x'=Ax\) as required.
 </section>
 </section>
 <section>
-<section id="slide-org1cf7654">
-<h2 id="org1cf7654">Example</h2>
+<section id="slide-org2d67306">
+<h2 id="org2d67306">Example</h2>
 <div style="font-size: 62%;">
 <p>
 Let \(A=\begin{pmatrix} 1 & -3\\ 3 & 1\end{pmatrix}\). Solve the following IVP
@@ -161,8 +162,8 @@ Let \(A=\begin{pmatrix} 1 & -3\\ 3 & 1\end{pmatrix}\). Solve the following IVP
 </div>
 </div>
 </section>
-<section id="slide-org37609aa">
-<h3 id="org37609aa">Solution</h3>
+<section id="slide-org0d27f6a">
+<h3 id="org0d27f6a">Solution</h3>
 <div style="font-size: 62%;">
 <p>
 \(A=\begin{pmatrix} i & -i\\ 1 & 1\end{pmatrix}\begin{pmatrix} 1+3i & 0\\0 & 1-3i\end{pmatrix}\begin{pmatrix} i & -i\\ 1 & 1\end{pmatrix}^{-1}\) So
@@ -177,8 +178,8 @@ Let \(A=\begin{pmatrix} 1 & -3\\ 3 & 1\end{pmatrix}\). Solve the following IVP
 </section>
 </section>
 <section>
-<section id="slide-org4297f2b">
-<h2 id="org4297f2b">Properties of the Matrix Exponential</h2>
+<section id="slide-org3f542b6">
+<h2 id="org3f542b6">Properties of the Matrix Exponential</h2>
 <div style="font-size: 62%;">
 <ul>
 <li>\(e^{0_{n\times n}}=I_{n\times n}\)
@@ -204,8 +205,8 @@ Let \(A=\begin{pmatrix} 1 & -3\\ 3 & 1\end{pmatrix}\). Solve the following IVP
 </section>
 </section>
 <section>
-<section id="slide-org5078ee3">
-<h2 id="org5078ee3">Columns of \(e^{At}\)</h2>
+<section id="slide-orgc1d583a">
+<h2 id="orgc1d583a">Columns of \(e^{At}\)</h2>
 <div style="font-size: 62%;">
 <p>
 For a \(2\times 2\) system, a general solution to \(x'=Ax\) can be written as
@@ -217,7 +218,7 @@ For a \(2\times 2\) system, a general solution to \(x'=Ax\) can be written as
 
 </div>
 <p>
-If \(A(t)=(f_1(t)|f_2(t))\) where \(f_1:\mathbb{R}\to\mathbb{R}^2\) and \(f_2:\mathbb{R}\to\mathbb{R}^2\), then
+If \(e^{At}=(f_1(t)|f_2(t))\) where \(f_1:\mathbb{R}\to\mathbb{R}^2\) and \(f_2:\mathbb{R}\to\mathbb{R}^2\), then
 </p>
 <div>
 \begin{equation*}
@@ -227,8 +228,8 @@ If \(A(t)=(f_1(t)|f_2(t))\) where \(f_1:\mathbb{R}\to\mathbb{R}^2\) and \(f_2:\m
 </div>
 </div>
 </section>
-<section id="slide-org92738d1">
-<h3 id="org92738d1">Columns of \(e^{At}\)</h3>
+<section id="slide-orged3153d">
+<h3 id="orged3153d">Columns of \(e^{At}\)</h3>
 <p>
 If \(e^{At}=(f_1(t)|f_2(t))\) then \(e^{0_{2\times 2}}=I_{2\times 2}\), so
 </p>
@@ -240,8 +241,8 @@ If \(e^{At}=(f_1(t)|f_2(t))\) then \(e^{0_{2\times 2}}=I_{2\times 2}\), so
 
 </div>
 </section>
-<section id="slide-org7f41835">
-<h3 id="org7f41835">Columns of \(e^{At}\)</h3>
+<section id="slide-org990869c">
+<h3 id="org990869c">Columns of \(e^{At}\)</h3>
 <p>
 It follows that \(f_1,f_2\) satisfy the following IVPs
 </p>
@@ -266,8 +267,8 @@ It follows that \(f_1,f_2\) satisfy the following IVPs
 </section>
 </section>
 <section>
-<section id="slide-orgba88e77">
-<h2 id="orgba88e77">\(e^{A(t+s)}=e^{At}e^{As}\)</h2>
+<section id="slide-orgfa3fd32">
+<h2 id="orgfa3fd32">\(e^{A(t+s)}=e^{At}e^{As}\)</h2>
 <div style="font-size: 62%;">
 <p>
 Let \(x_0\in\mathbb{R}^n\), Let \(x(t)\) solve
@@ -300,8 +301,8 @@ Then \(\tilde x(t)=x(t+s)\)
 </section>
 </section>
 <section>
-<section id="slide-org7b86ec6">
-<h2 id="org7b86ec6">\([e^{A}]^{-1}=e^{-A}\)</h2>
+<section id="slide-orgbf4f57e">
+<h2 id="orgbf4f57e">\([e^{A}]^{-1}=e^{-A}\)</h2>
 <div>
 \begin{align*}
     e^{A(1+(-1))}&=e^{A}e^{-A}\\
