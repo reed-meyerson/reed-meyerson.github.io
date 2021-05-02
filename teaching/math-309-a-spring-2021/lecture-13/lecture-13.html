@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Math 309: Lecture 13</title>
+<meta name="author" content="Reed Meyerson"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/sky.css" id="theme"/>
+
+<link rel="stylesheet" href="local.css"/>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1 class="title">Math 309: Lecture 13</h1><h2 class="author">Reed Meyerson</h2><h2 class="date">April 30</h2>
+</section>
+
+<section>
+<section id="slide-orgd97cbd4">
+<h2 id="orgd97cbd4">Last Time</h2>
+<ul>
+<li>&ldquo;Derivation&rdquo; of heat equation</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org1369ab3">
+<h2 id="org1369ab3">Goals for Today</h2>
+<ul>
+<li>Separation of Variables</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org45d1a06">
+<h2 id="org45d1a06">Heat Equation with Dirichlet Boundary Conditions</h2>
+<div>
+\begin{equation*}
+    \begin{cases}
+        \partial_tu(x,t)-c^2\partial_x^2u(x,t)=0&x\in[0,L],t>0\\
+        u(x,0)=f(x)&x\in[0,L]\\
+        u(0,t)=u(L,t)=0& t>0
+    \end{cases}
+\end{equation*}
+
+</div>
+</section>
+<section id="slide-org8473ea5">
+<h3 id="org8473ea5">&ldquo;PDE&rdquo; Part</h3>
+<div>
+\begin{equation*}
+    \partial_tu(x,t)-c^2\partial_x^2u(x,t)=0\text{, }x\in[0,L],t>0
+\end{equation*}
+
+</div>
+</section>
+<section id="slide-orge9cbef4">
+<h3 id="orge9cbef4">Initial Condition</h3>
+<div>
+\begin{equation*}
+    u(x,0)=f(x)\text{, }x\in[0,L]
+\end{equation*}
+
+</div>
+</section>
+<section id="slide-org2673b9a">
+<h3 id="org2673b9a">Boundary Conditions</h3>
+<div>
+\begin{equation*}
+    u(0,t)=u(L,t)=0\text{, }t>0
+\end{equation*}
+
+</div>
+<ul>
+<li>&ldquo;Dirichlet&rdquo; boundary conditions</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org6cff000">
+<h2 id="org6cff000">Linearity of PDE Part</h2>
+<p>
+Let \(u_1\), \(u_2\) be solutions to
+</p>
+<div>
+\begin{equation*}
+    \partial_tu(x,t)-c^2\partial_x^2u(x,t)=0\text{, }x\in[0,L],t>0
+\end{equation*}
+
+</div>
+<p>
+and \(\alpha\in\mathbb{R}\).
+Then, so is \((\alpha u_1+u_2)\).
+</p>
+</section>
+<section id="slide-org73eb0b2">
+<h3 id="org73eb0b2">Proof</h3>
+<div style="font-size: 62%">
+<div>
+\begin{align*}
+    \partial_t(\alpha u_1+u_2)-c^2\partial_x^2(\alpha u_1+u_2)&=\alpha \partial_t u_1+\partial_t u_2-\alpha c^2\partial_x^2u_1-c^2\partial_x^2u_2\\
+    &=\alpha \big[\partial_t u_1-c^2\partial_x^2 u_1\big]+\big[\partial_t u_2-c^2\partial_x^2 u_2\big]\\
+    &=\alpha\cdot 0+0\\
+    &=0
+\end{align*}
+
+</div>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org907ed54">
+<h2 id="org907ed54">Linearity of Boundary Conditions</h2>
+<p>
+Let \(u_1,u_2\) satisfy the boundary conditions
+</p>
+<div>
+\begin{equation*}
+    u(0,t)=u(L,t)=0\text{, }t>0
+\end{equation*}
+
+</div>
+<p>
+and \(\alpha\in\mathbb{R}\). Then \((\alpha u_1+u_2)\) also satisfies the above boundary conditions.
+</p>
+</section>
+<section id="slide-orgc9b1566">
+<h3 id="orgc9b1566">Proof</h3>
+<div>
+\begin{align*}
+    (\alpha u_1+u_2)(0,t) &= \alpha u_1(0,t)+u_2(0,t)\\
+        &= \alpha\cdot 0+0\\
+        &= 0\\
+    (\alpha u_1+u_2)(L,t) &= \alpha u_1(L,t)+u_2(L,t)\\
+        &= \alpha\cdot 0+0\\
+        &= 0
+\end{align*}
+
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org43c9fc4">
+<h2 id="org43c9fc4">Linearity of PDE with Boundary Conditions</h2>
+<p>
+Let \(u_1,u_2\) satisfy
+</p>
+<div>
+\begin{equation*}
+    \begin{cases}
+        \partial_tu(x,t)-c^2\partial_x^2u(x,t)=0&x\in[0,L],t>0\\
+        u(0,t)=u(L,t)=0& t>0
+    \end{cases}
+\end{equation*}
+
+</div>
+<p>
+and \(\alpha\in\mathbb{R}\). Then \((\alpha u_1+u_2)\) also sastisfies the above constraints.
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org86eb111">
+<h2 id="org86eb111">Effect of Linearity on Initial Conditions</h2>
+<p>
+Let \(u_1(x,0)=f(x)\) and \(u_2(x,0)=g(x)\). Then
+</p>
+<div>
+\begin{equation*}
+    (\alpha u_1+u_2)(x,0)=\alpha f(x)+g(x)
+\end{equation*}
+
+</div>
+</section>
+<section id="slide-org61199ec">
+<h3 id="org61199ec">Whole PDE</h3>
+<div style="font-size: 62%">
+<p>
+Let \(u_1\) satisfy
+</p>
+<div>
+\begin{equation*}
+    \begin{cases}
+        \partial_tu(x,t)-c^2\partial_x^2u(x,t)=0&x\in[0,L],t>0\\
+        u(x,0)=f(x)&x\in[0,L]\\
+        u(0,t)=u(L,t)=0& t>0
+    \end{cases}
+\end{equation*}
+
+</div>
+<p>
+and \(u_2\) satisfy
+</p>
+<div>
+\begin{equation*}
+    \begin{cases}
+        \partial_tu(x,t)-c^2\partial_x^2u(x,t)=0&x\in[0,L],t>0\\
+        u(x,0)=g(x)&x\in[0,L]\\
+        u(0,t)=u(L,t)=0& t>0
+    \end{cases}
+\end{equation*}
+
+</div>
+<p>
+and \(\alpha\in\mathbb{R}\). Then \((\alpha u_1+u_2)\) satisfies
+</p>
+<div>
+\begin{equation*}
+    \begin{cases}
+        \partial_tu(x,t)-c^2\partial_x^2u(x,t)=0&x\in[0,L],t>0\\
+        u(x,0)=(\alpha f+g)(x)&x\in[0,L]\\
+        u(0,t)=u(L,t)=0& t>0
+    \end{cases}
+\end{equation*}
+
+</div>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgeb04be5">
+<h2 id="orgeb04be5">Strategy</h2>
+<p>
+Find a &ldquo;bunch&rdquo; of solutions to
+</p>
+<div>
+\begin{equation*}
+    (\star)
+    \begin{cases}
+        \partial_tu(x,t)-c^2\partial_x^2u(x,t)=0&x\in[0,L],t>0\\
+        u(0,t)=u(L,t)=0& t>0
+    \end{cases}
+\end{equation*}
+
+</div>
+<p>
+Then add them up so we can &ldquo;match&rdquo; any initial condition
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org038fe97">
+<h2 id="org038fe97">Separation of Variables</h2>
+<p>
+<i>Ansatz</i>: Assume \(u(x,t)=T(t)X(x)\)
+</p>
+<ul>
+<li>examples \(\sin(x)\cos(t)\), \(e^tx^2\)</li>
+<li><b>NOT</b> \(\sin(xt)\)</li>
+
+</ul>
+<p>
+Also assume that \(u(x,t)\) is <i>non-trivial</i>
+</p>
+<ul>
+<li>not identically zero</li>
+
+</ul>
+<p>
+Now, plug into \((\star)\)
+</p>
+
+</section>
+<section id="slide-orgc2a3201">
+<h3 id="orgc2a3201">Plug into PDE Part</h3>
+<div style="font-size: 62%;">
+<div>
+\begin{align*}
+    \partial_tu(x,t)-c^2\partial_x^2u(x,t)&=\partial_t\big[T(t)X(x)\big]-c^2\partial_x^2\big[T(t)X(x)]\\
+        &= T'(t)X(x)-c^2T(t)X''(x)\\
+        &=0
+\end{align*}
+
+</div>
+<p>
+So
+</p>
+<div>
+\begin{align*}
+    \frac{1}{c^2}T'(t)X(x)&=T(t)X''(x)\\
+    \frac{T'X}{c^2TX}&=\frac{TX''}{TX}\\
+    \frac{T'}{c^2T}&=\frac{X''}{X}
+\end{align*}
+
+</div>
+</div>
+</section>
+<section id="slide-orgdff755b">
+<h3 id="orgdff755b">Eigenvalues</h3>
+<div style="font-size: 62%;">
+<p>
+Let \(x_0\in[0,L]\) be such that \(X(x_0)\neq 0\). Then let \(\lambda =\frac{X''(x_0)}{X(x_0)}\).
+</p>
+<div>
+\begin{align*}
+    \frac{T'(t)}{c^2T(t)}&=\frac{X''(x_0)}{X(x_0)}\\
+                   &=\lambda\\
+                   &=\frac{X''(x)}{X(x)}
+\end{align*}
+
+</div>
+<p>
+so
+</p>
+<div>
+\begin{equation*}
+    \frac{T'}{c^2T}=\frac{X''}{X}=\lambda
+\end{equation*}
+
+</div>
+</div>
+</section>
+<section id="slide-org0a9741b">
+<h3 id="org0a9741b">Eigenvalue Problem</h3>
+<p>
+Thus, if \(u=TX\) satisfies the PDE it <i>must</i> satisfy the following constraints
+</p>
+<div>
+\begin{equation*}
+    \begin{cases}
+        T'&=c^2\lambda T\\
+        X''&=\lambda X
+    \end{cases}
+\end{equation*}
+
+</div>
+</section>
+<section id="slide-orge3eecaf">
+<h3 id="orge3eecaf">Plug into Boundary Conditions</h3>
+<div style="font-size: 62%;">
+<div>
+\begin{align*}
+    u(0,t)&=T(t)X(0)\\
+        &=0
+\end{align*}
+
+</div>
+<p>
+Let \(T(t_0)\neq 0\). Thus, \(X(0)=0\).
+Similarly
+</p>
+<div>
+\begin{align*}
+    u(L,t)&=T(t)X(L)\\
+        &=0
+\end{align*}
+
+</div>
+<p>
+implies that \(X(L)=0\)
+</p>
+</div>
+</section>
+<section id="slide-org1ea9e6b">
+<h3 id="org1ea9e6b">Whole Eigenvalue Problem</h3>
+<div>
+\begin{equation*}
+(\star\star)
+    \begin{cases}
+        T'&=c^2\lambda T\\
+        X''&=\lambda X\\
+        X(0)&=0\\
+        X(L)&=0
+    \end{cases}
+\end{equation*}
+
+</div>
+<p>
+A solution is a triple \((X,T,\lambda)\)
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org6e25b15">
+<h2 id="org6e25b15">Solving the Eigenvalue Problem</h2>
+<div class="outline-text-2" id="text-org6e25b15">
+</div>
+</section>
+<section id="slide-org9562c4f">
+<h3 id="org9562c4f">Scaling Properties of Solutions</h3>
+<p>
+If \((X,T,\lambda)\) is a solution to \((\star\star)\), and \(\alpha\in\mathbb{R}\), then so is
+</p>
+<ul>
+<li>\((\alpha X,T,\lambda)\)</li>
+<li>\((X,\alpha T,\lambda)\)</li>
+<li>\((\alpha X,\alpha T,\lambda)\)</li>
+
+</ul>
+<p>
+Since we will be scaling these solutions and adding them, we will allow ourselves to pick one &ldquo;rescaling&rdquo; for each family of solutions.
+</p>
+</section>
+<section id="slide-org9516c3b">
+<h3 id="org9516c3b">Time Part</h3>
+<p>
+\(T'=c^2\lambda T\implies T(t)=e^{c^2\lambda t}\)
+</p>
+</section>
+<section id="slide-org2596a2f">
+<h3 id="org2596a2f">Spatial Part</h3>
+<div>
+\begin{equation*}
+(\star\star\star)
+    \begin{cases}
+        X''&=\lambda X\\
+        X(0)&=0\\
+        X(L)&=0
+    \end{cases}
+\end{equation*}
+
+</div>
+<p>
+Three cases
+</p>
+<ul>
+<li>\(\lambda =\gamma^2>0\)</li>
+<li>\(\lambda =0\)</li>
+<li>\(\lambda =-\gamma^2<0\)</li>
+
+</ul>
+</section>
+<section id="slide-org5db2392">
+<h3 id="org5db2392">Case (1) \(\lambda >0\)</h3>
+<p>
+If \(\lambda=\gamma^2>0\) and \(X''=\gamma^2 X\), then
+</p>
+<div>
+\begin{equation*}
+    X(x)=C_1e^{\gamma x}+C_2e^{-\gamma x}
+\end{equation*}
+
+</div>
+</section>
+<section id="slide-org7debd1d">
+<h3 id="org7debd1d">Case (1) Boundary Values</h3>
+<div style="font-size: 62%;">
+<div>
+\begin{align*}
+    X(0)&=C_1e^0+C_2e^0\\
+        &=C_1+C_2\\
+        &=0\\
+    X(L)&=C_1e^{\gamma L}+C_2e^{-\gamma L}\\
+        &=0
+\end{align*}
+
+</div>
+<p>
+\(\implies C_2=-C_1\) so
+</p>
+<div>
+\begin{align*}
+    C_1e^{\gamma L}-C_1e^{-\gamma L}&=0\\
+    C_1(e^{\gamma L}-e^{-\gamma L})&=0\\
+    C_1&=0\\
+    C_2&=0
+\end{align*}
+
+</div>
+</div>
+</section>
+<section id="slide-org62dd6ba">
+<h3 id="org62dd6ba">Only Trivial Solutions</h3>
+<p>
+Thus, \(C_1=C_2=0\), so \(X(t)=0\) is the trivial solution.
+</p>
+</section>
+<section id="slide-orga73e3c6">
+<h3 id="orga73e3c6">Case (2) \(\lambda =0\)</h3>
+<p>
+If \(\lambda =0\) and \(X''=0X\), then
+</p>
+<div>
+\begin{equation*}
+    X(x)=C_1x+C_2
+\end{equation*}
+
+</div>
+</section>
+<section id="slide-orgedec8ee">
+<h3 id="orgedec8ee">Case (2) Boundary Values</h3>
+<div style="font-size: 62%;">
+<div>
+\begin{align*}
+    X(0)&=C_10+C_2\\
+        &=0\\
+    X(L)&=C_1L+C_2\\
+        &=C_1L+0\\
+        &=0
+\end{align*}
+
+</div>
+<p>
+So, \(C_1=C_2=0\) and \(X\) is the trivial solution again.
+</p>
+</div>
+</section>
+<section id="slide-orgdcc8714">
+<h3 id="orgdcc8714">Case (3) \(\lambda<0\)</h3>
+<p>
+If \(\lambda=-\gamma^2<0\), and \(X''=-\gamma^2X\), then
+</p>
+<div>
+\begin{equation*}
+    X(x)=C_1\cos(\gamma x)+C_2\sin(\gamma x)\\
+\end{equation*}
+
+</div>
+</section>
+<section id="slide-org951dd10">
+<h3 id="org951dd10">Case (3) Boundary Values</h3>
+<div style="font-size: 62%;">
+<div>
+\begin{align*}
+    X(0)&=C_1\cos 0+C_2\sin 0\\
+        &=C_1\\
+        &=0\\
+    X(L)&=C_1\cos\gamma L+C_2\sin \gamma L\\
+        &=C_2\sin\gamma L\\
+        &= 0
+\end{align*}
+
+</div>
+<p>
+If \(C_2=0\), then trivial solution. So assume \(C_2\neq 0\).
+Then
+</p>
+<div>
+\begin{equation*}
+    \sin\gamma L=0
+\end{equation*}
+
+</div>
+<p>
+Thus, \(\gamma L=k\pi\), (i.e. \(\gamma=\frac{k\pi}{L}\)) for any integer \(k\). So \(\lambda =-\big(\frac{k\pi}{L}\big)^2\).
+</p>
+<ul>
+<li>Assumed \(\lambda \neq 0\), so \(k\neq 0\).</li>
+<li>If \(-\big(\frac{-k\pi}{L}\big)^2=-\big(\frac{k\pi}{L}\big)^2\), so can throw out the negative values of \(k\).</li>
+
+</ul>
+</div>
+</section>
+<section id="slide-org1f67e73">
+<h3 id="org1f67e73">Result</h3>
+<p>
+Every solution to \((\star\star)\) is of the form
+</p>
+<ul>
+<li>\((\sin(\frac{k\pi}{L} x),e^{-(\frac{ck\pi}{L})^2t},-(\frac{k\pi}{L})^2)\), for \(k=1,2,3,\cdots\)</li>
+
+</ul>
+</section>
+<section id="slide-org91ce9c6">
+<h3 id="org91ce9c6">Solutions to the PDE</h3>
+<p>
+Thus, let \(u_k(x,t)=e^{-(\frac{ck\pi}{L})^2t}\sin(\frac{k\pi}{L} x)\) for \(k=1,2,3,\cdots\)
+</p>
+<ul>
+<li>\(u_k\) solves \((\star)\).</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/search/search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom/zoom.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+mouseWheel: false,
+fragmentInURL: false,
+hashOneBasedIndex: false,
+pdfSeparateFragments: true,
+
+overview: true,
+
+transition: 'slide',
+transitionSpeed: 'default',
+
+// Plugins with reveal.js 4.x
+plugins: [ RevealMarkdown, RevealNotes, RevealSearch, RevealZoom ],
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+]
+
+});
+</script>
+</body>
+</html>

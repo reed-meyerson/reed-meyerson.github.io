@@ -1,0 +1,14 @@
+.reveal p {
+    text-align: left;
+}
+
+.reveal .center-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+}
+
+.reveal center {
+    text-align: center;
+}
