@@ -10,6 +10,169 @@
 <atom:link href="https://reedmeyerson.com/blog.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.2.335</generator>
-<lastBuildDate>Wed, 15 Mar 2023 23:44:56 GMT</lastBuildDate>
+<lastBuildDate>Sun, 19 Mar 2023 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Generative AI doesn’t need to be flashy</title>
+  <dc:creator>Reed Meyerson</dc:creator>
+  <link>https://reedmeyerson.com/posts/boring_generative_AI/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Generative AI is the new hotness. It’s flashy, exciting, full of pizazz. There’s a certain showmanship in asking a machine for an image of a monkey riding a unicycle and having it spit out an image of a monkey riding a unicycle.</p>
+<p>Most data scientists don’t deal with such exciting things. For most companies, pictures of monkeys riding unicycles have no effect on the bottom line; these flashy displays have seemingly nothing to do with business analytics. However, the techniques of generative AI are not inherently flashy and have many potential applications.</p>
+<div class="page-columns page-full"><p>This is the first in a series of posts on <strong>Generative Diffusion Models</strong><sup>*,<span class="citation" data-cites="sohldickstein2015deep">[1]</span>,<span class="citation" data-cites="ho2020denoising">[2]</span>,<span class="citation" data-cites="song2021scorebased">[3]</span></sup> . In this post, I argue that the intersection of “generative models like reverse diffusion” and “tools used to solve non-flashy problems” should be non-zero. In future posts we will implement reverse diffusion models, use them to solve inverse problems, explore their latent spaces, and utilize them as building blocks for unsupervised techniques.</p><div class="no-row-height column-margin column-container"><span class="">*: AKA the models used to generate images from sentences.</span></div></div>
+<div class="page-columns page-full"><p>Generative diffusion models are techniques for learning<sup>†</sup> a probability distribution from data. When applying these models, we hope that the learned distribution is similar to the ground-truth distribution that the data set was sampled from.</p><div class="no-row-height column-margin column-container"><span class="">†: or learning to sample/resample from</span></div></div>
+<p>In this post, we will not discuss <a href="https://lilianweng.github.io/posts/2021-07-11-diffusion-models/">how generative diffusion models work</a> (that will come later). Instead, we will accept what they <strong>accomplish</strong>:</p>
+<ol type="1">
+<li>Generative diffusion models can approximate any probability distribution<sup>‡</sup>(or conditional probability distribution).</li>
+<li>Empirically, they seem to generalize well<sup>§</sup>.</li>
+</ol>
+<div class="no-row-height column-margin column-container"><span class="">‡: given sufficiently many parameters, of course</span><span class="">§: That is, they seem to do well at finding points outside of the original data that are consistent with the original data</span></div><section id="why-should-i-learn-a-probability-distribution" class="level1 page-columns page-full">
+<h1>Why should I “learn” a probability distribution?</h1>
+<p>The following examples demonstrate why it is sometimes necessary to learn a distribution of values rather than estimate a single value or fit a fixed function.</p>
+<section id="forecasting" class="level2">
+<h2 class="anchored" data-anchor-id="forecasting">Forecasting</h2>
+<p>Your boss comes to you with the following time series:</p>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;">import</span> numpy <span class="im" style="color: #00769E;">as</span> np</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;">from</span> matplotlib <span class="im" style="color: #00769E;">import</span> pyplot <span class="im" style="color: #00769E;">as</span> plt</span>
+<span id="cb1-3">np.random.seed(<span class="dv" style="color: #AD0000;">3264</span>)</span>
+<span id="cb1-4">x <span class="op" style="color: #5E5E5E;">=</span> np.random.randn(<span class="dv" style="color: #AD0000;">50</span>)</span>
+<span id="cb1-5">plt.stem(x)</span>
+<span id="cb1-6">plt.xticks([<span class="dv" style="color: #AD0000;">0</span>,<span class="dv" style="color: #AD0000;">25</span>,<span class="dv" style="color: #AD0000;">50</span>,<span class="dv" style="color: #AD0000;">75</span>,<span class="dv" style="color: #AD0000;">100</span>],[<span class="st" style="color: #20794D;">''</span>,<span class="st" style="color: #20794D;">'past'</span>,<span class="st" style="color: #20794D;">'present'</span>,<span class="st" style="color: #20794D;">'future'</span>,<span class="st" style="color: #20794D;">''</span>])</span>
+<span id="cb1-7">plt.show()</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="https://reedmeyerson.com/posts/boring_generative_AI/index_files/figure-html/cell-2-output-1.png" width="582" height="411"></p>
+</div>
+</div>
+<p>There are 50 data points from the past and they want you to predict the next 50 in the future. After analyzing the data, you determine this is standard Gaussian noise. Thus, the likelihood for the next 50 points is proportional to a Gaussian,</p>
+<p><img src="https://latex.codecogs.com/png.latex?p(x_%7B51%7D,x_%7B52%7D,%5Ccdots,x_%7B100%7D)%20%5Cpropto%20e%5E%7B-(x_%7B51%7D%5E2+x_%7B52%7D%5E2+%5Ccdots%20+x_%7B100%7D%5E2)/2%7D"></p>
+<p>and is maximized when all values are zero. You conclude that the most likely prediction for the future is given by</p>
+<p><img src="https://latex.codecogs.com/png.latex?x_%7B51%7D=x_%7B52%7D=%5Ccdots=x_%7B100%7D=0"></p>
+<p>You plot your prediction and show it to your boss:</p>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">x_future <span class="op" style="color: #5E5E5E;">=</span> np.zeros(<span class="dv" style="color: #AD0000;">50</span>)</span>
+<span id="cb2-2">plt.stem(np.concatenate((x,x_future)))</span>
+<span id="cb2-3">plt.xticks([<span class="dv" style="color: #AD0000;">0</span>,<span class="dv" style="color: #AD0000;">25</span>,<span class="dv" style="color: #AD0000;">50</span>,<span class="dv" style="color: #AD0000;">75</span>,<span class="dv" style="color: #AD0000;">100</span>],[<span class="st" style="color: #20794D;">''</span>,<span class="st" style="color: #20794D;">'past'</span>,<span class="st" style="color: #20794D;">'present'</span>,<span class="st" style="color: #20794D;">'future'</span>,<span class="st" style="color: #20794D;">''</span>])</span>
+<span id="cb2-4">plt.show()</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="https://reedmeyerson.com/posts/boring_generative_AI/index_files/figure-html/cell-3-output-1.png" width="582" height="411"></p>
+</div>
+</div>
+<p>To which your boss complains that the left half of the plot looks nothing like the right half, so this can’t possibly be right.</p>
+<p>The issue here is that the <em>most likely</em> future is not a <em>typical</em> future. However, there is not a single typical future or a <em>most typical</em> future; there are a <em>distribution</em> of typical futures, and knowing that distribution is the goal of forecasting.</p>
+<p>If <img src="https://latex.codecogs.com/png.latex?p"> is a distribution of time series that you believe your time series is from, the problem of forecasting can be stated as learning the distribution of the future values conditioned on the past measurements. That is, to simulate the future, we want to sample</p>
+<p><img src="https://latex.codecogs.com/png.latex?x%20%5Csim%20p(%5Ctexttt%7Bfuture%7D%7C%5Ctexttt%7Bpast%7D)"></p>
+<p>Of course, in this case, the exact solution is relatively simple, <img src="https://latex.codecogs.com/png.latex?x_%7B51%5Cto%20100%7D%20%5Csim%20%5Cmathcal%7BN%7D(0,I_%7B50%5Ctimes%2050%7D)"> and simple statistics, Bayesian inference, or standard forecasting techniques like ARIMA should all yield something similar to the ground truth distribution.</p>
+</section>
+<section id="image-deblurringwhang2021deblurring-and-inpaintinglugmayr2022repaint" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="image-deblurringwhang2021deblurring-and-inpaintinglugmayr2022repaint">Image deblurring<sup><span class="citation" data-cites="whang2021deblurring">[4]</span></sup>, and inpainting<sup><span class="citation" data-cites="lugmayr2022repaint">[5]</span></sup></h2>
+<p>When a blurry image is taken, some information about the original scene is lost. That is, given a blurry image, we can’t say with certainty which specific clear image it came from. There might be a ‘most likely’ clear image, but as before, that most likely image might not be very typical, and it doesn’t tell us much about the distribution of clear images the blurry image might have come from. Thus, it is unnatural to solve this as a regression problem, by training a single deterministic function</p>
+<p><img src="https://latex.codecogs.com/png.latex?f%20:%5Ctexttt%7Bblurry%20images%7D%5Cto%20%5Ctexttt%7Bclear%20images%7D"></p>
+<div class="page-columns page-full"><p>Rather, let <img src="https://latex.codecogs.com/png.latex?p"> be the distribution of <img src="https://latex.codecogs.com/png.latex?(%5Ctexttt%7Bclear%20image%7D,%5Ctexttt%7Bblurry%20image%7D)"> pairs. We can recast the image deblurring problem as sampling from the marginal distribution of clear images conditioned on the blurry image marginal value<sup>*</sup>.</p><div class="no-row-height column-margin column-container"><span class="">*: it is useful to think of conditional sampling <img src="https://latex.codecogs.com/png.latex?X%5Csim%20p(x%7Cy)"> as a stochastic function with input <img src="https://latex.codecogs.com/png.latex?y"> and output <img src="https://latex.codecogs.com/png.latex?X"></span></div></div>
+<p><img src="https://latex.codecogs.com/png.latex?x%20%5Csim%20p(%5Ctexttt%7Bclear%20image%7D%7C%5Ctexttt%7Bblurry%20image%7D)"></p>
+<p>Similarly, for inpainting, there may be many ways to fill an unknown region with plausible pixel values. If <img src="https://latex.codecogs.com/png.latex?q"> is a distribution of images, then we can cast inpainting as conditionally sampling the unkown region given the known region.</p>
+<p><img src="https://latex.codecogs.com/png.latex?x%20%5Csim%20q(%5Ctexttt%7Bunknown%20region%7D%20%7C%20%5Ctexttt%7Bknown%20region%7D)"></p>
+<p>For these examples, generative diffusion is a great candidate for modeling these distributions because</p>
+<ol type="1">
+<li>Distributions of images are very complicated<sup>†</sup></li>
+<li>We care about getting the intricacies of the distribution correct, because the human visual system is very sensitive</li>
+<li>There are large data sets of images</li>
+</ol>
+<div class="no-row-height column-margin column-container"><span class="">†: so we want a universal distribution approximator</span></div><p>In particular, item (2.) is something we cannot overlook. Before using a technique as expensive as generative diffusion, ask yourself if you really need the accuracy. Even if your distribution is very complicated, it may be perfectly acceptable to underfit.</p>
+</section>
+<section id="inverse-problems" class="level2">
+<h2 class="anchored" data-anchor-id="inverse-problems">Inverse Problems</h2>
+<p>Broadly speaking, an inverse problem is to reconstruct a system from information about that system. Often, we think of the act of obtaining the information as a “measurement”. For some inverse problems, the measurements uniquely specify the system. In this case, we can try to form a deterministic function that reconstructs the system from the information</p>
+<p><img src="https://latex.codecogs.com/png.latex?f:%5Ctexttt%7Binformation%7D%20%5Cto%20%5Ctexttt%7Bsystem%7D"></p>
+<p>Deblurring and inpainting are both inverse problems. The system is the original image, and the information we have is the blurred image or the obstructed image, respectively. However, as we noted before, given a specific measurement (i.e.&nbsp;a specific blurred/obstructed image) there is not a single system (i.e.&nbsp;a clear/unobstructed image) that the measurement could have come from. When this is the case, we say the inverse problem is ill-posed. Ill-posed inverse problems can be solved by determining the conditional distribution</p>
+<p><img src="https://latex.codecogs.com/png.latex?p(%5Ctexttt%7Bsystem%7D%7C%5Ctexttt%7Bmeasurements%7D)"></p>
+<p>Intuitively, this conditional distribution tells you</p>
+<ol type="1">
+<li>What different systems could have produced the measurements you obtained</li>
+<li>How likely each of these possible systems are</li>
+</ol>
+<p>“Find out about something from measurements/information” is hilariously broad. Thus, inverse problems are everywhere. Here is a very small list:</p>
+<ul>
+<li>Medical Imaging
+<ul>
+<li>X-ray tomography: <img src="https://latex.codecogs.com/png.latex?p(%5Ctexttt%7Binside%20your%20body%7D%20%7C%20%5Ctexttt%7Bhow%20radiation%20propogates%20through%20you%7D)"></li>
+<li>Ultrasound: <img src="https://latex.codecogs.com/png.latex?p(%5Ctexttt%7Binside%20your%20body%7D%20%7C%20%5Ctexttt%7Bhow%20vibrations%20propogate%20through%20you%7D)"></li>
+<li>Electrical Impedence Tomography: <img src="https://latex.codecogs.com/png.latex?p(%5Ctexttt%7Binside%20your%20body%7D%20%7C%20%5Ctexttt%7Bhow%20voltages%20propogate%20through%20you%7D)"></li>
+</ul></li>
+<li>Finance/Economics
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?p(%5Ctexttt%7Bmacroeconomic%20quantitites%7D%7C%5Ctexttt%7Bmicroeconomic%20observables%7D)"></li>
+<li><img src="https://latex.codecogs.com/png.latex?p(%5Ctexttt%7BBlack-Scholes%20equation%20coefficients%7D%7C%5Ctexttt%7Basset%20time%20series%7D)"></li>
+<li><img src="https://latex.codecogs.com/png.latex?p(%5Ctexttt%7Ba%20firm's%20private%20market%20beliefs%7D%7C%5Ctexttt%7Bpublic%20trading%20data%7D)"></li>
+</ul></li>
+<li>Geophysics
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?p(%5Ctexttt%7Binside%20the%20earth%7D%7C%5Ctexttt%7Bearthquake%20wave%20propogation%20times%7D)"></li>
+</ul></li>
+</ul>
+<p>The list is practically endless. Your company is almost certainly either solving one or more inverse problems or consuming the solutions of one or more inverse problems.</p>
+</section>
+</section>
+<section id="should-i-use-generative-diffusion" class="level1 page-columns page-full">
+<h1>Should I use generative diffusion?</h1>
+<p>We have established that “learning probability distributions” is a very important tool for solving inverse problems, and inverse problems are everywhere. So, you should probably care about learning probability distributions.</p>
+<p>But it still remains: why generative diffusion? There are simpler, more computationally efficient and more interpretable models from classical and Bayesian statistics. Not to mention other generative machine learning models like a GANs or auto encoders.</p>
+<div class="page-columns page-full"><p>This question is similar to the question “Should I use a neural network in a regression problem?”<sup>*</sup>. Generative diffusion models, as tools for learning distributions are high variance and low bias. The low bias is consistent with the fact that they are expressive enough to approximate any probability distribution. However, you will need a lot of data to counteract the high variance.</p><div class="no-row-height column-margin column-container"><span class="">*: in short, most of the time: ‘No.’</span></div></div>
+<p>Here are some things to consider:</p>
+<ul>
+<li>Can I model my system explicitly?</li>
+<li>Is my distribution very complicated?</li>
+<li>How much do I care about underfitting? (Can I <em>pretend</em> that it is not complicated and still get good results?)</li>
+<li>Do I have a lot of data, and if not, can I employ transfer learning?</li>
+<li>Do I have the computational budget for training and inference?</li>
+<li>Do I need to be able to interpret the distribution?</li>
+<li>What do I need to <em>do</em> with the distribution? Sample from it, or something else?</li>
+</ul>
+<p>Most people will get to the end of this list and realize there are better tools to solve their problem. However, some people will realize that they have a very complicated distribution, and they care deeply about capturing its intricacies. It will be worth it for them to collect the large amount of data required and allocate a large computational budget.</p>
+</section>
+<section id="did-you-find-this-interesting-or-useful" class="level1">
+<h1>Did you find this interesting or useful?</h1>
+<p>Consider <a href="../../hire_me.html">Hiring me</a>.</p>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body">
+<div id="ref-sohldickstein2015deep" class="csl-entry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Sohl-Dickstein, J., Weiss, E.A., Maheswaranathan, N., and Ganguli, S. (2015). <a href="https://arxiv.org/abs/1503.03585">Deep unsupervised learning using nonequilibrium thermodynamics</a>.</div>
+</div>
+<div id="ref-ho2020denoising" class="csl-entry">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Ho, J., Jain, A., and Abbeel, P. (2020). <a href="https://arxiv.org/abs/2006.11239">Denoising diffusion probabilistic models</a>.</div>
+</div>
+<div id="ref-song2021scorebased" class="csl-entry">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Song, Y., Sohl-Dickstein, J., Kingma, D.P., Kumar, A., Ermon, S., and Poole, B. (2021). <a href="https://arxiv.org/abs/2011.13456">Score-based generative modeling through stochastic differential equations</a>.</div>
+</div>
+<div id="ref-whang2021deblurring" class="csl-entry">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">Whang, J., Delbracio, M., Talebi, H., Saharia, C., Dimakis, A.G., and Milanfar, P. (2021). <a href="https://arxiv.org/abs/2112.02475">Deblurring via stochastic refinement</a>.</div>
+</div>
+<div id="ref-lugmayr2022repaint" class="csl-entry">
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">Lugmayr, A., Danelljan, M., Romero, A., Yu, F., Timofte, R., and Gool, L.V. (2022). <a href="https://arxiv.org/abs/2201.09865">RePaint: Inpainting using denoising diffusion probabilistic models</a>.</div>
+</div>
+</div></section></div> ]]></description>
+  <category>generative models</category>
+  <category>probability</category>
+  <category>inverse problems</category>
+  <category>generative diffusion</category>
+  <category>unsupervised learning</category>
+  <category>machine learning</category>
+  <guid>https://reedmeyerson.com/posts/boring_generative_AI/index.html</guid>
+  <pubDate>Sun, 19 Mar 2023 04:00:00 GMT</pubDate>
+  <media:content url="https://reedmeyerson.com/posts/boring_generative_AI/time_series_mle.png" medium="image" type="image/png" height="102" width="144"/>
+</item>
 </channel>
 </rss>

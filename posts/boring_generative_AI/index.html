@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Reed Meyerson">
+<meta name="dcterms.date" content="2023-03-19">
+<meta name="description" content="Generative AI is flashy, but it doesn’t need to be. Generative diffusion models are universal probability distribution approximators. Sometimes (rarely, but more often than never) you should consider them for solving your boring business problems.">
+
+<title>Reed Meyerson - Generative AI doesn’t need to be flashy</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Reed Meyerson</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publications.html">
+ <span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../hire_me.html">
+ <span class="menu-text">Hire Me</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Generative AI doesn’t need to be flashy</h1>
+            <p class="subtitle lead">The case for boring generative AI</p>
+                  <div>
+        <div class="description">
+          Generative AI is flashy, but it doesn’t need to be. Generative diffusion models are universal probability distribution approximators. Sometimes (rarely, but more often than never) you should consider them for solving your boring business problems.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">generative models</div>
+                <div class="quarto-category">probability</div>
+                <div class="quarto-category">inverse problems</div>
+                <div class="quarto-category">generative diffusion</div>
+                <div class="quarto-category">unsupervised learning</div>
+                <div class="quarto-category">machine learning</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Reed Meyerson </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 19, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#why-should-i-learn-a-probability-distribution" id="toc-why-should-i-learn-a-probability-distribution" class="nav-link active" data-scroll-target="#why-should-i-learn-a-probability-distribution">Why should I “learn” a probability distribution?</a>
+  <ul class="collapse">
+  <li><a href="#forecasting" id="toc-forecasting" class="nav-link" data-scroll-target="#forecasting">Forecasting</a></li>
+  <li><a href="#image-deblurringwhang2021deblurring-and-inpaintinglugmayr2022repaint" id="toc-image-deblurringwhang2021deblurring-and-inpaintinglugmayr2022repaint" class="nav-link" data-scroll-target="#image-deblurringwhang2021deblurring-and-inpaintinglugmayr2022repaint">Image deblurring<sup><span class="citation" data-cites="whang2021deblurring">[4]</span></sup>, and inpainting<sup><span class="citation" data-cites="lugmayr2022repaint">[5]</span></sup></a></li>
+  <li><a href="#inverse-problems" id="toc-inverse-problems" class="nav-link" data-scroll-target="#inverse-problems">Inverse Problems</a></li>
+  </ul></li>
+  <li><a href="#should-i-use-generative-diffusion" id="toc-should-i-use-generative-diffusion" class="nav-link" data-scroll-target="#should-i-use-generative-diffusion">Should I use generative diffusion?</a></li>
+  <li><a href="#did-you-find-this-interesting-or-useful" id="toc-did-you-find-this-interesting-or-useful" class="nav-link" data-scroll-target="#did-you-find-this-interesting-or-useful">Did you find this interesting or useful?</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+
+
+
+
+<p>Generative AI is the new hotness. It’s flashy, exciting, full of pizazz. There’s a certain showmanship in asking a machine for an image of a monkey riding a unicycle and having it spit out an image of a monkey riding a unicycle.</p>
+<p>Most data scientists don’t deal with such exciting things. For most companies, pictures of monkeys riding unicycles have no effect on the bottom line; these flashy displays have seemingly nothing to do with business analytics. However, the techniques of generative AI are not inherently flashy and have many potential applications.</p>
+<div class="page-columns page-full"><p>This is the first in a series of posts on <strong>Generative Diffusion Models</strong><sup>*,<span class="citation" data-cites="sohldickstein2015deep">[<a href="#ref-sohldickstein2015deep" role="doc-biblioref">1</a>]</span>,<span class="citation" data-cites="ho2020denoising">[<a href="#ref-ho2020denoising" role="doc-biblioref">2</a>]</span>,<span class="citation" data-cites="song2021scorebased">[<a href="#ref-song2021scorebased" role="doc-biblioref">3</a>]</span></sup> . In this post, I argue that the intersection of “generative models like reverse diffusion” and “tools used to solve non-flashy problems” should be non-zero. In future posts we will implement reverse diffusion models, use them to solve inverse problems, explore their latent spaces, and utilize them as building blocks for unsupervised techniques.</p><div class="no-row-height column-margin column-container"><span class="">*: AKA the models used to generate images from sentences.</span></div></div>
+<div class="page-columns page-full"><p>Generative diffusion models are techniques for learning<sup>†</sup> a probability distribution from data. When applying these models, we hope that the learned distribution is similar to the ground-truth distribution that the data set was sampled from.</p><div class="no-row-height column-margin column-container"><span class="">†: or learning to sample/resample from</span></div></div>
+<p>In this post, we will not discuss <a href="https://lilianweng.github.io/posts/2021-07-11-diffusion-models/">how generative diffusion models work</a> (that will come later). Instead, we will accept what they <strong>accomplish</strong>:</p>
+<ol type="1">
+<li>Generative diffusion models can approximate any probability distribution<sup>‡</sup>(or conditional probability distribution).</li>
+<li>Empirically, they seem to generalize well<sup>§</sup>.</li>
+</ol>
+<div class="no-row-height column-margin column-container"><span class="">‡: given sufficiently many parameters, of course</span><span class="">§: That is, they seem to do well at finding points outside of the original data that are consistent with the original data</span></div><section id="why-should-i-learn-a-probability-distribution" class="level1 page-columns page-full">
+<h1>Why should I “learn” a probability distribution?</h1>
+<p>The following examples demonstrate why it is sometimes necessary to learn a distribution of values rather than estimate a single value or fit a fixed function.</p>
+<section id="forecasting" class="level2">
+<h2 class="anchored" data-anchor-id="forecasting">Forecasting</h2>
+<p>Your boss comes to you with the following time series:</p>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">3264</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.randn(<span class="dv">50</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>plt.stem(x)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>plt.xticks([<span class="dv">0</span>,<span class="dv">25</span>,<span class="dv">50</span>,<span class="dv">75</span>,<span class="dv">100</span>],[<span class="st">''</span>,<span class="st">'past'</span>,<span class="st">'present'</span>,<span class="st">'future'</span>,<span class="st">''</span>])</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-2-output-1.png" width="582" height="411"></p>
+</div>
+</div>
+<p>There are 50 data points from the past and they want you to predict the next 50 in the future. After analyzing the data, you determine this is standard Gaussian noise. Thus, the likelihood for the next 50 points is proportional to a Gaussian,</p>
+<p><span class="math display">\[p(x_{51},x_{52},\cdots,x_{100}) \propto e^{-(x_{51}^2+x_{52}^2+\cdots +x_{100}^2)/2}\]</span></p>
+<p>and is maximized when all values are zero. You conclude that the most likely prediction for the future is given by</p>
+<p><span class="math display">\[x_{51}=x_{52}=\cdots=x_{100}=0\]</span></p>
+<p>You plot your prediction and show it to your boss:</p>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x_future <span class="op">=</span> np.zeros(<span class="dv">50</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>plt.stem(np.concatenate((x,x_future)))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>plt.xticks([<span class="dv">0</span>,<span class="dv">25</span>,<span class="dv">50</span>,<span class="dv">75</span>,<span class="dv">100</span>],[<span class="st">''</span>,<span class="st">'past'</span>,<span class="st">'present'</span>,<span class="st">'future'</span>,<span class="st">''</span>])</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-3-output-1.png" width="582" height="411"></p>
+</div>
+</div>
+<p>To which your boss complains that the left half of the plot looks nothing like the right half, so this can’t possibly be right.</p>
+<p>The issue here is that the <em>most likely</em> future is not a <em>typical</em> future. However, there is not a single typical future or a <em>most typical</em> future; there are a <em>distribution</em> of typical futures, and knowing that distribution is the goal of forecasting.</p>
+<p>If <span class="math inline">\(p\)</span> is a distribution of time series that you believe your time series is from, the problem of forecasting can be stated as learning the distribution of the future values conditioned on the past measurements. That is, to simulate the future, we want to sample</p>
+<p><span class="math display">\[x \sim p(\texttt{future}|\texttt{past})\]</span></p>
+<p>Of course, in this case, the exact solution is relatively simple, <span class="math display">\[x_{51\to 100} \sim \mathcal{N}(0,I_{50\times 50})\]</span> and simple statistics, Bayesian inference, or standard forecasting techniques like ARIMA should all yield something similar to the ground truth distribution.</p>
+</section>
+<section id="image-deblurringwhang2021deblurring-and-inpaintinglugmayr2022repaint" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="image-deblurringwhang2021deblurring-and-inpaintinglugmayr2022repaint">Image deblurring<sup><span class="citation" data-cites="whang2021deblurring">[<a href="#ref-whang2021deblurring" role="doc-biblioref">4</a>]</span></sup>, and inpainting<sup><span class="citation" data-cites="lugmayr2022repaint">[<a href="#ref-lugmayr2022repaint" role="doc-biblioref">5</a>]</span></sup></h2>
+<p>When a blurry image is taken, some information about the original scene is lost. That is, given a blurry image, we can’t say with certainty which specific clear image it came from. There might be a ‘most likely’ clear image, but as before, that most likely image might not be very typical, and it doesn’t tell us much about the distribution of clear images the blurry image might have come from. Thus, it is unnatural to solve this as a regression problem, by training a single deterministic function</p>
+<p><span class="math display">\[f :\texttt{blurry images}\to \texttt{clear images}\]</span></p>
+<div class="page-columns page-full"><p>Rather, let <span class="math inline">\(p\)</span> be the distribution of <span class="math inline">\((\texttt{clear image},\texttt{blurry image})\)</span> pairs. We can recast the image deblurring problem as sampling from the marginal distribution of clear images conditioned on the blurry image marginal value<sup>*</sup>.</p><div class="no-row-height column-margin column-container"><span class="">*: it is useful to think of conditional sampling <span class="math inline">\(X\sim p(x|y)\)</span> as a stochastic function with input <span class="math inline">\(y\)</span> and output <span class="math inline">\(X\)</span></span></div></div>
+<p><span class="math display">\[x \sim p(\texttt{clear image}|\texttt{blurry image})\]</span></p>
+<p>Similarly, for inpainting, there may be many ways to fill an unknown region with plausible pixel values. If <span class="math inline">\(q\)</span> is a distribution of images, then we can cast inpainting as conditionally sampling the unkown region given the known region.</p>
+<p><span class="math display">\[x \sim q(\texttt{unknown region} | \texttt{known region})\]</span></p>
+<p>For these examples, generative diffusion is a great candidate for modeling these distributions because</p>
+<ol type="1">
+<li>Distributions of images are very complicated<sup>†</sup></li>
+<li>We care about getting the intricacies of the distribution correct, because the human visual system is very sensitive</li>
+<li>There are large data sets of images</li>
+</ol>
+<div class="no-row-height column-margin column-container"><span class="">†: so we want a universal distribution approximator</span></div><p>In particular, item (2.) is something we cannot overlook. Before using a technique as expensive as generative diffusion, ask yourself if you really need the accuracy. Even if your distribution is very complicated, it may be perfectly acceptable to underfit.</p>
+</section>
+<section id="inverse-problems" class="level2">
+<h2 class="anchored" data-anchor-id="inverse-problems">Inverse Problems</h2>
+<p>Broadly speaking, an inverse problem is to reconstruct a system from information about that system. Often, we think of the act of obtaining the information as a “measurement”. For some inverse problems, the measurements uniquely specify the system. In this case, we can try to form a deterministic function that reconstructs the system from the information</p>
+<p><span class="math display">\[f:\texttt{information} \to \texttt{system}\]</span></p>
+<p>Deblurring and inpainting are both inverse problems. The system is the original image, and the information we have is the blurred image or the obstructed image, respectively. However, as we noted before, given a specific measurement (i.e.&nbsp;a specific blurred/obstructed image) there is not a single system (i.e.&nbsp;a clear/unobstructed image) that the measurement could have come from. When this is the case, we say the inverse problem is ill-posed. Ill-posed inverse problems can be solved by determining the conditional distribution</p>
+<p><span class="math display">\[p(\texttt{system}|\texttt{measurements})\]</span></p>
+<p>Intuitively, this conditional distribution tells you</p>
+<ol type="1">
+<li>What different systems could have produced the measurements you obtained</li>
+<li>How likely each of these possible systems are</li>
+</ol>
+<p>“Find out about something from measurements/information” is hilariously broad. Thus, inverse problems are everywhere. Here is a very small list:</p>
+<ul>
+<li>Medical Imaging
+<ul>
+<li>X-ray tomography: <span class="math display">\[p(\texttt{inside your body} | \texttt{how radiation propogates through you})\]</span></li>
+<li>Ultrasound: <span class="math display">\[p(\texttt{inside your body} | \texttt{how vibrations propogate through you})\]</span></li>
+<li>Electrical Impedence Tomography: <span class="math display">\[p(\texttt{inside your body} | \texttt{how voltages propogate through you})\]</span></li>
+</ul></li>
+<li>Finance/Economics
+<ul>
+<li><span class="math inline">\(p(\texttt{macroeconomic quantitites}|\texttt{microeconomic observables})\)</span></li>
+<li><span class="math inline">\(p(\texttt{Black-Scholes equation coefficients}|\texttt{asset time series})\)</span></li>
+<li><span class="math inline">\(p(\texttt{a firm's private market beliefs}|\texttt{public trading data})\)</span></li>
+</ul></li>
+<li>Geophysics
+<ul>
+<li><span class="math inline">\(p(\texttt{inside the earth}|\texttt{earthquake wave propogation times})\)</span></li>
+</ul></li>
+</ul>
+<p>The list is practically endless. Your company is almost certainly either solving one or more inverse problems or consuming the solutions of one or more inverse problems.</p>
+</section>
+</section>
+<section id="should-i-use-generative-diffusion" class="level1 page-columns page-full">
+<h1>Should I use generative diffusion?</h1>
+<p>We have established that “learning probability distributions” is a very important tool for solving inverse problems, and inverse problems are everywhere. So, you should probably care about learning probability distributions.</p>
+<p>But it still remains: why generative diffusion? There are simpler, more computationally efficient and more interpretable models from classical and Bayesian statistics. Not to mention other generative machine learning models like a GANs or auto encoders.</p>
+<div class="page-columns page-full"><p>This question is similar to the question “Should I use a neural network in a regression problem?”<sup>*</sup>. Generative diffusion models, as tools for learning distributions are high variance and low bias. The low bias is consistent with the fact that they are expressive enough to approximate any probability distribution. However, you will need a lot of data to counteract the high variance.</p><div class="no-row-height column-margin column-container"><span class="">*: in short, most of the time: ‘No.’</span></div></div>
+<p>Here are some things to consider:</p>
+<ul>
+<li>Can I model my system explicitly?</li>
+<li>Is my distribution very complicated?</li>
+<li>How much do I care about underfitting? (Can I <em>pretend</em> that it is not complicated and still get good results?)</li>
+<li>Do I have a lot of data, and if not, can I employ transfer learning?</li>
+<li>Do I have the computational budget for training and inference?</li>
+<li>Do I need to be able to interpret the distribution?</li>
+<li>What do I need to <em>do</em> with the distribution? Sample from it, or something else?</li>
+</ul>
+<p>Most people will get to the end of this list and realize there are better tools to solve their problem. However, some people will realize that they have a very complicated distribution, and they care deeply about capturing its intricacies. It will be worth it for them to collect the large amount of data required and allocate a large computational budget.</p>
+</section>
+<section id="did-you-find-this-interesting-or-useful" class="level1">
+<h1>Did you find this interesting or useful?</h1>
+<p>Consider <a href="../../hire_me.html">Hiring me</a>.</p>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="doc-bibliography">
+<div id="ref-sohldickstein2015deep" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Sohl-Dickstein, J., Weiss, E.A., Maheswaranathan, N., and Ganguli, S. (2015). <a href="https://arxiv.org/abs/1503.03585">Deep unsupervised learning using nonequilibrium thermodynamics</a>.</div>
+</div>
+<div id="ref-ho2020denoising" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Ho, J., Jain, A., and Abbeel, P. (2020). <a href="https://arxiv.org/abs/2006.11239">Denoising diffusion probabilistic models</a>.</div>
+</div>
+<div id="ref-song2021scorebased" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Song, Y., Sohl-Dickstein, J., Kingma, D.P., Kumar, A., Ermon, S., and Poole, B. (2021). <a href="https://arxiv.org/abs/2011.13456">Score-based generative modeling through stochastic differential equations</a>.</div>
+</div>
+<div id="ref-whang2021deblurring" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">Whang, J., Delbracio, M., Talebi, H., Saharia, C., Dimakis, A.G., and Milanfar, P. (2021). <a href="https://arxiv.org/abs/2112.02475">Deblurring via stochastic refinement</a>.</div>
+</div>
+<div id="ref-lugmayr2022repaint" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">Lugmayr, A., Danelljan, M., Romero, A., Yu, F., Timofte, R., and Gool, L.V. (2022). <a href="https://arxiv.org/abs/2201.09865">RePaint: Inpainting using denoising diffusion probabilistic models</a>.</div>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

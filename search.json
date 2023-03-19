@@ -1,5 +1,33 @@
 [
   {
+    "objectID": "posts/boring_generative_AI/index.html",
+    "href": "posts/boring_generative_AI/index.html",
+    "title": "Generative AI doesn’t need to be flashy",
+    "section": "",
+    "text": "Generative AI is the new hotness. It’s flashy, exciting, full of pizazz. There’s a certain showmanship in asking a machine for an image of a monkey riding a unicycle and having it spit out an image of a monkey riding a unicycle.\nMost data scientists don’t deal with such exciting things. For most companies, pictures of monkeys riding unicycles have no effect on the bottom line; these flashy displays have seemingly nothing to do with business analytics. However, the techniques of generative AI are not inherently flashy and have many potential applications.\nIn this post, we will not discuss how generative diffusion models work (that will come later). Instead, we will accept what they accomplish:"
+  },
+  {
+    "objectID": "posts/boring_generative_AI/index.html#forecasting",
+    "href": "posts/boring_generative_AI/index.html#forecasting",
+    "title": "Generative AI doesn’t need to be flashy",
+    "section": "Forecasting",
+    "text": "Forecasting\nYour boss comes to you with the following time series:\n\n\nShow the code\nimport numpy as np\nfrom matplotlib import pyplot as plt\nnp.random.seed(3264)\nx = np.random.randn(50)\nplt.stem(x)\nplt.xticks([0,25,50,75,100],['','past','present','future',''])\nplt.show()\n\n\n\n\n\nThere are 50 data points from the past and they want you to predict the next 50 in the future. After analyzing the data, you determine this is standard Gaussian noise. Thus, the likelihood for the next 50 points is proportional to a Gaussian,\n\\[p(x_{51},x_{52},\\cdots,x_{100}) \\propto e^{-(x_{51}^2+x_{52}^2+\\cdots +x_{100}^2)/2}\\]\nand is maximized when all values are zero. You conclude that the most likely prediction for the future is given by\n\\[x_{51}=x_{52}=\\cdots=x_{100}=0\\]\nYou plot your prediction and show it to your boss:\n\n\nShow the code\nx_future = np.zeros(50)\nplt.stem(np.concatenate((x,x_future)))\nplt.xticks([0,25,50,75,100],['','past','present','future',''])\nplt.show()\n\n\n\n\n\nTo which your boss complains that the left half of the plot looks nothing like the right half, so this can’t possibly be right.\nThe issue here is that the most likely future is not a typical future. However, there is not a single typical future or a most typical future; there are a distribution of typical futures, and knowing that distribution is the goal of forecasting.\nIf \\(p\\) is a distribution of time series that you believe your time series is from, the problem of forecasting can be stated as learning the distribution of the future values conditioned on the past measurements. That is, to simulate the future, we want to sample\n\\[x \\sim p(\\texttt{future}|\\texttt{past})\\]\nOf course, in this case, the exact solution is relatively simple, \\[x_{51\\to 100} \\sim \\mathcal{N}(0,I_{50\\times 50})\\] and simple statistics, Bayesian inference, or standard forecasting techniques like ARIMA should all yield something similar to the ground truth distribution."
+  },
+  {
+    "objectID": "posts/boring_generative_AI/index.html#image-deblurringwhang2021deblurring-and-inpaintinglugmayr2022repaint",
+    "href": "posts/boring_generative_AI/index.html#image-deblurringwhang2021deblurring-and-inpaintinglugmayr2022repaint",
+    "title": "Generative AI doesn’t need to be flashy",
+    "section": "Image deblurring[4], and inpainting[5]",
+    "text": "Image deblurring[4], and inpainting[5]\nWhen a blurry image is taken, some information about the original scene is lost. That is, given a blurry image, we can’t say with certainty which specific clear image it came from. There might be a ‘most likely’ clear image, but as before, that most likely image might not be very typical, and it doesn’t tell us much about the distribution of clear images the blurry image might have come from. Thus, it is unnatural to solve this as a regression problem, by training a single deterministic function\n\\[f :\\texttt{blurry images}\\to \\texttt{clear images}\\]\nRather, let \\(p\\) be the distribution of \\((\\texttt{clear image},\\texttt{blurry image})\\) pairs. We can recast the image deblurring problem as sampling from the marginal distribution of clear images conditioned on the blurry image marginal value*.*: it is useful to think of conditional sampling \\(X\\sim p(x|y)\\) as a stochastic function with input \\(y\\) and output \\(X\\)\n\\[x \\sim p(\\texttt{clear image}|\\texttt{blurry image})\\]\nSimilarly, for inpainting, there may be many ways to fill an unknown region with plausible pixel values. If \\(q\\) is a distribution of images, then we can cast inpainting as conditionally sampling the unkown region given the known region.\n\\[x \\sim q(\\texttt{unknown region} | \\texttt{known region})\\]\nFor these examples, generative diffusion is a great candidate for modeling these distributions because\n\nDistributions of images are very complicated†\nWe care about getting the intricacies of the distribution correct, because the human visual system is very sensitive\nThere are large data sets of images\n\n†: so we want a universal distribution approximatorIn particular, item (2.) is something we cannot overlook. Before using a technique as expensive as generative diffusion, ask yourself if you really need the accuracy. Even if your distribution is very complicated, it may be perfectly acceptable to underfit."
+  },
+  {
+    "objectID": "posts/boring_generative_AI/index.html#inverse-problems",
+    "href": "posts/boring_generative_AI/index.html#inverse-problems",
+    "title": "Generative AI doesn’t need to be flashy",
+    "section": "Inverse Problems",
+    "text": "Inverse Problems\nBroadly speaking, an inverse problem is to reconstruct a system from information about that system. Often, we think of the act of obtaining the information as a “measurement”. For some inverse problems, the measurements uniquely specify the system. In this case, we can try to form a deterministic function that reconstructs the system from the information\n\\[f:\\texttt{information} \\to \\texttt{system}\\]\nDeblurring and inpainting are both inverse problems. The system is the original image, and the information we have is the blurred image or the obstructed image, respectively. However, as we noted before, given a specific measurement (i.e. a specific blurred/obstructed image) there is not a single system (i.e. a clear/unobstructed image) that the measurement could have come from. When this is the case, we say the inverse problem is ill-posed. Ill-posed inverse problems can be solved by determining the conditional distribution\n\\[p(\\texttt{system}|\\texttt{measurements})\\]\nIntuitively, this conditional distribution tells you\n\nWhat different systems could have produced the measurements you obtained\nHow likely each of these possible systems are\n\n“Find out about something from measurements/information” is hilariously broad. Thus, inverse problems are everywhere. Here is a very small list:\n\nMedical Imaging\n\nX-ray tomography: \\[p(\\texttt{inside your body} | \\texttt{how radiation propogates through you})\\]\nUltrasound: \\[p(\\texttt{inside your body} | \\texttt{how vibrations propogate through you})\\]\nElectrical Impedence Tomography: \\[p(\\texttt{inside your body} | \\texttt{how voltages propogate through you})\\]\n\nFinance/Economics\n\n\\(p(\\texttt{macroeconomic quantitites}|\\texttt{microeconomic observables})\\)\n\\(p(\\texttt{Black-Scholes equation coefficients}|\\texttt{asset time series})\\)\n\\(p(\\texttt{a firm's private market beliefs}|\\texttt{public trading data})\\)\n\nGeophysics\n\n\\(p(\\texttt{inside the earth}|\\texttt{earthquake wave propogation times})\\)\n\n\nThe list is practically endless. Your company is almost certainly either solving one or more inverse problems or consuming the solutions of one or more inverse problems."
+  },
+  {
     "objectID": "publications.html",
     "href": "publications.html",
     "title": "Publications",
@@ -7,11 +35,18 @@
     "text": "Stitching Data: Recovering a Manifold’s Geometry from Geodesic Intersections\nJournal of Geometric Analysis, 2022\n\n\nHeat Content Determines Planar Triangles\nProceedings of the American Mathematical Society, 2017"
   },
   {
+    "objectID": "hire_me.html",
+    "href": "hire_me.html",
+    "title": "Interested in Hiring Me?",
+    "section": "",
+    "text": "Email me at <my first name>.<my last name>@gmail.com or connect with me on LinkedIn!"
+  },
+  {
     "objectID": "blog.html",
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "No matching items"
+    "text": "Generative AI doesn’t need to be flashy\n\n\nThe case for boring generative AI\n\n\nGenerative AI is flashy, but it doesn’t need to be. Generative diffusion models are universal probability distribution approximators. Sometimes (rarely, but more often than never) you should consider them for solving your boring business problems.\n\n\n\n\n\n\nMar 19, 2023\n\n\nReed Meyerson\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
