@@ -166,11 +166,11 @@ div.csl-indent {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html">
+    <a class="nav-link" href="../../about.html">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../blog.html">
+    <a class="nav-link" href="../../index.html">
  <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
@@ -258,7 +258,7 @@ div.csl-indent {
 <p>Generative AI is the new hotness. It’s flashy, exciting, full of pizazz. There’s a certain showmanship in asking a machine for an image of a monkey riding a unicycle and having it spit out an image of a monkey riding a unicycle.</p>
 <p>Most data scientists don’t deal with such exciting things. For most companies, pictures of monkeys riding unicycles have no effect on the bottom line; these flashy displays have seemingly nothing to do with business analytics. However, the techniques of generative AI are not inherently flashy and have many potential applications.</p>
 <div class="page-columns page-full"><p>This is the first in a series of posts on <strong>Generative Diffusion Models</strong><sup>*,<span class="citation" data-cites="sohldickstein2015deep">[<a href="#ref-sohldickstein2015deep" role="doc-biblioref">1</a>]</span>,<span class="citation" data-cites="ho2020denoising">[<a href="#ref-ho2020denoising" role="doc-biblioref">2</a>]</span>,<span class="citation" data-cites="song2021scorebased">[<a href="#ref-song2021scorebased" role="doc-biblioref">3</a>]</span></sup> . In this post, I argue that the intersection of “generative models like reverse diffusion” and “tools used to solve non-flashy problems” should be non-zero. In future posts we will implement reverse diffusion models, use them to solve inverse problems, explore their latent spaces, and utilize them as building blocks for unsupervised techniques.</p><div class="no-row-height column-margin column-container"><span class="">*: AKA the models used to generate images from sentences.</span></div></div>
-<div class="page-columns page-full"><p>Generative diffusion models are techniques for learning<sup>†</sup> a probability distribution from data. When applying these models, we hope that the learned distribution is similar to the ground-truth distribution that the data set was sampled from.</p><div class="no-row-height column-margin column-container"><span class="">†: or learning to sample/resample from</span></div></div>
+<div class="page-columns page-full"><p>Generative diffusion models are techniques for learning<sup>†</sup> a probability distribution from data. When applying these models, we hope that the learned distribution is similar to the ground-truth distribution that the original data was sampled from.</p><div class="no-row-height column-margin column-container"><span class="">†: or learning to sample/resample from</span></div></div>
 <p>In this post, we will not discuss <a href="https://lilianweng.github.io/posts/2021-07-11-diffusion-models/">how generative diffusion models work</a> (that will come later). Instead, we will accept what they <strong>accomplish</strong>:</p>
 <ol type="1">
 <li>Generative diffusion models can approximate any probability distribution<sup>‡</sup>(or conditional probability distribution).</li>

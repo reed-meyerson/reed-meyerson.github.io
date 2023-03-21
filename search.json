@@ -35,6 +35,13 @@
     "text": "Stitching Data: Recovering a Manifold’s Geometry from Geodesic Intersections\nJournal of Geometric Analysis, 2022\n\n\nHeat Content Determines Planar Triangles\nProceedings of the American Mathematical Society, 2017"
   },
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Reed Meyerson",
+    "section": "",
+    "text": "Mathematician turned data scientist. I get most excited when I find geometry in unexpected places."
+  },
+  {
     "objectID": "hire_me.html",
     "href": "hire_me.html",
     "title": "Interested in Hiring Me?",
@@ -42,17 +49,17 @@
     "text": "Email me at <my first name>.<my last name>@gmail.com or connect with me on LinkedIn!"
   },
   {
-    "objectID": "blog.html",
-    "href": "blog.html",
+    "objectID": "index.html",
+    "href": "index.html",
     "title": "Blog",
     "section": "",
     "text": "Generative AI doesn’t need to be flashy\n\n\nThe case for boring generative AI\n\n\nGenerative AI is flashy, but it doesn’t need to be. Generative diffusion models are universal probability distribution approximators. Sometimes (rarely, but more often than never) you should consider them for solving your boring business problems.\n\n\n\n\n\n\nMar 19, 2023\n\n\nReed Meyerson\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Reed Meyerson",
+    "objectID": "contact.html",
+    "href": "contact.html",
+    "title": "Email",
     "section": "",
-    "text": "Mathematician turned data scientist. I get most excited when I find geometry in unexpected places."
+    "text": "<my first name>.<my last name>@gmail.com"
   }
 ]
