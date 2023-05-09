@@ -28,6 +28,13 @@
     "text": "Inverse Problems\nBroadly speaking, an inverse problem is to reconstruct a system from information about that system. Often, we think of the act of obtaining the information as a “measurement”. For some inverse problems, the measurements uniquely specify the system. In this case, we can try to form a deterministic function that reconstructs the system from the information\n\\[f:\\texttt{information} \\to \\texttt{system}\\]\nDeblurring and inpainting are both inverse problems. The system is the original image, and the information we have is the blurred image or the obstructed image, respectively. However, as we noted before, given a specific measurement (i.e. a specific blurred/obstructed image) there is not a single system (i.e. a clear/unobstructed image) that the measurement could have come from. When this is the case, we say the inverse problem is ill-posed. Ill-posed inverse problems can be solved by determining the conditional distribution\n\\[p(\\texttt{system}|\\texttt{measurements})\\]\nIntuitively, this conditional distribution tells you\n\nWhat different systems could have produced the measurements you obtained\nHow likely each of these possible systems are\n\n“Find out about something from measurements/information” is hilariously broad. Thus, inverse problems are everywhere. Here is a very small list:\n\nMedical Imaging\n\nX-ray tomography: \\[p(\\texttt{inside your body} | \\texttt{how radiation propogates through you})\\]\nUltrasound: \\[p(\\texttt{inside your body} | \\texttt{how vibrations propogate through you})\\]\nElectrical Impedence Tomography: \\[p(\\texttt{inside your body} | \\texttt{how voltages propogate through you})\\]\n\nFinance/Economics\n\n\\(p(\\texttt{macroeconomic quantitites}|\\texttt{microeconomic observables})\\)\n\\(p(\\texttt{Black-Scholes equation coefficients}|\\texttt{asset time series})\\)\n\\(p(\\texttt{a firm's private market beliefs}|\\texttt{public trading data})\\)\n\nGeophysics\n\n\\(p(\\texttt{inside the earth}|\\texttt{earthquake wave propogation times})\\)\n\n\nThe list is practically endless. Your company is almost certainly either solving one or more inverse problems or consuming the solutions of one or more inverse problems."
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Reed Meyerson",
+    "section": "",
+    "text": "Mathematician turned data scientist. I get most excited when I find geometry in unexpected places."
+  },
+  {
     "objectID": "publications.html",
     "href": "publications.html",
     "title": "Publications",
@@ -35,31 +42,10 @@
     "text": "Stitching Data: Recovering a Manifold’s Geometry from Geodesic Intersections\nJournal of Geometric Analysis, 2022\n\n\nHeat Content Determines Planar Triangles\nProceedings of the American Mathematical Society, 2017"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "Reed Meyerson",
-    "section": "",
-    "text": "Mathematician turned data scientist. I get most excited when I find geometry in unexpected places."
-  },
-  {
-    "objectID": "hire_me.html",
-    "href": "hire_me.html",
-    "title": "Interested in Hiring Me?",
-    "section": "",
-    "text": "Email me at <my first name>.<my last name>@gmail.com or connect with me on LinkedIn!"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
+    "objectID": "blog.html",
+    "href": "blog.html",
     "title": "Blog",
     "section": "",
     "text": "Generative AI doesn’t need to be flashy\n\n\nThe case for boring generative AI\n\n\nGenerative AI is flashy, but it doesn’t need to be. Generative diffusion models are universal probability distribution approximators. Sometimes (rarely, but more often than never) you should consider them for solving your boring business problems.\n\n\n\n\n\n\nMar 19, 2023\n\n\nReed Meyerson\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "contact.html",
-    "href": "contact.html",
-    "title": "Email",
-    "section": "",
-    "text": "<my first name>.<my last name>@gmail.com"
   }
 ]
