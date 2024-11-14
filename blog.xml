@@ -25,6 +25,12 @@
 <h1>A Bit of History</h1>
 <p>Pyramid building, tax collection, and war waging are not exactly simple enterprises. So complex are these operations, that their management requires a great technology. A technology so transformational, our modern Ops stacks pale in comparison. I speak, of course, of the technology of <em>writing</em>.</p>
 <p>Writing first appeared over 5,000 years ago in the ancient Mesopotamian civilization of Sumer. The invention of writing was so closely coincident with that of bookkeeping, auditing, and other administrative practices that it is reasonable to say it was <em>invented for the purpose of bookkeeping</em><sup><span class="citation" data-cites="smolinski1992search">[1]</span>,<span class="citation" data-cites="goody1986logic">[2]</span></sup>. In fact, roughly 90 percent of surviving ancient Sumerian tablets served administrative purposes<sup><span class="citation" data-cites="woods2010visible">[3]</span></sup>. Sumerian scribes kept detailed records of a vast array of transactions – no matter how big or small. Examples range from “a barge full of grain to a dead fowl”<sup><span class="citation" data-cites="keister1963commercial">[4]</span></sup>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="cuneiform.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Example of a Sumerian tablet summarizing account of silver@pict."><img src="https://reedmeyerson.com/posts/ancient_ops/cuneiform.png" class="img-fluid figure-img" style="width:50.0%" alt="Example of a Sumerian tablet summarizing account of silver[5]."></a></p>
+<figcaption>Example of a Sumerian tablet summarizing account of silver<sup><span class="citation" data-cites="pict">[5]</span></sup>.</figcaption>
+</figure>
+</div>
 <p>Why would a society go through so much trouble? What is the administrative value of good record-keeping? Fundamentally, record-keeping in the 4th millennium BC and in modernity provides the same value: to be able to reason about the past so that better decisions can be made in the future. All good Ops<sup>2</sup> must keep this as a primary objective.</p>
 <div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;MLOps, DevOps, PyramidOps, TaxOps, WarOps, CyclOps, LollipOps, FlipflOps, TriceratOps, BarbershOps, MuttonchOps, MountaintOps, ArchbishOps, etc…</p></div></div></section>
 <section id="why-automate" class="level1 page-columns page-full">
@@ -40,7 +46,7 @@
 <p>The following famous <a href="https://xkcd.com/1205/">xkcd</a> comic is still a good rule of thumb, but only if you interpret “How Much Time You Shave Off” more broadly.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="is_it_worth_the_time_2x.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="credit: https://xkcd.com/1205"><img src="https://reedmeyerson.com/posts/ancient_ops/is_it_worth_the_time_2x.png" class="img-fluid figure-img" alt="credit: https://xkcd.com/1205"></a></p>
+<p><a href="is_it_worth_the_time_2x.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="credit: https://xkcd.com/1205"><img src="https://reedmeyerson.com/posts/ancient_ops/is_it_worth_the_time_2x.png" class="img-fluid figure-img" alt="credit: https://xkcd.com/1205"></a></p>
 <figcaption>credit: https://xkcd.com/1205</figcaption>
 </figure>
 </div>
@@ -81,6 +87,9 @@
 </div>
 <div id="ref-keister1963commercial" class="csl-entry">
 <div class="csl-left-margin">4. </div><div class="csl-right-inline">Keister, O.R. (1963). Commercial record keeping in ancient mesopotamia. The Accounting Review <em>38</em>, 371.</div>
+</div>
+<div id="ref-pict" class="csl-entry">
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">Gavin.collins (2013). Sumerian account of silver for the govenor (background removed). <a href="https://commons.wikimedia.org/wiki/File:Sumerian_account_of_silver_for_the_govenor_%28background_removed%29.png">https://commons.wikimedia.org/wiki/File:Sumerian_account_of_silver_for_the_govenor_%28background_removed%29.png</a>.</div>
 </div>
 </div></section></div> ]]></description>
   <category>MLOps</category>
