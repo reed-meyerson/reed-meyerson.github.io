@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Reed Meyerson">
+<meta name="dcterms.date" content="2024-11-16">
+<meta name="description" content="While the “Dev” and “ML” parts of DevOps and MLOps are new, the “Ops” part is ancient, and the properties of good Ops have remained constant from antiquity to present.">
 
-<title>Reed Meyerson</title>
+<title>The Ancients had Ops – Reed Meyerson</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,24 +23,47 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-07ba0ad10f5680c660e360ac31d2f3b6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e8e09660be63d58976f87517ba1f5c1a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-07ba0ad10f5680c660e360ac31d2f3b6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e8e09660be63d58976f87517ba1f5c1a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -67,17 +93,17 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Reed Meyerson</span>
     </a>
   </div>
@@ -88,15 +114,15 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./blog.html"> 
+    <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./publications.html"> 
+    <a class="nav-link" href="../../publications.html"> 
 <span class="menu-text">Publications</span></a>
   </li>  
 </ul>
@@ -107,41 +133,132 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body page-columns page-full">
+      <h1 class="title">The Ancients had Ops</h1>
+            <p class="subtitle lead">Reproducible and Auditable MLOps with Guix and ZFS: Part 0</p>
+                  <div class="page-columns page-full">
+        <div class="description">
+          While the “Dev” and “ML” parts of DevOps and MLOps are new<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, the “Ops” part is ancient, and the properties of good Ops have remained constant from antiquity to present.
+        </div>
+      <div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Though the Vikings certainly had CI/CD pipelines (that is “Continuous Invasion/Continuous Destruction”)</p></div></div></div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">MLOps</div>
+                <div class="quarto-category">reproducibility</div>
+                <div class="quarto-category">auditability</div>
+                <div class="quarto-category">automation</div>
+                <div class="quarto-category">history</div>
+                <div class="quarto-category">Guix</div>
+                <div class="quarto-category">ZFS</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Reed Meyerson </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 16, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#a-bit-of-history" id="toc-a-bit-of-history" class="nav-link active" data-scroll-target="#a-bit-of-history">A Bit of History</a></li>
+  <li><a href="#why-automate" id="toc-why-automate" class="nav-link" data-scroll-target="#why-automate">Why Automate?</a></li>
+  <li><a href="#whats-next" id="toc-whats-next" class="nav-link" data-scroll-target="#whats-next">What’s Next?</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<div class="quarto-about-trestles">
-  <div class="about-entity">
-    <img src="headshot.jpg" class="about-image
-  rounded " style="width: 20em;">
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Reed Meyerson</h1>
-<p class="subtitle lead">Machine Learning Practitioner, Mathematician</p>
-</div>
-<div class="quarto-title-meta">
-  </div>
-</header>
-    <div class="about-links">
-  <a href="https://github.com/reed-meyerson/" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">Github</span>
-  </a>
-  <a href="https://www.linkedin.com/in/reed-meyerson/" class="about-link" rel="" target="">
-    <i class="bi bi-linkedin"></i>
-     <span class="about-link-text">LinkedIn</span>
-  </a>
-</div>
-  </div>
-  <div class="about-contents"><main class="content" id="quarto-document-content">
-<p>Mathematician turned data scientist. I get most excited when I find geometry in unexpected places.</p>
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
 
-</main></div>
+
+
+
+<section id="a-bit-of-history" class="level1 page-columns page-full">
+<h1>A Bit of History</h1>
+<p>Pyramid building, tax collection, and war waging are not exactly simple enterprises. So complex are these operations, that their management requires a great technology. A technology so transformational, our modern Ops stacks pale in comparison. I speak, of course, of the technology of <em>writing</em>.</p>
+<p>Writing first appeared over 5,000 years ago in the ancient Mesopotamian civilization of Sumer. The invention of writing was so closely coincident with that of bookkeeping, auditing, and other administrative practices that it is reasonable to say it was <em>invented for the purpose of bookkeeping</em><sup><span class="citation" data-cites="smolinski1992search">[<a href="#ref-smolinski1992search" role="doc-biblioref">1</a>]</span>,<span class="citation" data-cites="goody1986logic">[<a href="#ref-goody1986logic" role="doc-biblioref">2</a>]</span></sup>. In fact, roughly 90 percent of surviving ancient Sumerian tablets served administrative purposes<sup><span class="citation" data-cites="woods2010visible">[<a href="#ref-woods2010visible" role="doc-biblioref">3</a>]</span></sup>. Sumerian scribes kept detailed records of a vast array of transactions – no matter how big or small. Examples range from “a barge full of grain to a dead fowl”<sup><span class="citation" data-cites="keister1963commercial">[<a href="#ref-keister1963commercial" role="doc-biblioref">4</a>]</span></sup>.</p>
+<p>Why would a society go through so much trouble? What is the administrative value of good record-keeping? Fundamentally, record-keeping in the 4th millennium BC and in modernity provides the same value: to be able to reason about the past so that better decisions can be made in the future. All good Ops<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> must keep this as a primary objective.</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;MLOps, DevOps, PyramidOps, TaxOps, WarOps, CyclOps, LollipOps, FlipflOps, TriceratOps, BarbershOps, MuttonchOps, MountaintOps, ArchbishOps, etc…</p></div></div></section>
+<section id="why-automate" class="level1 page-columns page-full">
+<h1>Why Automate?</h1>
+<p>For many, MLOps<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> is synonymous with automation. This is like equating carpentry with the use of power tools. Yes, power tools offer incredible utility to the craft of carpentry, but carpentry is so much more than the use of a table saw. Similarly, automation is an incredible tool for MLOps, but it is not an end unto itself.</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;and the earlier coined “DevOps”</p></div></div><p>In further error, the utility of automation is too often limited to “doing things faster”. All else being equal, speeding up a process is worthwhile, but it is hardly the only objective worth optimizing for. Well-crafted automations lead to improvements in</p>
+<ul>
+<li>reliability</li>
+<li>repeatability</li>
+<li>auditability</li>
+<li>and yes… “doing things faster”</li>
+</ul>
+<p>The following famous <a href="https://xkcd.com/1205/">xkcd</a> comic is still a good rule of thumb, but only if you interpret “How Much Time You Shave Off” more broadly.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="is_it_worth_the_time_2x.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="credit: https://xkcd.com/1205"><img src="is_it_worth_the_time_2x.png" class="img-fluid figure-img" alt="credit: https://xkcd.com/1205"></a></p>
+<figcaption>credit: https://xkcd.com/1205</figcaption>
+</figure>
 </div>
- <!-- /main -->
+<p>Here are some examples of hidden time savings:</p>
+<ul>
+<li>After a benchmark, the resulting report is automatically stored in a standard location
+<ul>
+<li>Congratulations! You no longer need to ping your colleague on Slack to ask where they put that report.</li>
+</ul></li>
+<li>Before training a model, the information about input datasets is automatically stored
+<ul>
+<li>Congratulations! In three weeks, when you realize your model is doing ‘suspiciously well’ on a specific subset of the benchmark set, you can check for data leakage without needing to retrain your model.</li>
+</ul></li>
+<li>Before training a model, the computational environment used for training is automatically stored
+<ul>
+<li>Congratulations! When you need to retrain this model in six weeks, you don’t need to spend time remembering exactly which magic combination of shell commands and software versions are required to get things running again.</li>
+</ul></li>
+</ul>
+</section>
+<section id="whats-next" class="level1">
+<h1>What’s Next?</h1>
+<p>This was the first in a series of posts exploring reproducible and auditable ML workflows. This post motivates our emphasis on reproducibility and auditability, while future posts will focus more on using specific technologies (namely <a href="https://guix.gnu.org/">Guix</a> and <a href="https://en.wikipedia.org/wiki/ZFS">ZFS</a>) to achieve these goals. The examples used in upcoming posts aim to be concrete, however the principles that underlie reproducibility and auditability will be general, and I hope any machine learning practitioner will be able to find value in the content, even if they have no interest in Guix or ZFS.</p>
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
+<div id="ref-smolinski1992search" class="csl-entry" role="listitem">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Smolinski, H.C., Chumley, D.W., and Bennett, D.E. (1992). In search of ancient auditors. Accounting Historians Notebook <em>15</em>, 6.</div>
+</div>
+<div id="ref-goody1986logic" class="csl-entry" role="listitem">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Goody, J. (1986). The logic of writing and the organization of society (Cambridge University Press).</div>
+</div>
+<div id="ref-woods2010visible" class="csl-entry" role="listitem">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Woods, C., and Woods, C.E. (2010). Visible language: Inventions of writing in the ancient middle east and beyond;[in conjunction with the exhibition visible language: Inventions of writing in the ancient middle east and beyond] (Oriental Institute of the University of Chicago).</div>
+</div>
+<div id="ref-keister1963commercial" class="csl-entry" role="listitem">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">Keister, O.R. (1963). Commercial record keeping in ancient mesopotamia. The Accounting Review <em>38</em>, 371.</div>
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -162,6 +279,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
@@ -556,6 +680,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

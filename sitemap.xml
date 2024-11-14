@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://reedmeyerson.com/posts/boring_generative_AI/index.html</loc>
-    <lastmod>2023-05-09T17:53:17.687Z</lastmod>
+    <loc>https://reedmeyerson.com/publications.html</loc>
+    <lastmod>2024-11-13T15:00:39.009Z</lastmod>
   </url>
   <url>
     <loc>https://reedmeyerson.com/index.html</loc>
-    <lastmod>2023-05-09T17:53:17.894Z</lastmod>
+    <lastmod>2024-11-13T15:00:39.009Z</lastmod>
   </url>
   <url>
-    <loc>https://reedmeyerson.com/publications.html</loc>
-    <lastmod>2023-05-09T17:53:18.105Z</lastmod>
+    <loc>https://reedmeyerson.com/posts/ancient_ops/index.html</loc>
+    <lastmod>2024-11-14T13:40:09.653Z</lastmod>
+  </url>
+  <url>
+    <loc>https://reedmeyerson.com/posts/boring_generative_AI/index.html</loc>
+    <lastmod>2024-11-13T15:00:39.009Z</lastmod>
   </url>
   <url>
     <loc>https://reedmeyerson.com/blog.html</loc>
-    <lastmod>2023-05-09T17:53:18.347Z</lastmod>
+    <lastmod>2024-11-13T15:00:38.957Z</lastmod>
   </url>
 </urlset>

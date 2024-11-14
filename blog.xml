@@ -9,34 +9,118 @@
 <link>https://reedmeyerson.com/blog.html</link>
 <atom:link href="https://reedmeyerson.com/blog.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.3.340</generator>
-<lastBuildDate>Sun, 19 Mar 2023 04:00:00 GMT</lastBuildDate>
+<generator>quarto-1.6.33</generator>
+<lastBuildDate>Sat, 16 Nov 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>The Ancients had Ops</title>
+  <dc:creator>Reed Meyerson</dc:creator>
+  <link>https://reedmeyerson.com/posts/ancient_ops/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="a-bit-of-history" class="level1 page-columns page-full">
+<h1>A Bit of History</h1>
+<p>Pyramid building, tax collection, and war waging are not exactly simple enterprises. So complex are these operations, that their management requires a great technology. A technology so transformational, our modern Ops stacks pale in comparison. I speak, of course, of the technology of <em>writing</em>.</p>
+<p>Writing first appeared over 5,000 years ago in the ancient Mesopotamian civilization of Sumer. The invention of writing was so closely coincident with that of bookkeeping, auditing, and other administrative practices that it is reasonable to say it was <em>invented for the purpose of bookkeeping</em><sup><span class="citation" data-cites="smolinski1992search">[1]</span>,<span class="citation" data-cites="goody1986logic">[2]</span></sup>. In fact, roughly 90 percent of surviving ancient Sumerian tablets served administrative purposes<sup><span class="citation" data-cites="woods2010visible">[3]</span></sup>. Sumerian scribes kept detailed records of a vast array of transactions – no matter how big or small. Examples range from “a barge full of grain to a dead fowl”<sup><span class="citation" data-cites="keister1963commercial">[4]</span></sup>.</p>
+<p>Why would a society go through so much trouble? What is the administrative value of good record-keeping? Fundamentally, record-keeping in the 4th millennium BC and in modernity provides the same value: to be able to reason about the past so that better decisions can be made in the future. All good Ops<sup>2</sup> must keep this as a primary objective.</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;MLOps, DevOps, PyramidOps, TaxOps, WarOps, CyclOps, LollipOps, FlipflOps, TriceratOps, BarbershOps, MuttonchOps, MountaintOps, ArchbishOps, etc…</p></div></div></section>
+<section id="why-automate" class="level1 page-columns page-full">
+<h1>Why Automate?</h1>
+<p>For many, MLOps<sup>3</sup> is synonymous with automation. This is like equating carpentry with the use of power tools. Yes, power tools offer incredible utility to the craft of carpentry, but carpentry is so much more than the use of a table saw. Similarly, automation is an incredible tool for MLOps, but it is not an end unto itself.</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;and the earlier coined “DevOps”</p></div></div><p>In further error, the utility of automation is too often limited to “doing things faster”. All else being equal, speeding up a process is worthwhile, but it is hardly the only objective worth optimizing for. Well-crafted automations lead to improvements in</p>
+<ul>
+<li>reliability</li>
+<li>repeatability</li>
+<li>auditability</li>
+<li>and yes… “doing things faster”</li>
+</ul>
+<p>The following famous <a href="https://xkcd.com/1205/">xkcd</a> comic is still a good rule of thumb, but only if you interpret “How Much Time You Shave Off” more broadly.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="is_it_worth_the_time_2x.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="credit: https://xkcd.com/1205"><img src="https://reedmeyerson.com/posts/ancient_ops/is_it_worth_the_time_2x.png" class="img-fluid figure-img" alt="credit: https://xkcd.com/1205"></a></p>
+<figcaption>credit: https://xkcd.com/1205</figcaption>
+</figure>
+</div>
+<p>Here are some examples of hidden time savings:</p>
+<ul>
+<li>After a benchmark, the resulting report is automatically stored in a standard location
+<ul>
+<li>Congratulations! You no longer need to ping your colleague on Slack to ask where they put that report.</li>
+</ul></li>
+<li>Before training a model, the information about input datasets is automatically stored
+<ul>
+<li>Congratulations! In three weeks, when you realize your model is doing ‘suspiciously well’ on a specific subset of the benchmark set, you can check for data leakage without needing to retrain your model.</li>
+</ul></li>
+<li>Before training a model, the computational environment used for training is automatically stored
+<ul>
+<li>Congratulations! When you need to retrain this model in six weeks, you don’t need to spend time remembering exactly which magic combination of shell commands and software versions are required to get things running again.</li>
+</ul></li>
+</ul>
+</section>
+<section id="whats-next" class="level1">
+<h1>What’s Next?</h1>
+<p>This was the first in a series of posts exploring reproducible and auditable ML workflows. This post motivates our emphasis on reproducibility and auditability, while future posts will focus more on using specific technologies (namely <a href="https://guix.gnu.org/">Guix</a> and <a href="https://en.wikipedia.org/wiki/ZFS">ZFS</a>) to achieve these goals. The examples used in upcoming posts aim to be concrete, however the principles that underlie reproducibility and auditability will be general, and I hope any machine learning practitioner will be able to find value in the content, even if they have no interest in Guix or ZFS.</p>
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body">
+<div id="ref-smolinski1992search" class="csl-entry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Smolinski, H.C., Chumley, D.W., and Bennett, D.E. (1992). In search of ancient auditors. Accounting Historians Notebook <em>15</em>, 6.</div>
+</div>
+<div id="ref-goody1986logic" class="csl-entry">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Goody, J. (1986). The logic of writing and the organization of society (Cambridge University Press).</div>
+</div>
+<div id="ref-woods2010visible" class="csl-entry">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Woods, C., and Woods, C.E. (2010). Visible language: Inventions of writing in the ancient middle east and beyond;[in conjunction with the exhibition visible language: Inventions of writing in the ancient middle east and beyond] (Oriental Institute of the University of Chicago).</div>
+</div>
+<div id="ref-keister1963commercial" class="csl-entry">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">Keister, O.R. (1963). Commercial record keeping in ancient mesopotamia. The Accounting Review <em>38</em>, 371.</div>
+</div>
+</div></section></div> ]]></description>
+  <category>MLOps</category>
+  <category>reproducibility</category>
+  <category>auditability</category>
+  <category>automation</category>
+  <category>history</category>
+  <category>Guix</category>
+  <category>ZFS</category>
+  <guid>https://reedmeyerson.com/posts/ancient_ops/</guid>
+  <pubDate>Sat, 16 Nov 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://reedmeyerson.com/posts/ancient_ops/cuneiform.png" medium="image" type="image/png" height="143" width="144"/>
+</item>
 <item>
   <title>Generative AI doesn’t need to be flashy</title>
   <dc:creator>Reed Meyerson</dc:creator>
-  <link>https://reedmeyerson.com/posts/boring_generative_AI/index.html</link>
+  <link>https://reedmeyerson.com/posts/boring_generative_AI/</link>
   <description><![CDATA[ 
+
 
 
 
 
 <p>Generative AI is the new hotness. It’s flashy, exciting, full of pizazz. There’s a certain showmanship in asking a machine for an image of a monkey riding a unicycle and having it spit out an image of a monkey riding a unicycle.</p>
 <p>Most data scientists don’t deal with such exciting things. For most companies, pictures of monkeys riding unicycles have no effect on the bottom line; these flashy displays have seemingly nothing to do with business analytics. However, the techniques of generative AI are not inherently flashy and have many potential applications.</p>
-<div class="page-columns page-full"><p>This is the first in a series of posts on <strong>Generative Diffusion Models</strong><sup>*,<span class="citation" data-cites="sohldickstein2015deep">[1]</span>,<span class="citation" data-cites="ho2020denoising">[2]</span>,<span class="citation" data-cites="song2021scorebased">[3]</span></sup> . In this post, I argue that the intersection of “generative models like reverse diffusion” and “tools used to solve non-flashy problems” should be non-zero. In future posts we will implement reverse diffusion models, use them to solve inverse problems, explore their latent spaces, and utilize them as building blocks for unsupervised techniques.</p><div class="no-row-height column-margin column-container"><span class="">*: AKA the models used to generate images from sentences.</span></div></div>
-<div class="page-columns page-full"><p>Generative diffusion models are techniques for learning<sup>†</sup> a probability distribution from data. When applying these models, we hope that the learned distribution is similar to the ground-truth distribution that the original data was sampled from.</p><div class="no-row-height column-margin column-container"><span class="">†: or learning to sample/resample from</span></div></div>
+<div class="page-columns page-full"><p>This is the first in a series of posts on <strong>Generative Diffusion Models</strong><sup>*,<span class="citation" data-cites="sohldickstein2015deep">[1]</span>,<span class="citation" data-cites="ho2020denoising">[2]</span>,<span class="citation" data-cites="song2021scorebased">[3]</span></sup> . In this post, I argue that the intersection of “generative models like reverse diffusion” and “tools used to solve non-flashy problems” should be non-zero. In future posts we will implement reverse diffusion models, use them to solve inverse problems, explore their latent spaces, and utilize them as building blocks for unsupervised techniques.</p><div class="no-row-height column-margin column-container"><span class="margin-aside">*: AKA the models used to generate images from sentences.</span></div></div>
+<div class="page-columns page-full"><p>Generative diffusion models are techniques for learning<sup>†</sup> a probability distribution from data. When applying these models, we hope that the learned distribution is similar to the ground-truth distribution that the original data was sampled from.</p><div class="no-row-height column-margin column-container"><span class="margin-aside">†: or learning to sample/resample from</span></div></div>
 <p>In this post, we will not discuss <a href="https://lilianweng.github.io/posts/2021-07-11-diffusion-models/">how generative diffusion models work</a> (that will come later). Instead, we will accept what they <strong>accomplish</strong>:</p>
 <ol type="1">
 <li>Generative diffusion models can approximate any probability distribution<sup>‡</sup>(or conditional probability distribution).</li>
 <li>Empirically, they seem to generalize well<sup>§</sup>.</li>
 </ol>
-<div class="no-row-height column-margin column-container"><span class="">‡: given sufficiently many parameters, of course</span><span class="">§: That is, they seem to do well at finding points outside of the original data that are consistent with the original data</span></div><section id="why-should-i-learn-a-probability-distribution" class="level1 page-columns page-full">
+<div class="no-row-height column-margin column-container"><span class="margin-aside">‡: given sufficiently many parameters, of course</span><span class="margin-aside">§: That is, they seem to do well at finding points outside of the original data that are consistent with the original data</span></div><section id="why-should-i-learn-a-probability-distribution" class="level1 page-columns page-full">
 <h1>Why should I “learn” a probability distribution?</h1>
 <p>The following examples demonstrate why it is sometimes necessary to learn a distribution of values rather than estimate a single value or fit a fixed function.</p>
 <section id="forecasting" class="level2">
 <h2 class="anchored" data-anchor-id="forecasting">Forecasting</h2>
 <p>Your boss comes to you with the following time series:</p>
-<div class="cell" data-execution_count="1">
-<details>
+<div id="960448a5" class="cell" data-execution_count="1">
+<details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
@@ -83,7 +167,11 @@ font-style: inherit;">''</span>])</span>
 <span id="cb1-7">plt.show()</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="https://reedmeyerson.com/posts/boring_generative_AI/index_files/figure-html/cell-2-output-1.png" width="582" height="411"></p>
+<div>
+<figure class="figure">
+<p><img src="https://reedmeyerson.com/posts/boring_generative_AI/index_files/figure-html/cell-2-output-1.png" width="582" height="411" class="figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>There are 50 data points from the past and they want you to predict the next 50 in the future. After analyzing the data, you determine this is standard Gaussian noise. Thus, the likelihood for the next 50 points is proportional to a Gaussian,</p>
@@ -91,8 +179,8 @@ font-style: inherit;">''</span>])</span>
 <p>and is maximized when all values are zero. You conclude that the most likely prediction for the future is given by</p>
 <p><img src="https://latex.codecogs.com/png.latex?x_%7B51%7D=x_%7B52%7D=%5Ccdots=x_%7B100%7D=0"></p>
 <p>You plot your prediction and show it to your boss:</p>
-<div class="cell" data-execution_count="2">
-<details>
+<div id="2d0e3642" class="cell" data-execution_count="2">
+<details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">x_future <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -124,7 +212,11 @@ font-style: inherit;">''</span>])</span>
 <span id="cb2-4">plt.show()</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="https://reedmeyerson.com/posts/boring_generative_AI/index_files/figure-html/cell-3-output-1.png" width="582" height="411"></p>
+<div>
+<figure class="figure">
+<p><img src="https://reedmeyerson.com/posts/boring_generative_AI/index_files/figure-html/cell-3-output-1.png" width="582" height="411" class="figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>To which your boss complains that the left half of the plot looks nothing like the right half, so this can’t possibly be right.</p>
@@ -137,7 +229,7 @@ font-style: inherit;">''</span>])</span>
 <h2 class="anchored" data-anchor-id="image-deblurringwhang2021deblurring-and-inpaintinglugmayr2022repaint">Image deblurring<sup><span class="citation" data-cites="whang2021deblurring">[4]</span></sup>, and inpainting<sup><span class="citation" data-cites="lugmayr2022repaint">[5]</span></sup></h2>
 <p>When a blurry image is taken, some information about the original scene is lost. That is, given a blurry image, we can’t say with certainty which specific clear image it came from. There might be a ‘most likely’ clear image, but as before, that most likely image might not be very typical, and it doesn’t tell us much about the distribution of clear images the blurry image might have come from. Thus, it is unnatural to solve this as a regression problem, by training a single deterministic function</p>
 <p><img src="https://latex.codecogs.com/png.latex?f%20:%5Ctexttt%7Bblurry%20images%7D%5Cto%20%5Ctexttt%7Bclear%20images%7D"></p>
-<div class="page-columns page-full"><p>Rather, let <img src="https://latex.codecogs.com/png.latex?p"> be the distribution of <img src="https://latex.codecogs.com/png.latex?(%5Ctexttt%7Bclear%20image%7D,%5Ctexttt%7Bblurry%20image%7D)"> pairs. We can recast the image deblurring problem as sampling from the marginal distribution of clear images conditioned on the blurry image marginal value<sup>*</sup>.</p><div class="no-row-height column-margin column-container"><span class="">*: it is useful to think of conditional sampling <img src="https://latex.codecogs.com/png.latex?X%5Csim%20p(x%7Cy)"> as a stochastic function with input <img src="https://latex.codecogs.com/png.latex?y"> and output <img src="https://latex.codecogs.com/png.latex?X"></span></div></div>
+<div class="page-columns page-full"><p>Rather, let <img src="https://latex.codecogs.com/png.latex?p"> be the distribution of <img src="https://latex.codecogs.com/png.latex?(%5Ctexttt%7Bclear%20image%7D,%5Ctexttt%7Bblurry%20image%7D)"> pairs. We can recast the image deblurring problem as sampling from the marginal distribution of clear images conditioned on the blurry image marginal value<sup>*</sup>.</p><div class="no-row-height column-margin column-container"><span class="margin-aside">*: it is useful to think of conditional sampling <img src="https://latex.codecogs.com/png.latex?X%5Csim%20p(x%7Cy)"> as a stochastic function with input <img src="https://latex.codecogs.com/png.latex?y"> and output <img src="https://latex.codecogs.com/png.latex?X"></span></div></div>
 <p><img src="https://latex.codecogs.com/png.latex?x%20%5Csim%20p(%5Ctexttt%7Bclear%20image%7D%7C%5Ctexttt%7Bblurry%20image%7D)"></p>
 <p>Similarly, for inpainting, there may be many ways to fill an unknown region with plausible pixel values. If <img src="https://latex.codecogs.com/png.latex?q"> is a distribution of images, then we can cast inpainting as conditionally sampling the unkown region given the known region.</p>
 <p><img src="https://latex.codecogs.com/png.latex?x%20%5Csim%20q(%5Ctexttt%7Bunknown%20region%7D%20%7C%20%5Ctexttt%7Bknown%20region%7D)"></p>
@@ -147,7 +239,7 @@ font-style: inherit;">''</span>])</span>
 <li>We care about getting the intricacies of the distribution correct, because the human visual system is very sensitive</li>
 <li>There are large data sets of images</li>
 </ol>
-<div class="no-row-height column-margin column-container"><span class="">†: so we want a universal distribution approximator</span></div><p>In particular, item (2.) is something we cannot overlook. Before using a technique as expensive as generative diffusion, ask yourself if you really need the accuracy. Even if your distribution is very complicated, it may be perfectly acceptable to underfit.</p>
+<div class="no-row-height column-margin column-container"><span class="margin-aside">†: so we want a universal distribution approximator</span></div><p>In particular, item (2.) is something we cannot overlook. Before using a technique as expensive as generative diffusion, ask yourself if you really need the accuracy. Even if your distribution is very complicated, it may be perfectly acceptable to underfit.</p>
 </section>
 <section id="inverse-problems" class="level2">
 <h2 class="anchored" data-anchor-id="inverse-problems">Inverse Problems</h2>
@@ -186,7 +278,7 @@ font-style: inherit;">''</span>])</span>
 <h1>Should I use generative diffusion?</h1>
 <p>We have established that “learning probability distributions” is a very important tool for solving inverse problems, and inverse problems are everywhere. So, you should probably care about learning probability distributions.</p>
 <p>But it still remains: why generative diffusion? There are simpler, more computationally efficient and more interpretable models from classical and Bayesian statistics. Not to mention other generative machine learning models like a GANs or auto encoders.</p>
-<div class="page-columns page-full"><p>This question is similar to the question “Should I use a neural network in a regression problem?”<sup>*</sup>. Generative diffusion models, as tools for learning distributions are high variance and low bias. The low bias is consistent with the fact that they are expressive enough to approximate any probability distribution. However, you will need a lot of data to counteract the high variance.</p><div class="no-row-height column-margin column-container"><span class="">*: in short, most of the time: ‘No.’</span></div></div>
+<div class="page-columns page-full"><p>This question is similar to the question “Should I use a neural network in a regression problem?”<sup>*</sup>. Generative diffusion models, as tools for learning distributions are high variance and low bias. The low bias is consistent with the fact that they are expressive enough to approximate any probability distribution. However, you will need a lot of data to counteract the high variance.</p><div class="no-row-height column-margin column-container"><span class="margin-aside">*: in short, most of the time: ‘No.’</span></div></div>
 <p>Here are some things to consider:</p>
 <ul>
 <li>Can I model my system explicitly?</li>
@@ -203,7 +295,7 @@ font-style: inherit;">''</span>])</span>
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body">
 <div id="ref-sohldickstein2015deep" class="csl-entry">
 <div class="csl-left-margin">1. </div><div class="csl-right-inline">Sohl-Dickstein, J., Weiss, E.A., Maheswaranathan, N., and Ganguli, S. (2015). <a href="https://arxiv.org/abs/1503.03585">Deep unsupervised learning using nonequilibrium thermodynamics</a>.</div>
 </div>
@@ -226,8 +318,8 @@ font-style: inherit;">''</span>])</span>
   <category>generative diffusion</category>
   <category>unsupervised learning</category>
   <category>machine learning</category>
-  <guid>https://reedmeyerson.com/posts/boring_generative_AI/index.html</guid>
-  <pubDate>Sun, 19 Mar 2023 04:00:00 GMT</pubDate>
+  <guid>https://reedmeyerson.com/posts/boring_generative_AI/</guid>
+  <pubDate>Sun, 19 Mar 2023 00:00:00 GMT</pubDate>
   <media:content url="https://reedmeyerson.com/posts/boring_generative_AI/time_series_mle.png" medium="image" type="image/png" height="102" width="144"/>
 </item>
 </channel>
