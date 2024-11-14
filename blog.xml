@@ -10,7 +10,7 @@
 <atom:link href="https://reedmeyerson.com/blog.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.6.33</generator>
-<lastBuildDate>Sat, 16 Nov 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 14 Nov 2024 00:00:00 GMT</lastBuildDate>
 <item>
   <title>The Ancients had Ops</title>
   <dc:creator>Reed Meyerson</dc:creator>
@@ -100,7 +100,7 @@
   <category>Guix</category>
   <category>ZFS</category>
   <guid>https://reedmeyerson.com/posts/ancient_ops/</guid>
-  <pubDate>Sat, 16 Nov 2024 00:00:00 GMT</pubDate>
+  <pubDate>Thu, 14 Nov 2024 00:00:00 GMT</pubDate>
   <media:content url="https://reedmeyerson.com/posts/ancient_ops/cuneiform.png" medium="image" type="image/png" height="143" width="144"/>
 </item>
 <item>
