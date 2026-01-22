@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/speculative_decoding_not_heuristic/index.html",
       "/posts/ancient_ops/index.html",
       "/posts/boring_generative_AI/index.html"
     ]
